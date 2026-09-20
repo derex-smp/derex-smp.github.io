@@ -1,0 +1,84 @@
+---
+import Navbar from '../components/Navbar.astro';
+import CardList from '../components/CardList.astro';
+import PlayerCard from '../components/PlayerCard.astro';
+
+interface PlayerFile {
+	type: string;
+	name: string;
+}
+
+interface Member {
+	name: string;
+	uuid: string;
+}
+
+const playerDataResponse = await fetch(
+	'https://api.github.com/repos/derex-smp/derex-smp.github.io/contents/docs/playerdata',
+);
+const playerFiles = (await playerDataResponse.json()) as PlayerFile[];
+
+const members = (
+	await Promise.all(
+		playerFiles
+			.filter((file) => file.type === 'file' && !file.name.includes('_old'))
+			.map(async (file): Promise<Member | undefined> => {
+				const uuid = file.name.replace('.dat', '').replace(/-/g, '');
+				const formattedUuid = uuid.replace(
+					/(.{8})(.{4})(.{4})(.{4})(.{12})/,
+					'$1-$2-$3-$4-$5',
+				);
+
+				try {
+					const profileResponse = await fetch(
+						`https://api.ashcon.app/mojang/v2/user/${formattedUuid}`,
+					);
+					const profile = (await profileResponse.json()) as { username?: string };
+
+					return {
+						name: profile.username || uuid.substring(0, 8),
+						uuid,
+					};
+				} catch {
+					return undefined;
+				}
+			})
+		),
+	)
+).filter((member): member is Member => member !== undefined);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Server Members</title>
+		<meta
+			property="og:image"
+			content="https://raw.githubusercontent.com/DereC4/derecearthmod/master/images/croppedchen.ico"
+		/>
+		<meta
+			name="description"
+			content="Derex SMP Members - List of all members on our Minecraft server."
+		/>
+		<meta name="keywords" content="Minecraft, Derex SMP, Members, Server Members" />
+		<meta name="author" content="Derex SMP" />
+		<link rel="shortcut icon" href="https://raw.githubusercontent.com/DereC4/derecearthmod/master/images/croppedchen.ico" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+		<link href="https://fonts.cdnfonts.com/css/pixelcraft-2" rel="stylesheet" />
+		<style is:global>
+			@import '../styles.css';
+		</style>
+	</head>
+	<body
+		class="min-h-screen bg-cover bg-fixed bg-no-repeat"
+		style="background-image: url('https://raw.githubusercontent.com/derex-smp/derex-smp.github.io/refs/heads/main/docs/2021-12-25_23.21.02.png');"
+	>
+		<Navbar />
+		<CardList title="derex smp Members" listId="memberlist" listClass="memberlist">
+			{members.map((member: Member) => <PlayerCard name={member.name} uuid={member.uuid} />)}
+		</CardList>
+	</body>
+</html>
