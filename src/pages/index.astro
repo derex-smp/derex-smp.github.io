@@ -1,7 +1,6 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import ServerBanner from '../components/ServerBanner.astro';
-import '../styles.css';
 ---
 
 <html lang="en">
@@ -34,10 +33,13 @@ import '../styles.css';
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
 		<link href="https://fonts.cdnfonts.com/css/pixelcraft-2" rel="stylesheet" />
+		<style is:global>
+			@import '../styles.css';
+		</style>
 	</head>
 	<body>
 		<Navbar />
-		<header class="w3-container w3-center w3-padding-128">
+		<header class="w3-container w3-center mx-auto w-full px-25 py-32 md:px-10 xl:px-15">
 			<h1>Welcome to the main page for derex smp</h1>
 			<p>
 				Enjoy this little static site we made for fun.<br />
@@ -45,9 +47,9 @@ import '../styles.css';
 			</p>
 			<ServerBanner />
 		</header>
-		<main class="somethingidk w3-display-container w3-animate-opacity w3-text-white">
-			<section class="container">
-				<div class="map-preview-container"></div>
+		<main class="somethingidk w3-display-container w3-animate-opacity w3-text-white min-h-0">
+			<section class="container flex h-full items-center justify-center">
+				<div class="map-preview-container flex w-full max-w-150 flex-col items-center justify-center"></div>
 			</section>
 		</main>
 	</body>
