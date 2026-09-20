@@ -1,0 +1,55 @@
+---
+import Navbar from '../components/Navbar.astro';
+import CardList from '../components/CardList.astro';
+import PlayerCard from '../components/PlayerCard.astro';
+import punishments from '../../docs/deduplicated_punishments.json';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Disciplinary Records</title>
+		<meta
+			property="og:image"
+			content="https://raw.githubusercontent.com/DereC4/derecearthmod/master/images/croppedchen.ico"
+		/>
+		<meta
+			name="description"
+			content="derex smp Wall of Shame - Punishment list of hackers and griefers that have been put in jail on our Minecraft server."
+		/>
+		<meta
+			name="keywords"
+			content="Minecraft, derex smp, Wall of Shame, Banlist, Hackers, Griefers, Bans, Punishments, Server Rules, Minecraft Community, Jails"
+		/>
+		<meta name="author" content="derex smp" />
+		<link rel="shortcut icon" href="https://raw.githubusercontent.com/DereC4/derecearthmod/master/images/croppedchen.ico" type="image/x-icon" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+		<link href="https://fonts.cdnfonts.com/css/pixelcraft-2" rel="stylesheet" />
+		<style is:global>
+			@import '../styles.css';
+		</style>
+	</head>
+	<body
+		class="min-h-screen bg-cover bg-fixed bg-no-repeat"
+		style="background-image: url('https://raw.githubusercontent.com/derex-smp/derex-smp.github.io/refs/heads/main/docs/2021-12-25_23.21.02.png');"
+	>
+		<Navbar />
+		<CardList
+			title="derex smp wall of shame"
+			description="Punishment list of hackers and griefers that have been jailed"
+			listId="banlist"
+			listClass="banlist"
+		>
+			{punishments.map((punishment) => (
+				<PlayerCard
+					name={punishment.name}
+					uuid={punishment.uuid}
+					punishmentDate={punishment.punishmentDate}
+				/>
+			))}
+		</CardList>
+	</body>
+</html>
