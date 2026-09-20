@@ -1,17 +1,54 @@
 ---
-
+import Navbar from '../components/Navbar.astro';
+import ServerBanner from '../components/ServerBanner.astro';
+import '../styles.css';
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Welcome to derex smp, our Minecraft Survival Multiplayer server. Find the server rules and the banlist here."
+		/>
+		<meta property="og:title" content="derex smp - Minecraft Survival Multiplayer Server" />
+		<meta
+			property="og:description"
+			content="Welcome to derex smp, our Minecraft Survival Multiplayer server. Find the server rules and the banlist here."
+		/>
+		<meta
+			property="og:image"
+			content="https://raw.githubusercontent.com/DereC4/derecearthmod/master/images/croppedchen.ico"
+		/>
+		<meta property="og:url" content="https://derex-smp.github.io/" />
+		<meta
+			name="keywords"
+			content="Minecraft, SMP, Survival Multiplayer, derex smp, Minecraft Server, Server Rules, Banlist, Hacked Client, Hacks"
+		/>
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>derex smp</title>
+		<link rel="shortcut icon" href="https://raw.githubusercontent.com/DereC4/derecearthmod/master/images/croppedchen.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+		<link href="https://fonts.cdnfonts.com/css/pixelcraft-2" rel="stylesheet" />
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<Navbar />
+		<header class="w3-container w3-center w3-padding-128">
+			<h1>Welcome to the main page for derex smp</h1>
+			<p>
+				Enjoy this little static site we made for fun.<br />
+				The navbar above will take you to some cooler links associated with our Minecraft Survival Multiplayer world!
+			</p>
+			<ServerBanner />
+		</header>
+		<main class="somethingidk w3-display-container w3-animate-opacity w3-text-white">
+			<section class="container">
+				<div class="map-preview-container"></div>
+			</section>
+		</main>
 	</body>
 </html>
