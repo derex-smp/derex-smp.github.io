@@ -1,0 +1,18 @@
+---
+interface Props {
+	name: string;
+	uuid: string;
+	punishmentDate?: string | Date;
+}
+
+const { name, uuid, punishmentDate } = Astro.props;
+const formattedDate = punishmentDate
+	? new Date(punishmentDate).toLocaleDateString()
+	: undefined;
+---
+
+<div class="card">
+	<img src={`https://mc-heads.net/avatar/${uuid}/100`} alt={`${name}'s head`} />
+	<h2>{name}</h2>
+	{formattedDate && <p>Punishment Date: {formattedDate}</p>}
+</div>
