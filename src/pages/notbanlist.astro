@@ -47,7 +47,7 @@ import punishments from '../../docs/deduplicated_punishments.json';
 				<PlayerCard
 					name={punishment.name}
 					uuid={punishment.uuid}
-					punishmentDate={punishment.punishmentDate}
+					punishmentDate={new Date(punishment.punishmentDate)}
 				/>
 			))}
 		</CardList>
