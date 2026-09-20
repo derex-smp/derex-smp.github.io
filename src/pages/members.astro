@@ -18,34 +18,35 @@ const playerDataResponse = await fetch(
 );
 const playerFiles = (await playerDataResponse.json()) as PlayerFile[];
 
-const members = (
-	await Promise.all(
-		playerFiles
-			.filter((file) => file.type === 'file' && !file.name.includes('_old'))
-			.map(async (file): Promise<Member | undefined> => {
-				const uuid = file.name.replace('.dat', '').replace(/-/g, '');
-				const formattedUuid = uuid.replace(
-					/(.{8})(.{4})(.{4})(.{4})(.{12})/,
-					'$1-$2-$3-$4-$5',
+const memberResults = await Promise.all(
+	playerFiles
+		.filter((file) => file.type === 'file' && !file.name.includes('_old'))
+		.map(async (file): Promise<Member | undefined> => {
+			const uuid = file.name.replace('.dat', '').replace(/-/g, '');
+			const formattedUuid = uuid.replace(
+				/(.{8})(.{4})(.{4})(.{4})(.{12})/,
+				'$1-$2-$3-$4-$5',
+			);
+
+			try {
+				const profileResponse = await fetch(
+					`https://api.ashcon.app/mojang/v2/user/${formattedUuid}`,
 				);
+				const profile = (await profileResponse.json()) as { username?: string };
 
-				try {
-					const profileResponse = await fetch(
-						`https://api.ashcon.app/mojang/v2/user/${formattedUuid}`,
-					);
-					const profile = (await profileResponse.json()) as { username?: string };
+				return {
+					name: profile.username || uuid.substring(0, 8),
+					uuid,
+				};
+			} catch {
+				return undefined;
+			}
+		}),
+);
 
-					return {
-						name: profile.username || uuid.substring(0, 8),
-						uuid,
-					};
-				} catch {
-					return undefined;
-				}
-			})
-		),
-	)
-).filter((member): member is Member => member !== undefined);
+const members = memberResults.filter(
+	(member: Member | undefined): member is Member => member !== undefined,
+);
 ---
 
 <html lang="en">
