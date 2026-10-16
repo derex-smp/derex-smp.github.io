@@ -1,6 +1,7 @@
 # Temporary files and directories
 temp/
 /temp
+public/avatars/
 
 # Python cache files
 __pycache__/
