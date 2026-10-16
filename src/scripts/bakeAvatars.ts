@@ -22,7 +22,9 @@ async function fetchAvatar(
   }
 
   const sources = [
-    { name: "mc-heads", url: `https://mc-heads.net/avatar/${player.uuid}/100` },
+    { name: "crafthead", url: `https://crafthead.net/avatar/${player.uuid}?size=100&overlay=true` },
+    { name: "crafatar", url: `https://crafatar.com/avatars/${player.uuid}?size=100&overlay` },
+    { name: "mineatar", url: `https://mineatar.io/avatar/${player.uuid}?size=100&overlay=true` },
     ...(player.name
       ? [
           {
@@ -31,10 +33,7 @@ async function fetchAvatar(
           },
         ]
       : []),
-    {
-      name: "crafatar",
-      url: `https://crafatar.com/avatars/${player.uuid}?size=100&overlay`,
-    },
+    { name: "mc-heads", url: `https://mc-heads.net/avatar/${player.uuid}/100` },
   ];
 
   for (const source of sources) {
@@ -42,7 +41,7 @@ async function fetchAvatar(
       const res = await fetch(source.url);
       if (res.ok) {
         const buffer = Buffer.from(await res.arrayBuffer());
-        if (buffer.length > 500) {
+        if (buffer.length > 300) {
           fs.writeFileSync(filePath, buffer);
           console.log(
             `[${current}/${total}] Saved avatar for ${player.name || player.uuid} via ${source.name}`,
