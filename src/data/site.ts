@@ -1,6 +1,6 @@
 export const site = {
   name: "derex smp",
-  homeUrl: "https://derex-smp.github.io/",
+  homeUrl: "/",
   worldMapUrl: "https://mc.longhorns.dev/map/",
   youtubeUrl: "https://www.youtube.com/hashtag/derexsmp",
 };
