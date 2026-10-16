@@ -12,7 +12,12 @@ const formattedDate = punishmentDate
 ---
 
 <div class="card">
-	<img src={`https://mc-heads.net/avatar/${uuid}/100`} alt={`${name}'s head`} />
+	<img
+		src={`/avatars/${uuid}.png`}
+		onerror={`this.onerror=null;this.src='https://mc-heads.net/avatar/${uuid}/100';`}
+		alt={`${name}'s head`}
+		loading="lazy"
+	/>
 	<h2>{name}</h2>
 	{formattedDate && <p>Punishment Date: {formattedDate}</p>}
 </div>
