@@ -5,13 +5,33 @@ import Navbar from '../components/Navbar.astro';
 import CardList from '../components/CardList.astro';
 import PlayerCard from '../components/PlayerCard.astro';
 
+interface HistoryRecord {
+	currentName: string;
+	pastNames?: string[];
+}
+
 interface Member {
 	name: string;
 	uuid: string;
+	pastNames?: string[];
 }
 
+const historyPath = path.resolve('docs/player_history.json');
 const usercachePath = path.resolve('docs/usercache.json');
 const playerdataDir = path.resolve('docs/playerdata');
+
+const historyMap = new Map<string, HistoryRecord>();
+if (fs.existsSync(historyPath)) {
+	try {
+		const raw: Record<string, HistoryRecord> = JSON.parse(
+			fs.readFileSync(historyPath, 'utf8'),
+		);
+		for (const [id, record] of Object.entries(raw)) {
+			historyMap.set(id, record);
+			historyMap.set(id.replace(/-/g, ''), record);
+		}
+	} catch {}
+}
 
 const nameMap = new Map<string, string>();
 if (fs.existsSync(usercachePath)) {
@@ -40,8 +60,10 @@ if (fs.existsSync(playerdataDir)) {
 			if (!seen.has(uuid) && !seen.has(cleanUuid)) {
 				seen.add(uuid);
 				seen.add(cleanUuid);
-				const name = nameMap.get(uuid) || nameMap.get(cleanUuid) || uuid.slice(0, 8);
-				members.push({ name, uuid });
+				const hist = historyMap.get(uuid) || historyMap.get(cleanUuid);
+				const name = hist?.currentName || nameMap.get(uuid) || nameMap.get(cleanUuid) || uuid.slice(0, 8);
+				const pastNames = hist?.pastNames && hist.pastNames.length > 0 ? hist.pastNames : undefined;
+				members.push({ name, uuid, pastNames });
 			}
 		}
 	}
@@ -80,7 +102,7 @@ members.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'b
 	>
 		<Navbar />
 		<CardList title="derex smp Members" listId="memberlist" listClass="memberlist">
-			{members.map((member: Member) => <PlayerCard name={member.name} uuid={member.uuid} />)}
+			{members.map((member: Member) => <PlayerCard name={member.name} uuid={member.uuid} pastNames={member.pastNames} />)}
 		</CardList>
 	</body>
 </html>

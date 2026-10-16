@@ -3,9 +3,10 @@ interface Props {
 	name: string;
 	uuid: string;
 	punishmentDate?: string | Date;
+	pastNames?: string[];
 }
 
-const { name, uuid, punishmentDate } = Astro.props;
+const { name, uuid, punishmentDate, pastNames } = Astro.props;
 const formattedDate = punishmentDate
 	? new Date(punishmentDate).toLocaleDateString()
 	: undefined;
@@ -22,5 +23,10 @@ const formattedDate = punishmentDate
 		loading="lazy"
 	/>
 	<h2>{name}</h2>
+	{pastNames && pastNames.length > 0 && (
+		<p class="text-xs text-gray-400 mt-[-4px] mb-1">
+			aka: {pastNames.join(', ')}
+		</p>
+	)}
 	{formattedDate && <p>Punishment Date: {formattedDate}</p>}
 </div>
