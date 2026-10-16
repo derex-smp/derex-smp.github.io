@@ -13,6 +13,7 @@ export default defineConfig({
       name: "avatar-baker",
       hooks: {
         "astro:server:setup": async () => {
+          await updateAllPlayerNames();
           await ensureAvatarsBaked();
         },
         "astro:build:start": async () => {
