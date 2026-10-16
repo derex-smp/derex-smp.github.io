@@ -9,18 +9,19 @@ import punishments from '../../docs/deduplicated_punishments.json';
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Disciplinary Records</title>
+		<title>Disciplinary Records - derex smp</title>
 		<meta
 			property="og:image"
 			content="https://raw.githubusercontent.com/DereC4/derecearthmod/master/images/croppedchen.ico"
 		/>
 		<meta
 			name="description"
-			content="derex smp Wall of Shame - Punishment list of hackers and griefers that have been put in jail on our Minecraft server."
+			content="derex smp Disciplinary Records - Official administrative log of player sanctions, rule enforcement actions, and jailing records on our Minecraft server."
 		/>
+		<meta name="robots" content="index, follow" />
 		<meta
 			name="keywords"
-			content="Minecraft, derex smp, Wall of Shame, Banlist, Hackers, Griefers, Bans, Punishments, Server Rules, Minecraft Community, Jails"
+			content="Minecraft, derex smp, Disciplinary Records, Banlist, Sanctions, Server Rules, Moderation Log, Jails"
 		/>
 		<meta name="author" content="derex smp" />
 		<link rel="shortcut icon" href="https://raw.githubusercontent.com/DereC4/derecearthmod/master/images/croppedchen.ico" type="image/x-icon" />
@@ -38,8 +39,8 @@ import punishments from '../../docs/deduplicated_punishments.json';
 	>
 		<Navbar />
 		<CardList
-			title="derex smp wall of shame"
-			description="Punishment list of hackers and griefers that have been jailed"
+			title="derex smp Disciplinary Records"
+			description="Public log of server rule enforcement actions and jailing records"
 			listId="banlist"
 			listClass="banlist"
 		>
@@ -51,5 +52,8 @@ import punishments from '../../docs/deduplicated_punishments.json';
 				/>
 			))}
 		</CardList>
+		<div style="text-align: center; margin: 30px 0; color: #ccc; font-size: 0.9rem;">
+			<p>To dispute a record, submit a correction, or request an appeal, please open a ticket on our official Discord server.</p>
+		</div>
 	</body>
 </html>
