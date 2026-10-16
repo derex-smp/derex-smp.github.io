@@ -1,52 +1,53 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import Navbar from '../components/Navbar.astro';
 import CardList from '../components/CardList.astro';
 import PlayerCard from '../components/PlayerCard.astro';
-
-interface PlayerFile {
-	type: string;
-	name: string;
-}
 
 interface Member {
 	name: string;
 	uuid: string;
 }
 
-const playerDataResponse = await fetch(
-	'https://api.github.com/repos/derex-smp/derex-smp.github.io/contents/docs/playerdata',
-);
-const playerFiles = (await playerDataResponse.json()) as PlayerFile[];
+const usercachePath = path.resolve('docs/usercache.json');
+const playerdataDir = path.resolve('docs/playerdata');
 
-const memberResults = await Promise.all(
-	playerFiles
-		.filter((file) => file.type === 'file' && !file.name.includes('_old'))
-		.map(async (file): Promise<Member | undefined> => {
-			const uuid = file.name.replace('.dat', '').replace(/-/g, '');
-			const formattedUuid = uuid.replace(
-				/(.{8})(.{4})(.{4})(.{4})(.{12})/,
-				'$1-$2-$3-$4-$5',
-			);
-
-			try {
-				const profileResponse = await fetch(
-					`https://api.ashcon.app/mojang/v2/user/${formattedUuid}`,
-				);
-				const profile = (await profileResponse.json()) as { username?: string };
-
-				return {
-					name: profile.username || uuid.substring(0, 8),
-					uuid,
-				};
-			} catch {
-				return undefined;
+const nameMap = new Map<string, string>();
+if (fs.existsSync(usercachePath)) {
+	try {
+		const entries: { uuid: string; name: string }[] = JSON.parse(
+			fs.readFileSync(usercachePath, 'utf8'),
+		);
+		for (const entry of entries) {
+			if (entry.uuid && entry.name) {
+				nameMap.set(entry.uuid, entry.name);
+				nameMap.set(entry.uuid.replace(/-/g, ''), entry.name);
 			}
-		}),
-);
+		}
+	} catch {}
+}
 
-const members = memberResults.filter(
-	(member: Member | undefined): member is Member => member !== undefined,
-);
+const members: Member[] = [];
+const seen = new Set<string>();
+
+if (fs.existsSync(playerdataDir)) {
+	const files = fs.readdirSync(playerdataDir);
+	for (const file of files) {
+		if (file.endsWith('.dat') && !file.includes('_old')) {
+			const uuid = file.replace('.dat', '');
+			const cleanUuid = uuid.replace(/-/g, '');
+			if (!seen.has(uuid) && !seen.has(cleanUuid)) {
+				seen.add(uuid);
+				seen.add(cleanUuid);
+				const name = nameMap.get(uuid) || nameMap.get(cleanUuid) || uuid.slice(0, 8);
+				members.push({ name, uuid });
+			}
+		}
+	}
+}
+
+members.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
 ---
 
 <html lang="en">
