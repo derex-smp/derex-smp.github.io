@@ -1,0 +1,41 @@
+---
+import Navbar from '../components/Navbar.astro';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>404 - Page Not Found</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link href="https://fonts.cdnfonts.com/css/pixelcraft-2" rel="stylesheet" />
+		<style is:global>
+			@import '../styles.css';
+		</style>
+	</head>
+	<body
+		class="min-h-screen bg-cover bg-fixed bg-no-repeat text-center text-white font-['PixelCraft']"
+		style="background-image: url('/images/2021-12-25_23.21.02.png');"
+	>
+		<Navbar />
+		<div class="mt-40 px-4 font-['PixelCraft']">
+			<h1 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+				404 - Page Not Found
+			</h1>
+			<p class="text-lg md:text-xl mb-6 text-gray-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+				The coordinates you entered lead to nowhere.
+			</p>
+			<p>
+				<a
+					href="/"
+					class="inline-block bg-[#333] hover:bg-[#555] text-white border-2 border-white px-6 py-2.5 text-base transition-colors duration-150"
+				>
+					Return to Home
+				</a>
+			</p>
+		</div>
+	</body>
+</html>

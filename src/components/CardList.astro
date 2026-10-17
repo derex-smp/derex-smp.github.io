@@ -1,0 +1,18 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+	listId: string;
+	listClass: 'banlist' | 'memberlist';
+}
+
+const { title, description, listId, listClass } = Astro.props;
+---
+
+<div class="banlist-container">
+	<h1>{title}</h1>
+	{description && <h2>{description}</h2>}
+	<div class={listClass} id={listId}>
+		<slot />
+	</div>
+</div>
