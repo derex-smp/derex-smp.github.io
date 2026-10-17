@@ -16,9 +16,9 @@ interface Member {
 	pastNames?: string[];
 }
 
-const historyPath = path.resolve('docs/player_history.json');
-const usercachePath = path.resolve('docs/usercache.json');
-const playerdataDir = path.resolve('docs/playerdata');
+const historyPath = path.resolve('src/data/player_history.json');
+const usercachePath = path.resolve('src/data/usercache.json');
+const playerdataDir = path.resolve('src/data/playerdata');
 
 const historyMap = new Map<string, HistoryRecord>();
 if (fs.existsSync(historyPath)) {
@@ -98,7 +98,7 @@ members.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'b
 	</head>
 	<body
 		class="min-h-screen bg-cover bg-fixed bg-no-repeat"
-		style="background-image: url('https://raw.githubusercontent.com/derex-smp/derex-smp.github.io/refs/heads/main/docs/2021-12-25_23.21.02.png');"
+		style="background-image: url('/images/2021-12-25_23.21.02.png');"
 	>
 		<Navbar />
 		<CardList title="derex smp Members" listId="memberlist" listClass="memberlist">

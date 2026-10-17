@@ -7,10 +7,10 @@ interface HistoryRecord {
   lastUpdated: string;
 }
 
-const historyPath = path.resolve("docs/player_history.json");
-const usercachePath = path.resolve("docs/usercache.json");
-const playerdataDir = path.resolve("docs/playerdata");
-const punishmentsPath = path.resolve("docs/deduplicated_punishments.json");
+const historyPath = path.resolve("src/data/player_history.json");
+const usercachePath = path.resolve("src/data/usercache.json");
+const playerdataDir = path.resolve("src/data/playerdata");
+const punishmentsPath = path.resolve("src/data/punishments.json");
 
 function toDashed(clean: string): string {
   if (clean.length !== 32) return clean;

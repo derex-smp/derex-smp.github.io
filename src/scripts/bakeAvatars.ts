@@ -6,9 +6,9 @@ interface PlayerRecord {
   uuid: string;
 }
 
-const punishmentsPath = path.resolve("docs/deduplicated_punishments.json");
-const playerdataDir = path.resolve("docs/playerdata");
-const usercachePath = path.resolve("docs/usercache.json");
+const punishmentsPath = path.resolve("src/data/punishments.json");
+const playerdataDir = path.resolve("src/data/playerdata");
+const usercachePath = path.resolve("src/data/usercache.json");
 const outputDir = path.resolve("public/avatars");
 
 async function fetchAvatar(

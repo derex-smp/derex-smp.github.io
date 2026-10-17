@@ -2,7 +2,7 @@
 import Navbar from '../components/Navbar.astro';
 import CardList from '../components/CardList.astro';
 import PlayerCard from '../components/PlayerCard.astro';
-import punishments from '../../docs/deduplicated_punishments.json';
+import punishments from '../data/punishments.json';
 ---
 
 <html lang="en">
@@ -35,7 +35,7 @@ import punishments from '../../docs/deduplicated_punishments.json';
 	</head>
 	<body
 		class="min-h-screen bg-cover bg-fixed bg-no-repeat"
-		style="background-image: url('https://raw.githubusercontent.com/derex-smp/derex-smp.github.io/refs/heads/main/docs/2021-12-25_23.21.02.png');"
+		style="background-image: url('/images/2021-12-25_23.21.02.png');"
 	>
 		<Navbar />
 		<CardList
