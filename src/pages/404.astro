@@ -1,20 +1,15 @@
 ---
+import BaseHead from '../components/BaseHead.astro';
 import Navbar from '../components/Navbar.astro';
 ---
 
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>404 - Page Not Found</title>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-			rel="stylesheet"
+		<BaseHead
+			title="404 - Page Not Found | derex smp"
+			description="The requested page could not be found."
+			noindex={true}
 		/>
-		<link href="https://fonts.cdnfonts.com/css/pixelcraft-2" rel="stylesheet" />
-		<style is:global>
-			@import '../styles.css';
-		</style>
 	</head>
 	<body
 		class="min-h-screen bg-cover bg-fixed bg-no-repeat text-center text-white font-['PixelCraft']"
