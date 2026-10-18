@@ -107,6 +107,28 @@ h2 {
 .card p {
   margin: 0;
 }
+.bigcard {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: #c8d6e5;
+  border: 1px solid #6b7a8a;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 20px;
+  width: min(700px, calc(100% - 32px));
+  text-align: center;
+}
+.bigcard h2 {
+  color: black;
+  margin: 0 0 10px;
+  font-size: 2.5rem;
+  text-align: left;
+}
+.bigcard p {
+  margin: 0;
+}
 body, h1 {
   font-family: 'PixelCraft', sans-serif;
   color: black;

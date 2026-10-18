@@ -1,0 +1,24 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Navbar from '../../components/Navbar.astro';
+import BigCard from '../../components/BigCard.astro';
+import { getAllMembers } from '../../data/players';
+
+export function getStaticPaths() {
+  return getAllMembers().map((player) => ({
+    params: { uuid: player.uuid },
+    props: { player },
+  }));
+}
+
+const { player } = Astro.props;
+---
+<html lang="en">
+  <head><BaseHead title={`${player.name} - derex smp`} description={`${player.name} on derex smp`} /></head>
+  <body>
+    <Navbar />
+    <main class="flex justify-center pt-10">
+      <BigCard name={player.name} uuid={player.uuid} pastNames={player.pastNames != undefined ? player.pastNames : []} />
+    </main>
+  </body>
+</html>
