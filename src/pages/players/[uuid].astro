@@ -2,6 +2,7 @@
 import BaseHead from '../../components/BaseHead.astro';
 import Navbar from '../../components/Navbar.astro';
 import BigCard from '../../components/BigCard.astro';
+import Footer from '../../components/Footer.astro';
 import { getAllMembers } from '../../data/players';
 
 export function getStaticPaths() {
@@ -15,10 +16,11 @@ const { player } = Astro.props;
 ---
 <html lang="en">
   <head><BaseHead title={`${player.name} - derex smp`} description={`${player.name} on derex smp`} /></head>
-  <body>
+  <body class="min-h-screen flex flex-col bg-[#f4f4f4]">
     <Navbar />
-    <main class="flex justify-center pt-10">
+    <main class="flex-1 flex justify-center pt-10">
       <BigCard name={player.name} uuid={player.uuid} pastNames={player.pastNames != undefined ? player.pastNames : []} />
     </main>
+    <Footer />
   </body>
 </html>

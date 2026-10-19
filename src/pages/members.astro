@@ -3,7 +3,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Navbar from '../components/Navbar.astro';
 import CardList from '../components/CardList.astro';
 import PlayerCard from '../components/PlayerCard.astro';
-import { getMembers } from '../data/players'
+import Footer from '../components/Footer.astro';
+import { getMembers } from '../data/players';
 ---
 
 <html lang="en">
@@ -14,12 +15,15 @@ import { getMembers } from '../data/players'
 		/>
 	</head>
 	<body
-		class="min-h-screen bg-cover bg-fixed bg-no-repeat"
+		class="min-h-screen flex flex-col bg-cover bg-fixed bg-no-repeat"
 		style="background-image: url('/images/2021-12-25_23.21.02.png');"
 	>
 		<Navbar />
-		<CardList title="derex smp Members" listId="memberlist" listClass="memberlist">
-			{getMembers().map((member: Member) => <PlayerCard name={member.name} uuid={member.uuid} pastNames={member.pastNames} />)}
-		</CardList>
+		<main class="flex-1">
+			<CardList title="derex smp Members" listId="memberlist" listClass="memberlist">
+				{getMembers().map((member: Member) => <PlayerCard name={member.name} uuid={member.uuid} pastNames={member.pastNames} />)}
+			</CardList>
+		</main>
+		<Footer />
 	</body>
 </html>

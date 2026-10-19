@@ -13,7 +13,7 @@ import Footer from '../components/Footer.astro';
 			description="Welcome to derex smp, an active Minecraft Survival Multiplayer server. Explore our community members, world map, and server guidelines."
 		/>
 	</head>
-	<body>
+	<body class="min-h-screen flex flex-col">
 		<Navbar />
 		<header class="w3-container w3-center mx-auto w-full px-25 py-32 md:px-10 xl:px-15">
 			<h1>Welcome to the main page for derex smp</h1>
@@ -23,7 +23,7 @@ import Footer from '../components/Footer.astro';
 			</p>
 			<ServerBanner />
 		</header>
-		<main class="somethingidk w3-display-container w3-animate-opacity w3-text-white min-h-0">
+		<main class="somethingidk w3-display-container w3-animate-opacity w3-text-white min-h-0 flex-1">
 			<section class="container flex h-full items-center justify-center">
 				<div class="map-preview-container flex w-full max-w-150 flex-col items-center justify-center"></div>
 			</section>
