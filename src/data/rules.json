@@ -1,0 +1,132 @@
+{
+  "guild": {
+    "name": "This is a temporary name. Probably.",
+    "subtitle": "long-term server for minecraft ! Brought to you by UT Registration Plus team (LHD)",
+    "memberCount": "1,006 Members",
+    "icon": "https://cdn.discordapp.com/icons/726209227344969791/b4de2fd3d01d74f2ca99cf936a6e19ba.png",
+    "discordUrl": "https://discord.gg/invite",
+    "answerOverflowUrl": "https://www.answeroverflow.com/m/763554707296878633"
+  },
+  "thread": {
+    "title": "This is a message from a lost era of time",
+    "subtitle": "This is a message from a lost era of time",
+    "author": "sacred-rose",
+    "avatar": "https://cdn.discordapp.com/embed/avatars/0.png"
+  },
+  "messages": [
+    {
+      "id": "854783574040772637",
+      "author": "sacred-rose",
+      "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
+      "isOp": true,
+      "date": "2/8/21, 5:39 PM",
+      "header": "Allowed mods/clients",
+      "codeBlock": [
+        "- Non advantageous client side mods",
+        "- HUD mods",
+        "- Map mods",
+        "- Fullbright (Please be considerate of others who play with normal lighting)",
+        "- Autoreconnect/Anti AFK",
+        "- Macros (For AFK actions)",
+        "- Litematica/Blueprint mods to help with automated buildng",
+        "- Freecam for non advantageous purposes"
+      ],
+      "footer": "As always, use at your own risk. For those that hack, see # 🚓courtroom for help",
+      "channelTag": {
+        "label": "🚓courtroom",
+        "url": "https://www.answeroverflow.com/c/726209227344969791/781407412501741578"
+      }
+    },
+    {
+      "id": "854783574040772638",
+      "author": "sacred-rose",
+      "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
+      "isOp": true,
+      "date": "6/16/21, 1:04 PM",
+      "text": "Old server rules (a glimpse into the COVID Minehut era):",
+      "link": {
+        "label": "https://derec4.github.io/derexsmp/serverrules.html",
+        "url": "/serverrules.html"
+      }
+    },
+    {
+      "id": "1367362793682108506",
+      "author": "sacred-rose",
+      "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
+      "isOp": true,
+      "date": "4/30/25, 11:51 PM",
+      "codeTitle": "Minecraft Rules",
+      "paragraphs": [
+        "The goal of this server is to build a permanent world and have fun. Students should be able to take a break, come back next summer, and still see their home standing. Be civil. Consequences may vary. Wheaton's law applies and joining the discord is necessary.",
+        "This is a space for college-aged adults and up, so respect everyone's time and effort after a long day."
+      ]
+    },
+    {
+      "id": "1367362793682108507",
+      "author": "sacred-rose",
+      "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
+      "isOp": true,
+      "date": "4/30/25, 11:51 PM",
+      "codeTitle": "Society Rules",
+      "items": [
+        "No griefing/murdering etc (without consent)",
+        "You are responsible for your damage (creeper holes, boss fights, water messes, etc.)",
+        "Don't desecrate the landscape unless you know it's not there \"for show\" (like a mountain that's part of someone's home)",
+        "Replant/rebreed",
+        "Don't disgrace yourself by leaving floating trees",
+        "No weapons of mass destruction in local areas, like someone's home"
+      ]
+    },
+    {
+      "id": "1367362793682108508",
+      "author": "sacred-rose",
+      "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
+      "isOp": true,
+      "date": "4/30/25, 11:51 PM",
+      "codeTitle": "Lag Rules",
+      "items": [
+        "You can explore but keep in mind it'll prob lag everyone else if you go to unexplored chunks so try to go in groups",
+        "^^ EDIT 2025, the server is now hosted on a more powerful machine, and exploring is encouraged!",
+        "Redstone machines may break if you unload the chunk so use at your own risk"
+      ],
+      "postscripts": [
+        "Keep personal drama out of here.",
+        "Hacking/Griefing"
+      ],
+      "channelTag": {
+        "label": "🚓courtroom",
+        "url": "https://www.answeroverflow.com/c/726209227344969791/781407412501741578"
+      }
+    }
+  ],
+  "announcements": [
+    {
+      "author": "sacred-rose",
+      "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
+      "timeAgo": "2w ago",
+      "title": "derex smp Patch 2026.10.8",
+      "bullets": [
+        "New minecraft update dropped!",
+        "As always, some things temporarily unavailable but for the most part should be good. Report all findings in #courtroom",
+        "Will probably do the usual cleaning operations later"
+      ]
+    },
+    {
+      "author": "sacred-rose",
+      "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
+      "timeAgo": "4w ago",
+      "body": "Mojang has announced a new dimension is dropping which is crazy because I thought people were just coping on reddit"
+    },
+    {
+      "author": "sacred-rose",
+      "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
+      "timeAgo": "3mo ago",
+      "title": "derex smp Patch 2026.8.14",
+      "bullets": [
+        "reduced item merging even more to match vanilla behavior for all the technical farms and stuff",
+        "if you have feather falling crops wont break when u stomp on em anymore",
+        "squid"
+      ]
+    }
+  ]
+}
