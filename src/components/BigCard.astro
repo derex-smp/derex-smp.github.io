@@ -1,0 +1,32 @@
+---
+interface Props {
+	name: string;
+	uuid: string;
+	punishmentDate?: string | Date;
+	pastNames?: string[];
+}
+
+const { name, uuid, punishmentDate, pastNames } = Astro.props;
+const formattedDate = punishmentDate
+	? new Date(punishmentDate).toLocaleDateString()
+	: undefined;
+---
+
+<div class="bigcard">
+	<img
+		src={`/avatars/${uuid}.png`}
+		onerror={`this.onerror=null;this.src='https://mc-heads.net/avatar/${uuid}/100';`}
+		alt={`${name}'s head`}
+		width="200"
+		height="200"
+		class="w-[200px] h-[200px] mx-auto mb-2.5 block [image-rendering:pixelated]"
+		loading="lazy"
+	/>
+	<h2>{name}</h2>
+	{pastNames && pastNames.length > 0 && (
+		<p class="text-xs text-gray-400 mt-[-4px] mb-1">
+			aka: {pastNames.join(', ')}
+		</p>
+	)}
+	{formattedDate && <p>Punishment Date: {formattedDate}</p>}
+</div>
