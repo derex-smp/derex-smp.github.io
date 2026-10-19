@@ -1,13 +1,6 @@
 import re
 import json
 
-def to_dashed(uuid):
-    """Return the UUID in Minecraft's dashed format, matching the playerdata filenames."""
-    clean = uuid.replace("-", "").lower()
-    if len(clean) != 32:
-        return uuid
-    return f"{clean[:8]}-{clean[8:12]}-{clean[12:16]}-{clean[16:20]}-{clean[20:]}"
-
 def parse_sql_to_json(sql_input):
     whitelist = ["UT_Austin", "HaloODST", "cheribumie"]
     pattern = re.compile(r"INSERT INTO PUNISHMENTS VALUES\(\d+,'([^']+)','([^']+)','[^']+','[^']+','[^']+',(\d+),-1,'[^']*'\)")
@@ -20,7 +13,7 @@ def parse_sql_to_json(sql_input):
             continue
         punishment = {
             "name": name,
-            "uuid": to_dashed(uuid),
+            "uuid": uuid,
             "punishmentDate": int(punishment_date)
         }
         punishments.append(punishment)
