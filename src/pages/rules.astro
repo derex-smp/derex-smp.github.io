@@ -1,318 +1,395 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import rulesData from '../data/rules.json';
+import BaseHead from "../components/BaseHead.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import rulesData from "../data/rules.json";
 
 const { guild, thread, messages, announcements } = rulesData;
 ---
 
 <html lang="en" class="dark">
-	<head>
-		<BaseHead
-			title="Server Rules - derex smp"
-			description="Official server rules, allowed client mods, and community guidelines for derex smp."
-		/>
-	</head>
-	<body class="rules-page min-h-screen flex flex-col bg-[#0b0c10] text-[#dbdee1] selection:bg-[#5865F2] selection:text-white">
-		<Navbar />
+  <head>
+    <BaseHead
+      title="Server Rules - derex smp"
+      description="Official server rules, allowed client mods, and community guidelines for derex smp."
+    />
+  </head>
+  <body
+    class="rules-page min-h-screen flex flex-col bg-[#0b0c10] text-[#dbdee1] selection:bg-[#5865F2] selection:text-white"
+  >
+    <Navbar />
 
-		<div class="flex-1 w-full relative" style="background-color: #0c0d12; background-image: radial-gradient(circle at 50% 0%, rgba(30, 32, 45, 0.5) 0%, rgba(12, 13, 18, 0.95) 75%), linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px); background-size: auto, auto, 24px 24px, 24px 24px;">
-			<div class="max-w-6xl mx-auto px-4 py-8">
-				<div class="mb-8 border-b border-[#22242f] pb-6">
-					<div class="flex items-center gap-2 text-xs text-neutral-400 mb-2">
-						<img src={guild.icon} alt={guild.name} width="18" height="18" class="w-4.5 h-4.5 rounded-full" />
-						<span>{guild.name}</span>
-						<span>•</span>
-						<span>7y ago</span>
-						<span>•</span>
-						<span class="text-neutral-500">archived from Discord</span>
-					</div>
-					<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-						<div>
-							<h1 class="text-2xl md:text-3xl font-bold text-white tracking-tight m-0">
-								{thread.title}
-							</h1>
-							<p class="text-sm text-neutral-400 mt-1 m-0">
-								{thread.subtitle}
-							</p>
-						</div>
-						<a
-							href={guild.answerOverflowUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="self-start md:self-auto inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#171822] hover:bg-[#202230] text-xs text-neutral-300 border border-[#2b2d3d] rounded-md transition-colors"
-						>
-							<span>View on AnswerOverflow</span>
-							<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-								<polyline points="15 3 21 3 21 9"></polyline>
-								<line x1="10" y1="14" x2="21" y2="3"></line>
-							</svg>
-						</a>
-					</div>
-				</div>
+    <div
+      class="flex-1 w-full relative"
+      style="background-color: #0c0d12; background-image: radial-gradient(circle at 50% 0%, rgba(30, 32, 45, 0.5) 0%, rgba(12, 13, 18, 0.95) 75%), linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px); background-size: auto, auto, 24px 24px, 24px 24px;"
+    >
+      <div class="max-w-6xl mx-auto px-4 py-8">
+        <div class="mb-8 border-b border-[#22242f] pb-6">
+          <div class="flex items-center gap-2 text-xs text-neutral-400 mb-2">
+            <img
+              src={guild.icon}
+              alt={guild.name}
+              width="18"
+              height="18"
+              class="w-4.5 h-4.5 rounded-full"
+            />
+            <span>{guild.name}</span>
+            <span>•</span>
+            <span>October 7, 2020</span>
+            <span>•</span>
+            <span class="text-neutral-500">archived from Discord</span>
+          </div>
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+          >
+            <div>
+              <h1
+                class="text-2xl md:text-3xl font-bold text-white tracking-tight m-0"
+              >
+                {thread.title}
+              </h1>
+              <p class="text-sm text-neutral-400 mt-1 m-0">
+                {thread.subtitle}
+              </p>
+            </div>
+            <a
+              href={guild.answerOverflowUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="self-start md:self-auto inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#171822] hover:bg-[#202230] text-xs text-neutral-300 border border-[#2b2d3d] rounded-md transition-colors"
+            >
+              <span>View on AnswerOverflow</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-3.5 h-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                ></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
+          </div>
+        </div>
 
-				<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-					<div class="lg:col-span-2 flex flex-col gap-6">
-						{messages.map((msg, index) => (
-							<div class="relative flex gap-3.5 text-left" id={`msg-${msg.id}`}>
-								<div class="flex flex-col items-center">
-									<img
-										src={msg.avatar}
-										alt={msg.author}
-										width="40"
-										height="40"
-										class="w-10 h-10 rounded-full shrink-0 border border-neutral-700 bg-neutral-800"
-										loading="lazy"
-									/>
-									{index !== messages.length - 1 && (
-										<div class="w-0.5 flex-1 bg-[#1e202c] my-2"></div>
-									)}
-								</div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div class="lg:col-span-2 flex flex-col gap-6">
+            {
+              messages.map((msg, index) => (
+                <>
+                  {msg.dateDivider && (
+                    <div class="relative flex items-center justify-center my-3">
+                      <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-[#262838]" />
+                      </div>
+                      <span class="relative bg-[#0c0d12] px-3 py-0.5 rounded-full border border-[#262838] text-[11px] text-neutral-400 font-medium">
+                        {msg.dateDivider}
+                      </span>
+                    </div>
+                  )}
+                  <div
+                    class="relative flex gap-3.5 text-left"
+                    id={`msg-${msg.id}`}
+                  >
+                    <div class="flex flex-col items-center">
+                      <img
+                        src={msg.avatar}
+                        alt={msg.author}
+                        width="40"
+                        height="40"
+                        class="w-10 h-10 rounded-full shrink-0 border border-neutral-700 bg-neutral-800"
+                        loading="lazy"
+                      />
+                      {index !== messages.length - 1 && (
+                        <div class="w-0.5 flex-1 bg-[#1e202c] my-2" />
+                      )}
+                    </div>
 
-								<div class="flex-1 min-w-0 pb-6">
-									<div class="flex items-center gap-2 mb-2 flex-wrap">
-										<span class="font-semibold text-white text-sm">{msg.author}</span>
-										{msg.isOp && (
-											<span class="inline-flex items-center px-1.5 py-0.2 rounded bg-[#5865F2]/20 border border-[#5865F2]/40 text-[#828cf5] text-[10px] font-bold tracking-wider">
-												OP
-											</span>
-										)}
-										<span class="text-xs text-neutral-500">•</span>
-										<span class="text-xs text-neutral-400">{msg.date}</span>
-									</div>
+                    <div class="flex-1 min-w-0 pb-6">
+                      <div class="flex items-center gap-2 mb-2 flex-wrap">
+                        <span class="font-semibold text-white text-sm">
+                          {msg.author}
+                        </span>
+                        {msg.isOp && (
+                          <span class="inline-flex items-center px-1.5 py-0.2 rounded bg-[#5865F2]/20 border border-[#5865F2]/40 text-[#828cf5] text-[10px] font-bold tracking-wider">
+                            OP
+                          </span>
+                        )}
+                        <span class="text-xs text-neutral-500">•</span>
+                        <span class="text-xs text-neutral-400">{msg.date}</span>
+                      </div>
 
-									{msg.header && (
-										<div class="text-base font-semibold text-white mb-2">
-											{msg.header}
-										</div>
-									)}
+                      {msg.header && (
+                        <div class="text-base font-semibold text-white mb-2">
+                          {msg.header}
+                        </div>
+                      )}
 
-									{msg.codeTitle && (
-										<div class="inline-block bg-[#161722] border border-[#262838] px-2.5 py-1 rounded text-xs font-mono text-[#55FFFF] mb-3 font-medium">
-											{msg.codeTitle}
-										</div>
-									)}
+                      {msg.codeTitle && (
+                        <div class="inline-block bg-[#161722] border border-[#262838] px-2.5 py-1 rounded text-xs font-mono text-[#55FFFF] mb-3 font-medium">
+                          {msg.codeTitle}
+                        </div>
+                      )}
 
-									{msg.paragraphs && (
-										<div class="flex flex-col gap-3 my-2 text-sm text-[#dbdee1] leading-relaxed">
-											{msg.paragraphs.map((p) => (
-												<p class="m-0">{p}</p>
-											))}
-										</div>
-									)}
+                      {msg.paragraphs && (
+                        <div class="flex flex-col gap-3 my-2 text-sm text-[#dbdee1] leading-relaxed">
+                          {msg.paragraphs.map((p) => (
+                            <p class="m-0">{p}</p>
+                          ))}
+                        </div>
+                      )}
 
-									{msg.items && (
-										<ul class="my-2 space-y-1.5 pl-5 list-disc text-sm text-[#dbdee1] leading-relaxed">
-											{msg.items.map((item) => (
-												<li>{item}</li>
-											))}
-										</ul>
-									)}
+                      {msg.items && (
+                        <ul class="my-2 space-y-1.5 pl-5 list-disc text-sm text-[#dbdee1] leading-relaxed">
+                          {msg.items.map((item) => (
+                            <li>{item}</li>
+                          ))}
+                        </ul>
+                      )}
 
-									{msg.sections && (
-										<div class="flex flex-col gap-4 my-2">
-											{msg.sections.map((sec) => (
-												<div>
-													{sec.codeTitle && (
-														<div class="inline-block bg-[#161722] border border-[#262838] px-2.5 py-1 rounded text-xs font-mono text-[#55FFFF] mb-2 font-medium">
-															{sec.codeTitle}
-														</div>
-													)}
-													{sec.items && (
-														<ul class="my-2 space-y-1.5 pl-5 list-disc text-sm text-[#dbdee1] leading-relaxed">
-															{sec.items.map((item) => (
-																<li>{item}</li>
-															))}
-														</ul>
-													)}
-													{sec.text && (
-														<p class="text-sm text-[#dbdee1] m-0 mb-2">
-															{sec.text}
-														</p>
-													)}
-													{sec.channelTag && (
-														<div class="flex items-center gap-1.5 mt-2">
-															<span class="text-xs text-[#949ba4]">- See</span>
-															<a
-																href={sec.channelTag.url}
-																target="_blank"
-																rel="noopener noreferrer"
-																class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#5865F2]/15 hover:bg-[#5865F2]/25 text-[#9ba5fc] text-xs font-mono font-medium transition-colors"
-															>
-																<span>#</span>
-																<span>{sec.channelTag.label}</span>
-															</a>
-															<span class="text-xs text-[#949ba4]">for help</span>
-														</div>
-													)}
-												</div>
-											))}
-										</div>
-									)}
+                      {msg.sections && (
+                        <div class="flex flex-col gap-4 my-2">
+                          {msg.sections.map((sec) => (
+                            <div>
+                              {sec.codeTitle && (
+                                <div class="inline-block bg-[#161722] border border-[#262838] px-2.5 py-1 rounded text-xs font-mono text-[#55FFFF] mb-2 font-medium">
+                                  {sec.codeTitle}
+                                </div>
+                              )}
+                              {sec.items && (
+                                <ul class="my-2 space-y-1.5 pl-5 list-disc text-sm text-[#dbdee1] leading-relaxed">
+                                  {sec.items.map((item) => (
+                                    <li>{item}</li>
+                                  ))}
+                                </ul>
+                              )}
+                              {sec.text && (
+                                <p class="text-sm text-[#dbdee1] m-0 mb-2">
+                                  {sec.text}
+                                </p>
+                              )}
+                              {sec.channelTag && (
+                                <div class="flex items-center gap-1.5 mt-2">
+                                  <span class="text-xs text-[#949ba4]">
+                                    - See
+                                  </span>
+                                  <a
+                                    href={sec.channelTag.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#5865F2]/15 hover:bg-[#5865F2]/25 text-[#9ba5fc] text-xs font-mono font-medium transition-colors"
+                                  >
+                                    <span>#</span>
+                                    <span>{sec.channelTag.label}</span>
+                                  </a>
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
 
-									{msg.text && (
-										<p class="text-sm text-[#dbdee1] m-0 mb-2">
-											{msg.text}
-										</p>
-									)}
+                      {msg.text && (
+                        <p class="text-sm text-[#dbdee1] m-0 mb-2">
+                          {msg.text}
+                        </p>
+                      )}
 
-									{msg.link && (
-										<a
-											href={msg.link.url}
-											class="text-sm text-[#5865F2] hover:underline break-all"
-										>
-											{msg.link.label}
-										</a>
-									)}
+                      {msg.link && (
+                        <a
+                          href={msg.link.url}
+                          class="text-sm text-[#5865F2] hover:underline break-all"
+                        >
+                          {msg.link.label}
+                        </a>
+                      )}
 
-									{msg.footer && (
-										<div class="mt-3 text-xs text-[#949ba4] flex items-center gap-1.5 flex-wrap">
-											<span>{msg.footer}</span>
-											{msg.channelTag && (
-												<a
-													href={msg.channelTag.url}
-													target="_blank"
-													rel="noopener noreferrer"
-													class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#5865F2]/15 hover:bg-[#5865F2]/25 text-[#9ba5fc] text-xs font-mono font-medium transition-colors"
-												>
-													<span>#</span>
-													<span>{msg.channelTag.label}</span>
-												</a>
-											)}
-											<span>for help</span>
-										</div>
-									)}
-								</div>
-							</div>
-						))}
-					</div>
+                      {msg.footer && (
+                        <div class="mt-3 text-xs text-[#949ba4] flex items-center gap-1.5 flex-wrap">
+                          <span>{msg.footer}</span>
+                          {msg.channelTag && (
+                            <a
+                              href={msg.channelTag.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#5865F2]/15 hover:bg-[#5865F2]/25 text-[#9ba5fc] text-xs font-mono font-medium transition-colors"
+                            >
+                              <span>#</span>
+                              <span>{msg.channelTag.label}</span>
+                            </a>
+                          )}
+                          <span>for help</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </>
+              ))
+            }
+          </div>
 
-					<div class="flex flex-col gap-6">
-						<div class="bg-[#14151e] border border-[#242636] rounded-lg p-5 text-left shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
-							<div class="flex items-center gap-3 mb-3">
-								<img src={guild.icon} alt={guild.name} width="48" height="48" class="w-12 h-12 rounded-full border border-neutral-700" />
-								<div>
-									<h2 class="text-base font-bold text-white m-0 leading-snug">{guild.name}</h2>
-									<span class="text-xs text-neutral-400">{guild.memberCount}</span>
-								</div>
-							</div>
-							<p class="text-xs text-neutral-300 leading-relaxed mb-4">
-								{guild.subtitle}
-							</p>
-							<a
-								href={guild.answerOverflowUrl}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="block w-full py-2 px-3 text-center bg-[#5865F2] hover:bg-[#4752c4] text-white text-xs font-medium rounded transition-colors"
-							>
-								View on AnswerOverflow
-							</a>
-						</div>
+          <div class="flex flex-col gap-6">
+            <div
+              class="bg-[#14151e] border border-[#242636] rounded-lg p-5 text-left shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <img
+                  src={guild.icon}
+                  alt={guild.name}
+                  width="48"
+                  height="48"
+                  class="w-12 h-12 rounded-full border border-neutral-700"
+                />
+                <div>
+                  <h2 class="text-base font-bold text-white m-0 leading-snug">
+                    {guild.name}
+                  </h2>
+                  <span class="text-xs text-neutral-400"
+                    >{guild.memberCount}</span
+                  >
+                </div>
+              </div>
+              <p class="text-xs text-neutral-300 leading-relaxed mb-4">
+                {guild.subtitle}
+              </p>
+              <a
+                href={guild.answerOverflowUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block w-full py-2 px-3 text-center bg-[#5865F2] hover:bg-[#4752c4] text-white text-xs font-medium rounded transition-colors"
+              >
+                View on AnswerOverflow
+              </a>
+            </div>
 
-						<div class="bg-[#14151e] border border-[#242636] rounded-lg p-5 text-left shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
-							<h3 class="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-3 flex items-center gap-2">
-								<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#5865F2]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-									<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-									<path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-								</svg>
-								<span>Recent Announcements</span>
-							</h3>
-							<div class="space-y-4">
-								{announcements.map((ann) => (
-									<div class="border-b border-[#1f212e] pb-3 last:border-0 last:pb-0">
-										<div class="flex items-center justify-between gap-2 mb-1">
-											<span class="text-xs font-medium text-white">{ann.author}</span>
-											<span class="text-[11px] text-neutral-500">{ann.timeAgo}</span>
-										</div>
-										{ann.title && (
-											<div class="text-xs font-semibold text-[#828cf5] mb-1">
-												{ann.title}
-											</div>
-										)}
-										{ann.bullets && (
-											<div class="bg-[#0f1017] p-2 rounded border border-[#1b1d28] font-mono text-[11px] text-neutral-300 space-y-1">
-												{ann.bullets.map((b) => (
-													<div>{b}</div>
-												))}
-											</div>
-										)}
-										{ann.body && (
-											<p class="text-xs text-neutral-300 leading-relaxed m-0">
-												{ann.body}
-											</p>
-										)}
-									</div>
-								))}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+            <div
+              class="bg-[#14151e] border border-[#242636] rounded-lg p-5 text-left shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
+            >
+              <h3
+                class="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-3 flex items-center gap-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4 text-[#5865F2]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <span>Recent Announcements</span>
+              </h3>
+              <div class="space-y-4">
+                {
+                  announcements.map((ann) => (
+                    <div class="border-b border-[#1f212e] pb-3 last:border-0 last:pb-0">
+                      <div class="flex items-center justify-between gap-2 mb-1">
+                        <span class="text-xs font-medium text-white">
+                          {ann.author}
+                        </span>
+                        <span class="text-[11px] text-neutral-500">
+                          {ann.timeAgo}
+                        </span>
+                      </div>
+                      {ann.title && (
+                        <div class="text-xs font-semibold text-[#828cf5] mb-1">
+                          {ann.title}
+                        </div>
+                      )}
+                      {ann.bullets && (
+                        <div class="bg-[#0f1017] p-2 rounded border border-[#1b1d28] font-mono text-[11px] text-neutral-300 space-y-1">
+                          {ann.bullets.map((b) => (
+                            <div>{b}</div>
+                          ))}
+                        </div>
+                      )}
+                      {ann.body && (
+                        <p class="text-xs text-neutral-300 leading-relaxed m-0">
+                          {ann.body}
+                        </p>
+                      )}
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-		<Footer />
+    <Footer />
 
-		<script>
-			const copyButtons = document.querySelectorAll('.copy-code-btn');
-			copyButtons.forEach((btn) => {
-				btn.addEventListener('click', async () => {
-					const content = btn.getAttribute('data-content');
-					if (!content) return;
-					try {
-						await navigator.clipboard.writeText(content);
-						const copyIcon = btn.querySelector('.copy-icon');
-						const checkIcon = btn.querySelector('.check-icon');
-						if (copyIcon && checkIcon) {
-							copyIcon.classList.add('hidden');
-							checkIcon.classList.remove('hidden');
-							setTimeout(() => {
-								copyIcon.classList.remove('hidden');
-								checkIcon.classList.add('hidden');
-							}, 2000);
-						}
-					} catch {}
-				});
-			});
-		</script>
-		<style>
-			:global(.rules-page),
-			:global(.rules-page *),
-			:global(.rules-page p),
-			:global(.rules-page li),
-			:global(.rules-page span),
-			:global(.rules-page h1),
-			:global(.rules-page h2),
-			:global(.rules-page h3) {
-				font-family: 'PixelCraft', sans-serif !important;
-			}
+    <script>
+      const copyButtons = document.querySelectorAll(".copy-code-btn");
+      copyButtons.forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const content = btn.getAttribute("data-content");
+          if (!content) return;
+          try {
+            await navigator.clipboard.writeText(content);
+            const copyIcon = btn.querySelector(".copy-icon");
+            const checkIcon = btn.querySelector(".check-icon");
+            if (copyIcon && checkIcon) {
+              copyIcon.classList.add("hidden");
+              checkIcon.classList.remove("hidden");
+              setTimeout(() => {
+                copyIcon.classList.remove("hidden");
+                checkIcon.classList.add("hidden");
+              }, 2000);
+            }
+          } catch {}
+        });
+      });
+    </script>
+    <style>
+      :global(.rules-page),
+      :global(.rules-page *),
+      :global(.rules-page p),
+      :global(.rules-page li),
+      :global(.rules-page span),
+      :global(.rules-page h1),
+      :global(.rules-page h2),
+      :global(.rules-page h3) {
+        font-family: "PixelCraft", sans-serif !important;
+      }
 
-			:global(.rules-page p) {
-				color: #e0e0e0 !important;
-				line-height: 1.625 !important;
-			}
+      :global(.rules-page p) {
+        color: #e0e0e0 !important;
+        line-height: 1.625 !important;
+      }
 
-			:global(.rules-page li) {
-				color: #e0e0e0 !important;
-				line-height: 1.625 !important;
-			}
+      :global(.rules-page li) {
+        color: #e0e0e0 !important;
+        line-height: 1.625 !important;
+      }
 
-			:global(.rules-page a) {
-				color: #5865f2 !important;
-				font-family: 'PixelCraft', sans-serif !important;
-				text-decoration: none !important;
-			}
+      :global(.rules-page a) {
+        color: #5865f2 !important;
+        font-family: "PixelCraft", sans-serif !important;
+        text-decoration: none !important;
+      }
 
-			:global(.rules-page a:hover) {
-				text-decoration: underline !important;
-			}
+      :global(.rules-page a:hover) {
+        text-decoration: underline !important;
+      }
 
-			:global(.rules-page .font-mono),
-			:global(.rules-page code),
-			:global(.rules-page pre) {
-				font-family: 'PixelCraft', monospace !important;
-			}
-		</style>
-	</body>
+      :global(.rules-page .font-mono),
+      :global(.rules-page code),
+      :global(.rules-page pre) {
+        font-family: "PixelCraft", monospace !important;
+      }
+    </style>
+  </body>
 </html>

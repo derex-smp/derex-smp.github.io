@@ -15,11 +15,21 @@
   },
   "messages": [
     {
-      "id": "854783574040772637",
-      "author": "sacred-rose",
+      "id": "763554707296878633",
+      "author": "derex smp",
       "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
       "isOp": true,
-      "date": "2/8/21, 5:39 PM",
+      "dateDivider": "October 7, 2020",
+      "date": "10/7/2020 07:13 PM",
+      "text": "This is a message from a lost era of time"
+    },
+    {
+      "id": "854783574040772637",
+      "author": "derex smp",
+      "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
+      "isOp": true,
+      "dateDivider": "February 8, 2021",
+      "date": "2/8/2021 05:39 PM",
       "codeTitle": "Allowed mods/clients",
       "items": [
         "Non advantageous client side mods",
@@ -39,10 +49,11 @@
     },
     {
       "id": "854783574040772638",
-      "author": "sacred-rose",
+      "author": "derex smp",
       "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
       "isOp": true,
-      "date": "6/16/21, 1:04 PM",
+      "dateDivider": "June 16, 2021",
+      "date": "6/16/2021 01:04 PM",
       "text": "Old server rules (a glimpse into the COVID Minehut era):",
       "link": {
         "label": "https://derec4.github.io/derexsmp/serverrules.html",
@@ -51,10 +62,11 @@
     },
     {
       "id": "1367362793682108506",
-      "author": "sacred-rose",
+      "author": "derex smp",
       "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
       "isOp": true,
-      "date": "4/30/25, 11:51 PM",
+      "dateDivider": "April 30, 2025",
+      "date": "4/30/2025 11:51 PM",
       "codeTitle": "Minecraft Rules",
       "paragraphs": [
         "The goal of this server is to build a permanent world and have fun. Students should be able to take a break, come back next summer, and still see their home standing. Be civil. Consequences may vary. Wheaton's law applies and joining the discord is necessary.",
@@ -63,10 +75,10 @@
     },
     {
       "id": "1367362793682108507",
-      "author": "sacred-rose",
+      "author": "derex smp",
       "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
       "isOp": true,
-      "date": "4/30/25, 11:51 PM",
+      "date": "4/30/2025 11:51 PM",
       "codeTitle": "Society Rules",
       "items": [
         "No griefing/murdering etc (without consent)",
@@ -79,10 +91,10 @@
     },
     {
       "id": "1367362793682108508",
-      "author": "sacred-rose",
+      "author": "derex smp",
       "avatar": "https://cdn.discordapp.com/embed/avatars/0.png",
       "isOp": true,
-      "date": "4/30/25, 11:51 PM",
+      "date": "4/30/2025 11:51 PM",
       "sections": [
         {
           "codeTitle": "Lag Rules",
