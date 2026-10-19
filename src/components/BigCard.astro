@@ -19,14 +19,16 @@ const formattedDate = punishmentDate
 		alt={`${name}'s head`}
 		width="200"
 		height="200"
-		class="w-[200px] h-[200px] mx-auto mb-2.5 block [image-rendering:pixelated]"
+		class="w-[200px] h-[200px] shrink-0 [image-rendering:pixelated]"
 		loading="lazy"
 	/>
-	<h2>{name}</h2>
-	{pastNames && pastNames.length > 0 && (
-		<p class="text-xs text-gray-400 mt-[-4px] mb-1">
-			aka: {pastNames.join(', ')}
-		</p>
-	)}
-	{formattedDate && <p>Punishment Date: {formattedDate}</p>}
+  <div>
+    <h2>{name}</h2>
+    {pastNames && pastNames.length > 0 && (
+      <p class="text-xs">
+        aka: {pastNames.join(', ')}
+      </p>
+    )}
+    {formattedDate && <p>Punishment Date: {formattedDate}</p>}
+  </div>
 </div>
