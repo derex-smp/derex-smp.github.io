@@ -12,7 +12,7 @@ const formattedDate = punishmentDate
 	: undefined;
 ---
 
-<div class="bigcard">
+<div class="flex flex-col sm:flex-row items-center gap-8 bg-[#c8d6e5] border border-[#6b7a8a] rounded-[5px] shadow-[0_0_10px_rgba(0,0,0,0.1)] m-2.5 p-5 w-[min(700px,calc(100%-32px))]">
 	<img
 		src={`/avatars/${uuid}.png`}
 		onerror={`this.onerror=null;this.src='https://mc-heads.net/avatar/${uuid}/100';`}
@@ -22,13 +22,13 @@ const formattedDate = punishmentDate
 		class="w-[200px] h-[200px] shrink-0 [image-rendering:pixelated]"
 		loading="lazy"
 	/>
-  <div>
-    <h2>{name}</h2>
-    {pastNames && pastNames.length > 0 && (
-      <p class="text-xs text-gray-600">
-        aka: {pastNames.join(', ')}
-      </p>
-    )}
-    {formattedDate && <p>Punishment Date: {formattedDate}</p>}
-  </div>
+	<div class="flex-1 min-w-0 text-left">
+		<h2 class="text-4xl text-black m-0 mb-2.5 text-left">{name}</h2>
+		{pastNames && pastNames.length > 0 && (
+			<p class="m-0 text-xs text-gray-600">
+				aka: {pastNames.join(', ')}
+			</p>
+		)}
+		{formattedDate && <p class="m-0 text-black text-sm">Punishment Date: {formattedDate}</p>}
+	</div>
 </div>
