@@ -9,13 +9,12 @@ def to_dashed(uuid_str):
         return uuid_str.lower().strip()
     return f"{clean[:8]}-{clean[8:12]}-{clean[12:16]}-{clean[16:20]}-{clean[20:]}"
 
-base_dir = os.path.dirname(os.path.abspath(__file__))
-if not os.path.exists(os.path.join(base_dir, "src")):
-    base_dir = os.path.abspath(os.path.join(base_dir, ".."))
+script_dir = os.path.dirname(os.path.abspath(__file__))
+data_dir = os.path.abspath(os.path.join(script_dir, "..", "data"))
 
-history_file = os.path.join(base_dir, "src", "data", "player_history.json")
-punishments_file = os.path.join(base_dir, "src", "data", "punishments.json")
-usercache_file = os.path.join(base_dir, "src", "data", "usercache.json")
+history_file = os.path.join(data_dir, "player_history.json")
+punishments_file = os.path.join(data_dir, "punishments.json")
+usercache_file = os.path.join(data_dir, "usercache.json")
 
 history = {}
 if os.path.exists(history_file):
