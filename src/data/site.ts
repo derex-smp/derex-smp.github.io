@@ -4,7 +4,8 @@ export const site = {
   homeUrl: "/",
   worldMapUrl: "https://mc.longhorns.dev/map/",
   youtubeUrl: "https://www.youtube.com/hashtag/derexsmp",
-  rulesUrl: "https://www.answeroverflow.com/m/763554707296878633",
+  rulesUrl: "/rules",
+  answerOverflowUrl: "https://www.answeroverflow.com/m/763554707296878633",
 };
 
 export const navigationLinks = [
