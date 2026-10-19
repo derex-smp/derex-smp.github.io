@@ -23,12 +23,6 @@ const { serverIp } = site;
 		<div class="flex-1 min-w-0 flex flex-col justify-center gap-1 text-left">
 			<div class="flex items-center justify-between gap-2">
 				<div class="flex items-center gap-2 min-w-0">
-					<span
-						id="server-status-dot"
-						class="w-2.5 h-2.5 rounded-full bg-[#00AAFF] border border-[#004477] shrink-0"
-						title="Online"
-					></span>
-
 					<button
 						id="copy-ip-button"
 						type="button"
@@ -97,7 +91,7 @@ const { serverIp } = site;
 
 			<div
 				id="server-motd"
-				class="text-xs md:text-sm text-[#aaaaaa] truncate text-left pl-[18px] [text-shadow:2px_2px_0px_#222222]"
+				class="text-xs md:text-sm text-[#aaaaaa] truncate text-left [text-shadow:2px_2px_0px_#222222]"
 			>
 				we have faster minecarts on this world
 			</div>
@@ -143,7 +137,6 @@ const { serverIp } = site;
 			const playerCountEl = document.getElementById('server-player-count');
 			const motdEl = document.getElementById('server-motd');
 			const iconEl = document.getElementById('server-icon') as HTMLImageElement | null;
-			const statusDot = document.getElementById('server-status-dot');
 
 			if (data.online) {
 				if (playerCountEl && data.players) {
@@ -155,19 +148,11 @@ const { serverIp } = site;
 				if (iconEl && data.icon) {
 					iconEl.src = data.icon;
 				}
-				if (statusDot) {
-					statusDot.className = 'w-2.5 h-2.5 rounded-full bg-[#00AAFF] border border-[#004477] shrink-0';
-					statusDot.title = 'Online';
-				}
 			} else {
 				if (playerCountEl) playerCountEl.textContent = '0/30';
 				if (motdEl) {
 					motdEl.textContent = "Can't connect to server";
 					motdEl.className = 'text-xs md:text-sm text-[#FF5555] truncate font-[\'PixelCraft\']';
-				}
-				if (statusDot) {
-					statusDot.className = 'w-2.5 h-2.5 rounded-full bg-[#FF5555] shrink-0';
-					statusDot.title = 'Offline';
 				}
 			}
 		} catch {}
