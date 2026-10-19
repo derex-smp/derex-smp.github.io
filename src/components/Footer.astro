@@ -1,0 +1,18 @@
+---
+import { site } from '../data/site';
+---
+
+<footer class="w-full bg-[#0d0d0d] border-t border-[#262626] py-6 px-4 text-center text-xs text-gray-400">
+	<div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+		<div>
+			derex smp • <span class="text-gray-300">mc.longhorns.dev</span>
+		</div>
+		<div class="flex items-center gap-4">
+			<a href={site.worldMapUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">World Map</a>
+			<a href="/serverrules.html" class="hover:text-white transition-colors">Rules</a>
+			<a href="/members" class="hover:text-white transition-colors">Members</a>
+			<a href="/notbanlist" class="hover:text-white transition-colors">Records</a>
+			<a href={site.youtubeUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">YouTube</a>
+		</div>
+	</div>
+</footer>
