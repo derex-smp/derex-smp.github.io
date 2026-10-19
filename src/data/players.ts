@@ -70,7 +70,6 @@ if (existsSync(playerdataDir)) {
 const allMembers: Member[] = [...members];
 
 for (const punished of punishments) {
-    const name = punished.name;
     const uuid = punished.uuid;
 
     if (seen.has(uuid)) {
@@ -79,6 +78,7 @@ for (const punished of punishments) {
 
     seen.add(uuid);
     const hist = historyMap.get(uuid);
+    const name = hist?.currentName || punished.name;
     const pastNames = hist?.pastNames?.length ? hist.pastNames : undefined;
     allMembers.push({ name, uuid, pastNames })
 }
