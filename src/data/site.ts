@@ -4,6 +4,7 @@ export const site = {
   homeUrl: "/",
   worldMapUrl: "https://mc.longhorns.dev/map/",
   youtubeUrl: "https://www.youtube.com/hashtag/derexsmp",
+  rulesUrl: "https://www.answeroverflow.com/m/763554707296878633",
 };
 
 export const navigationLinks = [
@@ -12,5 +13,5 @@ export const navigationLinks = [
   { label: "Members", href: "/members" },
   { label: "Disciplinary Records", href: "/notbanlist" },
   { label: "Youtube", href: site.youtubeUrl },
-  { label: "Legacy Rules", href: "/serverrules.html" },
+  { label: "Rules", href: site.rulesUrl },
 ] as const;
