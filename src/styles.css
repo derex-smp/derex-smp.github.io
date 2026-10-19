@@ -1,2 +1,2 @@
-@import "../styles.css";
 @import "tailwindcss";
+@import "../styles.css" layer(components);
