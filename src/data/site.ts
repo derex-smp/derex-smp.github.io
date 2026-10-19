@@ -1,5 +1,6 @@
 export const site = {
   name: "derex smp",
+  serverIp: "mc.longhorns.dev",
   homeUrl: "/",
   worldMapUrl: "https://mc.longhorns.dev/map/",
   youtubeUrl: "https://www.youtube.com/hashtag/derexsmp",

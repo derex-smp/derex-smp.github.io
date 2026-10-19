@@ -1,7 +1,176 @@
+---
+// Layout adapted from LOOHP's MC-Server-Banner-API (https://github.com/LOOHP/MC-Server-Banner-API)
+import { site } from '../data/site';
+const { serverIp } = site;
+---
+
 <div class="server-banner mx-auto my-7.5 max-w-150">
-	<img
-		class="h-auto w-full rounded-lg shadow-[0_4px_8px_rgba(0,0,0,0.2)]"
-		src="https://api.loohpjames.com/serverbanner.png?ip=mc.longhorns.dev&timezone=UTC"
-		alt="Server Banner"
-	/>
+	<div
+		class="relative flex items-center gap-3 bg-[#1e1e1e] border border-[#333333] rounded-lg p-2.5 text-white shadow-[0_4px_8px_rgba(0,0,0,0.3)] select-none font-['PixelCraft']"
+	>
+		<img
+			id="server-icon"
+			src={`https://api.mcsrvstat.us/icon/${serverIp}`}
+			alt="Server Icon"
+			width="64"
+			height="64"
+			style="width: 64px !important; height: 64px !important; image-rendering: pixelated;"
+			class="w-16 h-16 rounded shrink-0 object-contain bg-[#141414]"
+			loading="lazy"
+		/>
+
+		<div class="flex-1 min-w-0 flex flex-col justify-center gap-1">
+			<div class="flex items-center justify-between gap-2">
+				<div class="flex items-center gap-2 min-w-0">
+					<span
+						id="server-status-dot"
+						class="w-2.5 h-2.5 rounded-full bg-[#00AAFF] shadow-[0_0_6px_#00AAFF] shrink-0"
+						title="Online"
+					></span>
+
+					<button
+						id="copy-ip-button"
+						type="button"
+						class="group flex items-center gap-1.5 text-white hover:text-[#55FFFF] text-sm md:text-base font-['PixelCraft'] cursor-pointer transition-colors bg-transparent border-0 p-0 text-left"
+						title="Click to copy IP"
+					>
+						<span>IP: {serverIp}</span>
+						<span
+							id="copy-icon-wrapper"
+							class="inline-flex items-center justify-center p-0.5 text-gray-400 group-hover:text-white transition-colors"
+						>
+							<svg
+								id="copy-icon-svg"
+								xmlns="http://www.w3.org/2000/svg"
+								class="w-4 h-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+								<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+							</svg>
+							<svg
+								id="check-icon-svg"
+								xmlns="http://www.w3.org/2000/svg"
+								class="w-4 h-4 text-[#55FF55] hidden"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<polyline points="20 6 9 17 4 12"></polyline>
+							</svg>
+						</span>
+						<span
+							id="copied-text"
+							class="text-xs text-[#55FF55] font-normal opacity-0 transition-opacity duration-150"
+						>
+							Copied!
+						</span>
+					</button>
+				</div>
+
+				<div class="flex items-center gap-2 shrink-0 pr-1">
+					<span id="server-player-count" class="text-sm text-[#aaaaaa] font-['PixelCraft']">
+						--/30
+					</span>
+					<div
+						id="server-ping-bars"
+						class="flex items-end gap-[2px] h-3.5 pb-0.5"
+						title="Signal: Full"
+					>
+						<span class="w-[2px] h-[3px] bg-[#55FF55] rounded-xs"></span>
+						<span class="w-[2px] h-[5px] bg-[#55FF55] rounded-xs"></span>
+						<span class="w-[2px] h-[7px] bg-[#55FF55] rounded-xs"></span>
+						<span class="w-[2px] h-[9px] bg-[#55FF55] rounded-xs"></span>
+						<span class="w-[2px] h-[11px] bg-[#55FF55] rounded-xs"></span>
+					</div>
+				</div>
+			</div>
+
+			<div
+				id="server-motd"
+				class="text-xs md:text-sm text-[#5555FF] truncate font-['PixelCraft']"
+			>
+				we have faster minecarts on this world
+			</div>
+		</div>
+	</div>
 </div>
+
+<script>
+	import { site } from '../data/site';
+	const { serverIp } = site;
+
+	const copyButton = document.getElementById('copy-ip-button');
+	const copySvg = document.getElementById('copy-icon-svg');
+	const checkSvg = document.getElementById('check-icon-svg');
+	const copiedText = document.getElementById('copied-text');
+
+	if (copyButton) {
+		let timeoutId: number | undefined;
+		copyButton.addEventListener('click', async () => {
+			try {
+				await navigator.clipboard.writeText(serverIp);
+				if (copySvg && checkSvg && copiedText) {
+					copySvg.classList.add('hidden');
+					checkSvg.classList.remove('hidden');
+					copiedText.classList.remove('opacity-0');
+					window.clearTimeout(timeoutId);
+					timeoutId = window.setTimeout(() => {
+						copySvg.classList.remove('hidden');
+						checkSvg.classList.add('hidden');
+						copiedText.classList.add('opacity-0');
+					}, 2000);
+				}
+			} catch {}
+		});
+	}
+
+	async function updateServerStatus() {
+		try {
+			const res = await fetch(`https://api.mcsrvstat.us/3/${serverIp}`);
+			if (!res.ok) return;
+			const data = await res.json();
+
+			const playerCountEl = document.getElementById('server-player-count');
+			const motdEl = document.getElementById('server-motd');
+			const iconEl = document.getElementById('server-icon') as HTMLImageElement | null;
+			const statusDot = document.getElementById('server-status-dot');
+
+			if (data.online) {
+				if (playerCountEl && data.players) {
+					playerCountEl.textContent = `${data.players.online}/${data.players.max}`;
+				}
+				if (motdEl && data.motd?.clean?.[0]) {
+					motdEl.textContent = data.motd.clean[0].trim();
+				}
+				if (iconEl && data.icon) {
+					iconEl.src = data.icon;
+				}
+				if (statusDot) {
+					statusDot.className = 'w-2.5 h-2.5 rounded-full bg-[#00AAFF] shadow-[0_0_6px_#00AAFF] shrink-0';
+					statusDot.title = 'Online';
+				}
+			} else {
+				if (playerCountEl) playerCountEl.textContent = '0/30';
+				if (motdEl) {
+					motdEl.textContent = "Can't connect to server";
+					motdEl.className = 'text-xs md:text-sm text-[#FF5555] truncate font-[\'PixelCraft\']';
+				}
+				if (statusDot) {
+					statusDot.className = 'w-2.5 h-2.5 rounded-full bg-[#FF5555] shrink-0';
+					statusDot.title = 'Offline';
+				}
+			}
+		} catch {}
+	}
+
+	updateServerStatus();
+</script>

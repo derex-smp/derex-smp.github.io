@@ -2,6 +2,8 @@
 temp/
 /temp
 public/avatars/
+src/data/player_history.json
+src/data/usercache.json
 
 # Python cache files
 __pycache__/
