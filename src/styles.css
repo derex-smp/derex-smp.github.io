@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @import "../styles.css" layer(components);
+
+@theme {
+  --font-sans: 'PixelCraft', sans-serif;
+}
+
+html, body, h1, h2, h3, h4, h5, h6, p, a, button, input {
+  font-family: 'PixelCraft', sans-serif;
+}
