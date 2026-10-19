@@ -24,7 +24,7 @@ function toClean(dashed: string): string {
 async function fetchProfile(cleanUuid: string): Promise<string | null> {
   const sources = [
     `https://crafthead.net/profile/${cleanUuid}`,
-    `https://sessionserver.mojang.com/session/minecraft/profile/${cleanUuid}`
+    `https://sessionserver.mojang.com/session/minecraft/profile/${cleanUuid}`,
   ];
 
   for (const url of sources) {
@@ -58,7 +58,9 @@ export async function updateAllPlayerNames(): Promise<void> {
 
   if (fs.existsSync(punishmentsPath)) {
     try {
-      const punishments: { uuid: string }[] = JSON.parse(fs.readFileSync(punishmentsPath, "utf8"));
+      const punishments: { uuid: string }[] = JSON.parse(
+        fs.readFileSync(punishmentsPath, "utf8"),
+      );
       for (const p of punishments) {
         if (p.uuid) {
           allUuids.add(toClean(p.uuid));
