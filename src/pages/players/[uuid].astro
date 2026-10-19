@@ -18,7 +18,7 @@ const { player } = Astro.props;
   <head><BaseHead title={`${player.name} - derex smp`} description={`${player.name} on derex smp`} /></head>
   <body class="min-h-screen flex flex-col bg-[#f4f4f4]">
     <Navbar />
-    <main class="flex-1 flex justify-center pt-10">
+    <main class="flex-1 flex justify-center items-start pt-10">
       <BigCard name={player.name} uuid={player.uuid} pastNames={player.pastNames != undefined ? player.pastNames : []} />
     </main>
     <Footer />
