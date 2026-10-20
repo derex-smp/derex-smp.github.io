@@ -1,0 +1,105 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Navbar from "../../components/Navbar.astro";
+import BigCard from "../../components/BigCard.astro";
+import Footer from "../../components/Footer.astro";
+import { getAllMembers } from "../../data/players";
+
+export function getStaticPaths() {
+  const members = getAllMembers();
+  const paths: any[] = [];
+  const seen = new Set<string>();
+
+  for (const player of members) {
+    const lowerName = player.name.toLowerCase();
+    if (!seen.has(lowerName)) {
+      seen.add(lowerName);
+      paths.push({
+        params: { slug: player.name },
+        props: { player, isRedirect: false, target: `/player/${player.name}` },
+      });
+    }
+
+    if (player.pastNames) {
+      for (const past of player.pastNames) {
+        const lowerPast = past.toLowerCase();
+        if (!seen.has(lowerPast)) {
+          seen.add(lowerPast);
+          paths.push({
+            params: { slug: past },
+            props: {
+              player,
+              isRedirect: true,
+              target: `/player/${player.name}`,
+            },
+          });
+        }
+      }
+    }
+
+    const lowerUuid = player.uuid.toLowerCase();
+    if (!seen.has(lowerUuid)) {
+      seen.add(lowerUuid);
+      paths.push({
+        params: { slug: player.uuid },
+        props: { player, isRedirect: true, target: `/player/${player.name}` },
+      });
+    }
+  }
+
+  return paths;
+}
+
+interface Props {
+  player: any;
+  isRedirect: boolean;
+  target: string;
+}
+
+const { player, isRedirect, target } = Astro.props;
+---
+
+{
+  isRedirect ? (
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <title>{`Redirecting to ${player.name} - derex smp`}</title>
+        <link
+          rel="canonical"
+          href={
+            new URL(target, Astro.site || "https://derex-smp.github.io").href
+          }
+        />
+        <meta http-equiv="refresh" content={`0; url=${target}`} />
+        <meta name="robots" content="noindex, follow" />
+      </head>
+      <body class="bg-[#f4f4f4] text-center pt-20">
+        <p>
+          Redirecting to <a href={target}>{player.name}</a>...
+        </p>
+      </body>
+    </html>
+  ) : (
+    <html lang="en">
+      <head>
+        <BaseHead
+          title={`${player.name} - derex smp`}
+          description={`View ${player.name}'s player profile and history on derex smp.`}
+          image={`/avatars/${player.uuid}.png`}
+        />
+      </head>
+      <body class="min-h-screen flex flex-col bg-[#f4f4f4]">
+        <Navbar />
+        <main class="flex-1 flex justify-center items-start pt-10">
+          <BigCard
+            name={player.name}
+            uuid={player.uuid}
+            pastNames={player.pastNames ? player.pastNames : []}
+          />
+        </main>
+        <Footer />
+      </body>
+    </html>
+  )
+}

@@ -1,9 +1,5 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Navbar from '../../components/Navbar.astro';
-import BigCard from '../../components/BigCard.astro';
-import Footer from '../../components/Footer.astro';
-import { getAllMembers } from '../../data/players';
+import { getAllMembers } from "../../data/players";
 
 export function getStaticPaths() {
   return getAllMembers().map((player) => ({
@@ -13,14 +9,21 @@ export function getStaticPaths() {
 }
 
 const { player } = Astro.props;
+const target = `/player/${player.name}`;
 ---
+
 <html lang="en">
-  <head><BaseHead title={`${player.name} - derex smp`} description={`${player.name} on derex smp`} /></head>
-  <body class="min-h-screen flex flex-col bg-[#f4f4f4]">
-    <Navbar />
-    <main class="flex-1 flex justify-center items-start pt-10">
-      <BigCard name={player.name} uuid={player.uuid} pastNames={player.pastNames != undefined ? player.pastNames : []} />
-    </main>
-    <Footer />
+  <head>
+    <meta charset="utf-8" />
+    <title>{`Redirecting to ${player.name} - derex smp`}</title>
+    <link
+      rel="canonical"
+      href={new URL(target, Astro.site || "https://derex-smp.github.io").href}
+    />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <meta name="robots" content="noindex, follow" />
+  </head>
+  <body class="bg-[#f4f4f4] text-center pt-20">
+    <p>Redirecting to <a href={target}>{player.name}</a>...</p>
   </body>
 </html>
