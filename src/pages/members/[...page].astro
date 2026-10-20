@@ -17,6 +17,7 @@ interface Props {
 }
 
 const { page } = Astro.props;
+const bgImage = `/images/members_${((page.currentPage - 1) % 6) + 1}.png`;
 ---
 
 <html lang="en">
@@ -26,12 +27,12 @@ const { page } = Astro.props;
         ? "Server Members - derex smp"
         : `Server Members (Page ${page.currentPage} of ${page.lastPage}) - derex smp`}
       description="Browse the complete roster of active and historical players on the derex smp Minecraft server."
-      image="/images/members_3.png"
+      image={bgImage}
     />
   </head>
   <body
     class="min-h-screen flex flex-col bg-cover bg-fixed bg-no-repeat"
-    style="background-image: url('/images/members_3.png');"
+    style={`background-image: url('${bgImage}');`}
   >
     <Navbar />
     <main class="flex-1">
