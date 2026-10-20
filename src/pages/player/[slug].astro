@@ -11,6 +11,7 @@ export function getStaticPaths() {
   const seen = new Set<string>();
 
   for (const player of members) {
+    // primary canonical page: /player/username (this is what Google indexes)
     const lowerName = player.name.toLowerCase();
     if (!seen.has(lowerName)) {
       seen.add(lowerName);
@@ -20,6 +21,8 @@ export function getStaticPaths() {
       });
     }
 
+    // old alias redirects: /player/old_name -> bounces to /player/current_name
+    // uh prob have to figure something out if another player snatches this name
     if (player.pastNames) {
       for (const past of player.pastNames) {
         const lowerPast = past.toLowerCase();
@@ -37,6 +40,7 @@ export function getStaticPaths() {
       }
     }
 
+    // UUID redirects: /player/011db1cd... -> bounces to /player/current_name
     const lowerUuid = player.uuid.toLowerCase();
     if (!seen.has(lowerUuid)) {
       seen.add(lowerUuid);
@@ -60,6 +64,7 @@ const { player, isRedirect, target } = Astro.props;
 ---
 
 {
+  // If the slug visited is an old name or a UUID, trigger a 0s redirect to the active name
   isRedirect ? (
     <html lang="en">
       <head>
@@ -81,6 +86,7 @@ const { player, isRedirect, target } = Astro.props;
       </body>
     </html>
   ) : (
+    // Otherwise, this is the real active profile page!
     <html lang="en">
       <head>
         <BaseHead

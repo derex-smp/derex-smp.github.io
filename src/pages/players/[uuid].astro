@@ -1,6 +1,7 @@
 ---
 import { getAllMembers } from "../../data/players";
 
+// Legacy fallback: redirects old /players/[uuid] bookmarks/Discord links to the new clean /player/[name] route
 export function getStaticPaths() {
   return getAllMembers().map((player) => ({
     params: { uuid: player.uuid },
