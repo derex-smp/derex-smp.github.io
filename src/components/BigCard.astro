@@ -1,34 +1,40 @@
 ---
 interface Props {
-	name: string;
-	uuid: string;
-	punishmentDate?: string | Date;
-	pastNames?: string[];
+  name: string;
+  uuid: string;
+  punishmentDate?: string | Date;
+  pastNames?: string[];
 }
 
 const { name, uuid, punishmentDate, pastNames } = Astro.props;
 const formattedDate = punishmentDate
-	? new Date(punishmentDate).toLocaleDateString()
-	: undefined;
+  ? new Date(punishmentDate).toLocaleDateString()
+  : undefined;
 ---
 
-<div class="flex flex-col sm:flex-row items-center gap-8 bg-[#c8d6e5] border border-[#6b7a8a] rounded-[5px] shadow-[0_0_10px_rgba(0,0,0,0.1)] m-2.5 p-5 w-[min(700px,calc(100%-32px))] h-fit">
-	<img
-		src={`/avatars/${uuid}.png`}
-		onerror={`this.onerror=null;this.src='https://mc-heads.net/avatar/${uuid}/100';`}
-		alt={`${name}'s head`}
-		width="200"
-		height="200"
-		class="w-[200px] h-[200px] shrink-0 [image-rendering:pixelated]"
-		loading="lazy"
-	/>
-	<div class="flex-1 min-w-0 text-left">
-		<h2 class="text-4xl text-black m-0 mb-2.5 text-left">{name}</h2>
-		{pastNames && pastNames.length > 0 && (
-			<p class="m-0 text-xs text-gray-600">
-				aka: {pastNames.join(', ')}
-			</p>
-		)}
-		{/* {formattedDate && <p class="m-0 text-black text-sm">Punishment Date: {formattedDate}</p>} */}
-	</div>
+<div
+  class="flex flex-col sm:flex-row items-center gap-8 bg-[#c8d6e5] border border-[#6b7a8a] rounded-[5px] shadow-[0_0_10px_rgba(0,0,0,0.1)] m-2.5 p-5 w-[min(700px,calc(100%-32px))] h-fit"
+>
+  <img
+    src={`/avatars/${uuid}.png`}
+    onerror={`this.onerror=null;this.src='https://mc-heads.net/avatar/${uuid}/100';`}
+    alt={`${name}'s head`}
+    width="200"
+    height="200"
+    class="w-[200px] h-[200px] shrink-0 [image-rendering:pixelated]"
+    loading="lazy"
+  />
+  <div class="flex-1 min-w-0 text-left">
+    <h2 class="text-4xl text-black m-0 mb-2.5 text-left">{name}</h2>
+    {
+      pastNames && pastNames.length > 0 && (
+        <p class="m-0 text-xs text-gray-600">aka: {pastNames.join(", ")}</p>
+      )
+    }
+    {
+      formattedDate && (
+        <p class="m-0 text-black text-sm">Date: {formattedDate}</p>
+      )
+    }
+  </div>
 </div>
