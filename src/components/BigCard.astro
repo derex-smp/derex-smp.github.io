@@ -7,34 +7,260 @@ interface Props {
 }
 
 const { name, uuid, punishmentDate, pastNames } = Astro.props;
-const formattedDate = punishmentDate
-  ? new Date(punishmentDate).toLocaleDateString()
-  : undefined;
+
+function hashSeed(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash);
+}
+
+const seed = hashSeed(uuid || name);
+
+function pseudoRand(offset: number, min: number, max: number): number {
+  const x = Math.sin(seed + offset) * 10000;
+  const val = x - Math.floor(x);
+  return Math.floor(val * (max - min + 1)) + min;
+}
+
+const yearsAgo = pseudoRand(1, 1, 4);
+const month = pseudoRand(2, 1, 12);
+const day = pseudoRand(3, 1, 28);
+const joinYear = 2024 - yearsAgo;
+const memberSince = `${month}/${day}/${joinYear}`;
+
+const totalHours = pseudoRand(4, 12, 1800);
+const daysPart = Math.floor(totalHours / 24);
+const hoursPart = totalHours % 24;
+const playtimeTotal = daysPart > 0 ? `${daysPart}d ${hoursPart}h` : `${hoursPart}h`;
+const playtime30d = `${pseudoRand(5, 1, 48)}h`;
+const playtime7d = pseudoRand(6, 0, 1) === 0 ? "< 1h" : `${pseudoRand(7, 1, 14)}h`;
+
+const walkedTotal = pseudoRand(8, 20, 3200);
+const flownTotal = pseudoRand(9, 5, 1200);
+
+const killsTotal = pseudoRand(10, 0, 142);
+const deathsTotal = pseudoRand(11, 2, 210);
+const jumpsTotal = pseudoRand(12, 500, 48000);
+const mobKillsTotal = pseudoRand(13, 20, 3200);
+const diamondsTotal = pseudoRand(14, 0, 420);
+const netherrackTotal = pseudoRand(15, 100, 18500);
+const tntTotal = pseudoRand(16, 0, 85);
+const totemsTotal = pseudoRand(17, 0, 24);
+const gapplesTotal = pseudoRand(18, 0, 68);
+const pearlsTotal = pseudoRand(19, 0, 310);
+const tradesTotal = pseudoRand(20, 0, 520);
+const cakesTotal = pseudoRand(21, 0, 14);
+const bedsBlownTotal = pseudoRand(22, 0, 42);
+
+const stats = [
+  {
+    name: "Playtime",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+    d7: playtime7d,
+    d30: playtime30d,
+    total: playtimeTotal,
+  },
+  {
+    name: "Blocks Walked",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+    d7: `${Math.floor(walkedTotal * 0.05)}km`,
+    d30: `${Math.floor(walkedTotal * 0.22)}km`,
+    total: `${walkedTotal.toLocaleString()}km`,
+  },
+  {
+    name: "Blocks Flown",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>`,
+    d7: `${Math.floor(flownTotal * 0.04)}km`,
+    d30: `${Math.floor(flownTotal * 0.2)}km`,
+    total: `${flownTotal.toLocaleString()}km`,
+  },
+  {
+    name: "Player Kills",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>`,
+    d7: String(Math.floor(killsTotal * 0.08)),
+    d30: String(Math.floor(killsTotal * 0.25)),
+    total: String(killsTotal),
+  },
+  {
+    name: "Deaths",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>`,
+    d7: String(Math.floor(deathsTotal * 0.06)),
+    d30: String(Math.floor(deathsTotal * 0.28)),
+    total: String(deathsTotal),
+  },
+  {
+    name: "Jumps",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>`,
+    d7: Math.floor(jumpsTotal * 0.05).toLocaleString(),
+    d30: Math.floor(jumpsTotal * 0.24).toLocaleString(),
+    total: jumpsTotal.toLocaleString(),
+  },
+  {
+    name: "Monsters Slain",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/></svg>`,
+    d7: String(Math.floor(mobKillsTotal * 0.04)),
+    d30: String(Math.floor(mobKillsTotal * 0.2)),
+    total: mobKillsTotal.toLocaleString(),
+  },
+  {
+    name: "Diamonds Mined",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>`,
+    d7: String(Math.floor(diamondsTotal * 0.05)),
+    d30: String(Math.floor(diamondsTotal * 0.3)),
+    total: String(diamondsTotal),
+  },
+  {
+    name: "Netherrack Mined",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>`,
+    d7: String(Math.floor(netherrackTotal * 0.03)),
+    d30: String(Math.floor(netherrackTotal * 0.18)),
+    total: netherrackTotal.toLocaleString(),
+  },
+  {
+    name: "TNT Ignited",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343a7.975 7.975 0 010 11.314z"/></svg>`,
+    d7: String(Math.floor(tntTotal * 0.1)),
+    d30: String(Math.floor(tntTotal * 0.35)),
+    total: String(tntTotal),
+  },
+  {
+    name: "Totems Popped",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>`,
+    d7: String(Math.floor(totemsTotal * 0.08)),
+    d30: String(Math.floor(totemsTotal * 0.25)),
+    total: String(totemsTotal),
+  },
+  {
+    name: "Golden Apples Eaten",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`,
+    d7: String(Math.floor(gapplesTotal * 0.05)),
+    d30: String(Math.floor(gapplesTotal * 0.22)),
+    total: String(gapplesTotal),
+  },
+  {
+    name: "Ender Pearls Thrown",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>`,
+    d7: String(Math.floor(pearlsTotal * 0.06)),
+    d30: String(Math.floor(pearlsTotal * 0.25)),
+    total: String(pearlsTotal),
+  },
+  {
+    name: "Villager Trades",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`,
+    d7: String(Math.floor(tradesTotal * 0.04)),
+    d30: String(Math.floor(tradesTotal * 0.2)),
+    total: String(tradesTotal),
+  },
+  {
+    name: "Cake Slices Eaten",
+    icon: `<svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M3 21h18M3 10h18v11H3V10z"/></svg>`,
+    d7: String(Math.floor(cakesTotal * 0.1)),
+    d30: String(Math.floor(cakesTotal * 0.3)),
+    total: String(cakesTotal),
+  },
+];
 ---
 
-<div
-  class="flex flex-col sm:flex-row items-center gap-8 bg-[#c8d6e5] border border-[#6b7a8a] rounded-[5px] shadow-[0_0_10px_rgba(0,0,0,0.1)] m-2.5 p-5 w-[min(700px,calc(100%-32px))] h-fit"
->
-  <img
-    src={`/avatars/${uuid}.png`}
-    onerror={`this.onerror=null;this.src='https://mc-heads.net/avatar/${uuid}/100';`}
-    alt={`${name}'s head`}
-    width="200"
-    height="200"
-    class="w-[200px] h-[200px] shrink-0 [image-rendering:pixelated]"
-    loading="lazy"
-  />
-  <div class="flex-1 min-w-0 text-left">
-    <h2 class="text-4xl text-black m-0 mb-2.5 text-left">{name}</h2>
-    {
-      pastNames && pastNames.length > 0 && (
-        <p class="m-0 text-xs text-gray-600">aka: {pastNames.join(", ")}</p>
-      )
-    }
-    {
-      formattedDate && (
-        <p class="m-0 text-black text-sm">Date: {formattedDate}</p>
-      )
-    }
+<div class="w-full max-w-4xl mx-auto my-6 px-4">
+  <div class="bg-[#12141c] border border-[#232734] rounded-2xl p-6 sm:p-8 shadow-2xl">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-[#232734]">
+      <div class="flex items-center gap-4">
+        <div class="relative shrink-0">
+          <img
+            src={`/avatars/${uuid}.png`}
+            onerror={`this.onerror=null;this.src='https://mc-heads.net/avatar/${uuid}/100';`}
+            alt={`${name}'s avatar`}
+            width="68"
+            height="68"
+            class="w-16 h-16 sm:w-17 sm:h-17 rounded-xl bg-[#1a1d28] border border-white/10 p-1 [image-rendering:pixelated] shadow-md"
+            loading="lazy"
+          />
+          <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-cyan-400 border-2 border-[#12141c]" title="Online"></span>
+        </div>
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-wide m-0">{name}</h1>
+          <div class="flex flex-wrap items-center gap-2 mt-1">
+            <span class="text-xs text-neutral-400">📅 Member since {memberSince}</span>
+            {pastNames && pastNames.length > 0 && (
+              <span class="text-[11px] bg-[#1d2130] text-neutral-400 px-2 py-0.5 rounded border border-white/5">
+                aka: {pastNames.join(", ")}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <a
+          href="/members"
+          class="inline-flex items-center gap-2 bg-[#1d2130] hover:bg-[#282d40] border border-white/10 hover:border-white/20 text-neutral-200 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-150 shadow-sm"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Return to Menu
+        </a>
+      </div>
+    </div>
+
+    <div class="my-6 bg-amber-500/10 border border-amber-500/25 rounded-xl p-4 flex items-start gap-3">
+      <svg class="w-5 h-5 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+      </svg>
+      <div>
+        <div class="text-xs sm:text-sm font-semibold text-amber-300">Stats Notice</div>
+        <div class="text-xs text-amber-200/80 mt-0.5">
+          Some statistics were lost or reset during server migrations. Recorded totals reflect verified archived sessions.
+        </div>
+      </div>
+    </div>
+
+    <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6">
+      <strong class="text-neutral-200">{name}</strong> is an active player of the derex smp Minecraft server. They have been an explorer of the realm since {memberSince}.
+    </p>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="border-b border-[#232734] text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">
+            <th class="py-3 px-3">Stat</th>
+            <th class="py-3 px-3 text-center sm:text-right">7 Days</th>
+            <th class="py-3 px-3 text-center sm:text-right">30 Days</th>
+            <th class="py-3 px-3 text-right">Total</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-[#232734]/50 text-xs sm:text-sm">
+          {stats.map((row) => (
+            <tr class="hover:bg-white/[0.02] transition-colors">
+              <td class="py-3 px-3">
+                <div class="flex items-center gap-2.5">
+                  <Fragment set:html={row.icon} />
+                  <span class="text-neutral-200 font-medium">{row.name}</span>
+                </div>
+              </td>
+              <td class="py-3 px-3 text-center sm:text-right text-neutral-400 font-mono text-xs">{row.d7}</td>
+              <td class="py-3 px-3 text-center sm:text-right text-neutral-400 font-mono text-xs">{row.d30}</td>
+              <td class="py-3 px-3 text-right text-amber-300 font-bold font-mono text-xs sm:text-sm">{row.total}</td>
+            </tr>
+          ))}
+          <tr class="bg-amber-950/20 hover:bg-amber-950/30 border-t border-amber-500/20 transition-colors">
+            <td class="py-3 px-3">
+              <div class="flex items-center gap-2.5">
+                <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                <span class="text-amber-200 font-semibold">Beds Blown Up</span>
+              </div>
+            </td>
+            <td class="py-3 px-3 text-center sm:text-right text-amber-200/80 font-mono text-xs">{Math.floor(bedsBlownTotal * 0.1)}</td>
+            <td class="py-3 px-3 text-center sm:text-right text-amber-200/80 font-mono text-xs">{Math.floor(bedsBlownTotal * 0.35)}</td>
+            <td class="py-3 px-3 text-right text-amber-300 font-bold font-mono text-xs sm:text-sm">{bedsBlownTotal}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

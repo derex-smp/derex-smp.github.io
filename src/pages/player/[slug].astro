@@ -79,9 +79,9 @@ const { player, isRedirect, target } = Astro.props;
         <meta http-equiv="refresh" content={`0; url=${target}`} />
         <meta name="robots" content="noindex, follow" />
       </head>
-      <body class="bg-[#f4f4f4] text-center pt-20">
+      <body class="bg-[#0c0d12] text-[#dbdee1] text-center pt-20">
         <p>
-          Redirecting to <a href={target}>{player.name}</a>...
+          Redirecting to <a class="text-sky-400 hover:underline" href={target}>{player.name}</a>...
         </p>
       </body>
     </html>
@@ -95,9 +95,15 @@ const { player, isRedirect, target } = Astro.props;
           image={`/avatars/${player.uuid}.png`}
         />
       </head>
-      <body class="min-h-screen flex flex-col bg-[#f4f4f4]">
+      <body class="min-h-screen flex flex-col bg-[#0c0d12] text-[#dbdee1]">
         <Navbar />
-        <main class="flex-1 flex justify-center items-start pt-10">
+        <div class="bg-yellow-400 text-neutral-950 py-2.5 px-4 text-center text-xs sm:text-sm font-semibold border-b border-yellow-500 shadow-sm flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 shrink-0 text-neutral-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          <span>Notice: The statistics shown on this page are dummy placeholder data and subject to change.</span>
+        </div>
+        <main class="flex-1 flex justify-center items-start py-6 sm:py-10">
           <BigCard
             name={player.name}
             uuid={player.uuid}
