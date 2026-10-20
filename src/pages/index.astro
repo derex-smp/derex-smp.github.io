@@ -13,17 +13,22 @@ import Footer from '../components/Footer.astro';
 			description="Welcome to derex smp, an active Minecraft Survival Multiplayer server. Explore our community members, world map, and server guidelines."
 		/>
 	</head>
-	<body class="min-h-screen flex flex-col">
+	<body
+		class="min-h-screen flex flex-col bg-cover bg-fixed bg-no-repeat bg-center"
+		style="background-image: url('/images/2025-12-18_03.38.29.png');"
+	>
 		<Navbar />
 		<header class="w3-container w3-center mx-auto w-full px-25 py-32 md:px-10 xl:px-15">
-			<h1>Welcome to the main page for derex smp</h1>
-			<p>
+			<h1 class="text-white! drop-shadow-[2px_2px_0_rgba(0,0,0,1)]">
+				Welcome to the main page for derex smp
+			</h1>
+			<p class="text-stone-200! drop-shadow-[1px_1px_0_rgba(0,0,0,1)]">
 				Enjoy this little static site we made for fun.<br />
 				The navbar above will take you to some cooler links associated with our Minecraft Survival Multiplayer world!
 			</p>
 			<ServerBanner />
 		</header>
-		<main class="somethingidk w3-display-container w3-animate-opacity w3-text-white min-h-0 flex-1">
+		<main class="w3-display-container w3-animate-opacity w3-text-white min-h-0 flex-1">
 			<section class="container flex h-full items-center justify-center">
 				<div class="map-preview-container flex w-full max-w-150 flex-col items-center justify-center"></div>
 			</section>
