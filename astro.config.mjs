@@ -44,6 +44,35 @@ export default defineConfig({
         }
         return true;
       },
+      serialize: (item) => {
+        const now = new Date();
+        if (item.url === "https://derex-smp.github.io/") {
+          item.priority = 1.0;
+          item.changefreq = "daily";
+          item.lastmod = now;
+        } else if (item.url.includes("/rules") || item.url.includes("/notbanlist")) {
+          item.priority = 0.9;
+          item.changefreq = "weekly";
+          item.lastmod = now;
+        } else if (item.url.includes("/members")) {
+          item.priority = 0.8;
+          item.changefreq = "hourly";
+          item.lastmod = now;
+        } else if (item.url.includes("/player/")) {
+          item.priority = 0.7;
+          item.changefreq = "hourly";
+          item.lastmod = now;
+        }
+        return item;
+      },
+      chunks: {
+        players: (item) => {
+          if (item.url.includes("/player/")) {
+            return item;
+          }
+          return false;
+        },
+      },
     }),
     {
       name: "avatar-baker",
