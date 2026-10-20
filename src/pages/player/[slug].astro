@@ -25,6 +25,7 @@ export function getStaticPaths() {
     // uh prob have to figure something out if another player snatches this name
     if (player.pastNames) {
       for (const past of player.pastNames) {
+        if (!/^[a-zA-Z0-9_]{3,16}$/.test(past)) continue;
         const lowerPast = past.toLowerCase();
         if (!seen.has(lowerPast)) {
           seen.add(lowerPast);
@@ -46,6 +47,14 @@ export function getStaticPaths() {
       seen.add(lowerUuid);
       paths.push({
         params: { slug: player.uuid },
+        props: { player, isRedirect: true, target: `/player/${player.name}` },
+      });
+    }
+    const cleanUuid = lowerUuid.replace(/-/g, '');
+    if (!seen.has(cleanUuid)) {
+      seen.add(cleanUuid);
+      paths.push({
+        params: { slug: cleanUuid },
         props: { player, isRedirect: true, target: `/player/${player.name}` },
       });
     }

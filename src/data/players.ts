@@ -71,16 +71,18 @@ const allMembers: Member[] = [...members];
 
 for (const punished of punishments) {
     const uuid = punished.uuid;
+    const cleanUuid = uuid.replace(/-/g, '');
 
-    if (seen.has(uuid)) {
+    if (seen.has(uuid) || seen.has(cleanUuid)) {
         continue;
     }
 
     seen.add(uuid);
-    const hist = historyMap.get(uuid);
+    seen.add(cleanUuid);
+    const hist = historyMap.get(uuid) || historyMap.get(cleanUuid);
     const name = hist?.currentName || punished.name;
     const pastNames = hist?.pastNames?.length ? hist.pastNames : undefined;
-    allMembers.push({ name, uuid, pastNames })
+    allMembers.push({ name, uuid, pastNames });
 }
 
 members.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));

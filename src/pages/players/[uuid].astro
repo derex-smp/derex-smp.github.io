@@ -3,10 +3,21 @@ import { getAllMembers } from "../../data/players";
 
 // Legacy fallback: redirects old /players/[uuid] bookmarks/Discord links to the new clean /player/[name] route
 export function getStaticPaths() {
-  return getAllMembers().map((player) => ({
-    params: { uuid: player.uuid },
-    props: { player },
-  }));
+  const paths: any[] = [];
+  const seen = new Set<string>();
+  for (const player of getAllMembers()) {
+    const u = player.uuid;
+    const clean = u.replace(/-/g, '');
+    if (!seen.has(u)) {
+      seen.add(u);
+      paths.push({ params: { uuid: u }, props: { player } });
+    }
+    if (!seen.has(clean)) {
+      seen.add(clean);
+      paths.push({ params: { uuid: clean }, props: { player } });
+    }
+  }
+  return paths;
 }
 
 const { player } = Astro.props;
