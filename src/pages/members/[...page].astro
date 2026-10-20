@@ -1,0 +1,111 @@
+---
+import type { Page } from "astro";
+import BaseHead from "../../components/BaseHead.astro";
+import Navbar from "../../components/Navbar.astro";
+import CardList from "../../components/CardList.astro";
+import PlayerCard from "../../components/PlayerCard.astro";
+import Footer from "../../components/Footer.astro";
+import { getMembers } from "../../data/players";
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const members = getMembers();
+  return paginate(members, { pageSize: 100 });
+}
+
+interface Props {
+  page: Page<any>;
+}
+
+const { page } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead
+      title={page.currentPage === 1
+        ? "Server Members - derex smp"
+        : `Server Members (Page ${page.currentPage} of ${page.lastPage}) - derex smp`}
+      description="Browse the complete roster of active and historical players on the derex smp Minecraft server."
+    />
+  </head>
+  <body
+    class="min-h-screen flex flex-col bg-cover bg-fixed bg-no-repeat"
+    style="background-image: url('/images/2021-12-25_23.21.02.png');"
+  >
+    <Navbar />
+    <main class="flex-1">
+      <CardList
+        title="derex smp Members"
+        description={`Showing members ${page.start + 1}–${page.end + 1} of ${page.total}`}
+        listId="memberlist"
+        listClass="memberlist"
+      >
+        {
+          page.data.map((member: any) => (
+            <PlayerCard
+              name={member.name}
+              uuid={member.uuid}
+              pastNames={member.pastNames}
+            />
+          ))
+        }
+      </CardList>
+      <nav
+        class="flex items-center justify-center gap-1.5 sm:gap-2 my-8 flex-wrap px-4"
+        aria-label="Pagination"
+      >
+        {
+          page.url.prev ? (
+            <a
+              href={page.url.prev}
+              class="px-3 py-1.5 bg-[#c8d6e5] hover:bg-[#b0c4de] text-black border border-[#6b7a8a] rounded text-sm transition-colors cursor-pointer"
+            >
+              « Prev
+            </a>
+          ) : (
+            <span class="px-3 py-1.5 bg-[#c8d6e5]/40 text-gray-500 border border-[#6b7a8a]/40 rounded text-sm cursor-not-allowed">
+              « Prev
+            </span>
+          )
+        }
+
+        {
+          Array.from({ length: page.lastPage }, (_, i) => i + 1).map((p) =>
+            p === page.currentPage ? (
+              <span class="px-3 py-1.5 bg-[#2c3e50] text-white border border-[#1a252f] rounded text-sm font-bold shadow-inner">
+                {p}
+              </span>
+            ) : (
+              <a
+                href={
+                  p === 1
+                    ? page.url.first || "/members"
+                    : `${(page.url.first || "/members").replace(/\/$/, "")}/${p}`
+                }
+                class="px-3 py-1.5 bg-[#c8d6e5] hover:bg-[#b0c4de] text-black border border-[#6b7a8a] rounded text-sm transition-colors cursor-pointer"
+              >
+                {p}
+              </a>
+            ),
+          )
+        }
+
+        {
+          page.url.next ? (
+            <a
+              href={page.url.next}
+              class="px-3 py-1.5 bg-[#c8d6e5] hover:bg-[#b0c4de] text-black border border-[#6b7a8a] rounded text-sm transition-colors cursor-pointer"
+            >
+              Next »
+            </a>
+          ) : (
+            <span class="px-3 py-1.5 bg-[#c8d6e5]/40 text-gray-500 border border-[#6b7a8a]/40 rounded text-sm cursor-not-allowed">
+              Next »
+            </span>
+          )
+        }
+      </nav>
+    </main>
+    <Footer />
+  </body>
+</html>
