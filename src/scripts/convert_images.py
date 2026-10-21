@@ -19,7 +19,7 @@ def format_size(size_bytes):
     return f"{size_bytes} B"
 
 def process_single_image(args):
-    file_path_str, lossless, quality = args
+    file_path_str, mode = args
     file_path = Path(file_path_str)
     orig_size = file_path.stat().st_size
     out_path = file_path.with_suffix(".webp")
@@ -29,10 +29,14 @@ def process_single_image(args):
             "format": "WEBP",
             "method": 6,
         }
-        if lossless:
+
+        if mode == "lossless":
             save_kwargs["lossless"] = True
+        elif mode == "near-lossless":
+            save_kwargs["lossless"] = True
+            save_kwargs["quality"] = 75
         else:
-            save_kwargs["quality"] = quality
+            save_kwargs["quality"] = 88
 
         if img.mode not in ("RGB", "RGBA"):
             if "transparency" in img.info or img.mode in ("LA", "P", "PA"):
@@ -45,7 +49,7 @@ def process_single_image(args):
     new_size = out_path.stat().st_size
     return file_path.name, orig_size, new_size
 
-def convert_pngs_to_webp(images_dir, lossless=False, quality=92):
+def convert_pngs_to_webp(images_dir, mode="perceptual"):
     directory = Path(images_dir)
     if not directory.exists():
         print(f"Directory not found: {images_dir}")
@@ -58,10 +62,17 @@ def convert_pngs_to_webp(images_dir, lossless=False, quality=92):
 
     cpu_count = os.cpu_count() or 4
     print(f"Found {len(png_files)} PNG files in {directory.resolve()}")
-    mode_str = "Bit-exact Lossless" if lossless else f"High-fidelity Quality {quality}"
-    print(f"Mode: {mode_str} (Workers: {cpu_count})\n")
 
-    tasks = [(str(f), lossless, quality) for f in png_files]
+    if mode == "lossless":
+        label = "Bit-exact Lossless"
+    elif mode == "near-lossless":
+        label = "WebP Near-Lossless Preprocessing (Lossless + Q75 filter)"
+    else:
+        label = "Perceptually Lossless (High-Fidelity Q88, ~90% savings)"
+
+    print(f"Mode: {label} (Workers: {cpu_count})\n")
+
+    tasks = [(str(f), mode) for f in png_files]
     total_orig_bytes = 0
     total_new_bytes = 0
 
@@ -89,7 +100,13 @@ def convert_pngs_to_webp(images_dir, lossless=False, quality=92):
     print("=" * 60)
 
 if __name__ == "__main__":
-    is_lossless = "--lossless" in sys.argv
+    if "--lossless" in sys.argv:
+        selected_mode = "lossless"
+    elif "--near-lossless" in sys.argv:
+        selected_mode = "near-lossless"
+    else:
+        selected_mode = "perceptual"
+
     script_dir = Path(__file__).resolve().parent
     target_dir = script_dir.parent.parent / "public" / "images"
-    convert_pngs_to_webp(target_dir, lossless=is_lossless)
+    convert_pngs_to_webp(target_dir, mode=selected_mode)
