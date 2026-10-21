@@ -3,6 +3,27 @@ import BaseHead from "../components/BaseHead.astro";
 import Navbar from "../components/Navbar.astro";
 import ServerBanner from "../components/ServerBanner.astro";
 import Footer from "../components/Footer.astro";
+
+const siteUrl = Astro.site?.href || "https://derex-smp.github.io";
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "derex smp",
+  url: siteUrl,
+  description: "Official website of derex smp, an active Minecraft Survival Multiplayer server.",
+};
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "derex smp",
+  url: siteUrl,
+  sameAs: [
+    "https://mc.longhorns.dev/map/",
+    "https://www.youtube.com/hashtag/derexsmp",
+    "https://www.answeroverflow.com/m/763554707296878633",
+  ],
+};
 ---
 
 <html lang="en">
@@ -18,6 +39,7 @@ import Footer from "../components/Footer.astro";
     <BaseHead
       title="derex smp - Minecraft Survival Multiplayer Server"
       description="Welcome to derex smp, an active Minecraft Survival Multiplayer server. Explore our community players, world map, and server guidelines."
+      structuredData={[websiteSchema, orgSchema]}
     />
   </head>
   <body class="min-h-screen flex flex-col bg-[#0c0d12]">

@@ -45,6 +45,26 @@ interface Props {
 const { page, isRedirect, target, player } = Astro.props;
 const currentPage = page?.currentPage || 1;
 const bgImage = `/images/members_${((currentPage - 1) % 6) + 1}.webp`;
+
+const siteUrl = Astro.site?.href || "https://derex-smp.github.io";
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: siteUrl,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Players",
+      item: new URL("/players", siteUrl).href,
+    },
+  ],
+};
 ---
 
 {
@@ -90,6 +110,9 @@ const bgImage = `/images/members_${((currentPage - 1) % 6) + 1}.webp`;
           }
           description="Browse the complete roster of active and historical players on the derex smp Minecraft server."
           image={bgImage}
+          prevUrl={page.url.prev}
+          nextUrl={page.url.next}
+          structuredData={breadcrumbSchema}
         />
       </head>
       <body class="min-h-screen flex flex-col bg-[#0c0d12]">

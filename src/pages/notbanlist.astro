@@ -8,6 +8,26 @@ import punishments from "../data/punishments.json";
 import historyData from "../data/player_history.json";
 
 const history: Record<string, any> = historyData;
+
+const siteUrl = Astro.site?.href || "https://derex-smp.github.io";
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: siteUrl,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Disciplinary Records",
+      item: new URL("/notbanlist", siteUrl).href,
+    },
+  ],
+};
 ---
 
 <html lang="en">
@@ -22,6 +42,7 @@ const history: Record<string, any> = historyData;
     <BaseHead
       title="Disciplinary Records - derex smp"
       description="Official administrative log of server rule enforcement actions and jailing records on derex smp."
+      structuredData={breadcrumbSchema}
     />
   </head>
   <body class="min-h-screen flex flex-col bg-[#0c0d12]">

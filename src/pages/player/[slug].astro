@@ -70,6 +70,48 @@ interface Props {
 }
 
 const { player, isRedirect, target } = Astro.props;
+
+const siteUrl = Astro.site?.href || "https://derex-smp.github.io";
+const profileUrl = new URL(`/player/${player.name}`, siteUrl).href;
+const avatarUrl = new URL(`/avatars/${player.uuid}.png`, siteUrl).href;
+
+const profileSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: player.name,
+    identifier: player.uuid,
+    image: avatarUrl,
+    description: `Minecraft player profile and stats for ${player.name} on the derex smp server.`,
+    url: profileUrl,
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: siteUrl,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Players",
+      item: new URL("/players", siteUrl).href,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: player.name,
+      item: profileUrl,
+    },
+  ],
+};
 ---
 
 {
@@ -106,6 +148,10 @@ const { player, isRedirect, target } = Astro.props;
           title={`${player.name} - derex smp`}
           description={`View ${player.name}'s player profile and history on derex smp.`}
           image={`/avatars/${player.uuid}.png`}
+          ogType="profile"
+          twitterCard="summary"
+          username={player.name}
+          structuredData={[profileSchema, breadcrumbSchema]}
         />
       </head>
       <body class="min-h-screen flex flex-col bg-[#0c0d12] text-[#dbdee1]">

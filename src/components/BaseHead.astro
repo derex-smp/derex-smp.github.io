@@ -4,6 +4,12 @@ interface Props {
   description: string;
   image?: string;
   noindex?: boolean;
+  ogType?: "website" | "profile";
+  twitterCard?: "summary" | "summary_large_image";
+  username?: string;
+  structuredData?: Record<string, any> | Record<string, any>[];
+  prevUrl?: string;
+  nextUrl?: string;
 }
 
 const {
@@ -11,18 +17,30 @@ const {
   description,
   image = "/images/pano4_2025.jpg",
   noindex = false,
+  ogType = "website",
+  twitterCard = "summary_large_image",
+  username,
+  structuredData,
+  prevUrl,
+  nextUrl,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL(image, Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://derex-smp.github.io");
+const socialImageURL = new URL(image, Astro.site || "https://derex-smp.github.io");
 
-const jsonLd = {
+const defaultJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "derex smp",
-  url: Astro.site?.href,
+  url: Astro.site?.href || "https://derex-smp.github.io",
   description: description,
 };
+
+const schemas = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : [defaultJsonLd];
 ---
 
 <meta charset="utf-8" />
@@ -33,17 +51,20 @@ const jsonLd = {
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
+{prevUrl && <link rel="prev" href={new URL(prevUrl, Astro.site || "https://derex-smp.github.io").href} />}
+{nextUrl && <link rel="next" href={new URL(nextUrl, Astro.site || "https://derex-smp.github.io").href} />}
 
 {noindex && <meta name="robots" content="noindex, nofollow" />}
 
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialImageURL} />
 <meta property="og:site_name" content="derex smp" />
+{ogType === "profile" && username && <meta property="profile:username" content={username} />}
 
-<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:card" content={twitterCard} />
 <meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
@@ -60,7 +81,11 @@ const jsonLd = {
 />
 <link href="https://fonts.cdnfonts.com/css/pixelcraft-2" rel="stylesheet" />
 
-<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+{
+  schemas.map((schema) => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))
+}
 
 <style is:global>
   @import "../styles.css";

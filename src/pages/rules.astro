@@ -5,6 +5,26 @@ import Footer from "../components/Footer.astro";
 import rulesData from "../data/rules.json";
 
 const { guild, thread, messages, announcements } = rulesData;
+
+const siteUrl = Astro.site?.href || "https://derex-smp.github.io";
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: siteUrl,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Rules",
+      item: new URL("/rules", siteUrl).href,
+    },
+  ],
+};
 ---
 
 <html lang="en" class="dark">
@@ -12,6 +32,7 @@ const { guild, thread, messages, announcements } = rulesData;
     <BaseHead
       title="Server Rules - derex smp"
       description="Official server rules, allowed client mods, and community guidelines for derex smp."
+      structuredData={breadcrumbSchema}
     />
   </head>
   <body
