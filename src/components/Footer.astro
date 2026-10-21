@@ -1,30 +1,38 @@
 ---
-import { site } from '../data/site';
+import { site } from "../data/site";
 ---
 
-<footer class="site-footer w-full bg-[#0d0d0d] border-t border-[#262626] py-6 px-4 text-center text-xs text-[#aaaaaa] mt-auto select-none">
-	<div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-		<div class="text-[#aaaaaa]">
-			derex smp • <span class="text-white">mc.longhorns.dev</span>
-		</div>
-		<div class="flex items-center gap-4">
-			<a href={site.worldMapUrl} target="_blank" rel="noopener noreferrer">World Map</a>
-			<a href={site.rulesUrl}>Rules</a>
-			<a href="/players">Players</a>
-			<a href="/notbanlist">Records</a>
-			<a href={site.youtubeUrl} target="_blank" rel="noopener noreferrer">YouTube</a>
-		</div>
-	</div>
+<footer
+  class="site-footer w-full bg-[#0d0d0d] border-t border-[#262626] py-6 px-4 text-center text-xs text-[#aaaaaa] mt-auto select-none"
+>
+  <div
+    class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3"
+  >
+    <div class="text-[#aaaaaa]">
+      derex smp • <span class="text-white">mc.longhorns.dev</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href={site.worldMapUrl} target="_blank" rel="noopener noreferrer"
+        >World Map</a
+      >
+      <a href={site.rulesUrl}>Rules</a>
+      <a href="/players">Players</a>
+      <a href="/notbanlist">Records</a>
+      <a href={site.youtubeUrl} target="_blank" rel="noopener noreferrer"
+        >YouTube</a
+      >
+    </div>
+  </div>
 </footer>
 
 <style>
-	.site-footer a {
-		color: #aaaaaa !important;
-		text-decoration: none !important;
-		transition: color 0.15s ease-in-out;
-	}
-	.site-footer a:hover {
-		color: #ffffff !important;
-		text-decoration: none !important;
-	}
+  .site-footer a {
+    color: #aaaaaa !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease-in-out;
+  }
+  .site-footer a:hover {
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
 </style>

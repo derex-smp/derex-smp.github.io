@@ -7,7 +7,7 @@ export function getStaticPaths() {
   const seen = new Set<string>();
   for (const player of getAllMembers()) {
     const u = player.uuid;
-    const clean = u.replace(/-/g, '');
+    const clean = u.replace(/-/g, "");
     if (!seen.has(u)) {
       seen.add(u);
       paths.push({ params: { uuid: u }, props: { player } });
@@ -36,6 +36,10 @@ const target = `/player/${player.name}`;
     <meta name="robots" content="noindex, follow" />
   </head>
   <body class="bg-[#0c0d12] text-[#dbdee1] text-center pt-20">
-    <p>Redirecting to <a class="text-sky-400 hover:underline" href={target}>{player.name}</a>...</p>
+    <p>
+      Redirecting to <a class="text-sky-400 hover:underline" href={target}
+        >{player.name}</a
+      >...
+    </p>
   </body>
 </html>

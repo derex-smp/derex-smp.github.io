@@ -1,27 +1,27 @@
 ---
 interface Props {
-	title: string;
-	description: string;
-	image?: string;
-	noindex?: boolean;
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
 }
 
 const {
-	title,
-	description,
-	image = '/images/pano4_2025.jpg',
-	noindex = false,
+  title,
+  description,
+  image = "/images/pano4_2025.jpg",
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(image, Astro.site);
 
 const jsonLd = {
-	'@context': 'https://schema.org',
-	'@type': 'WebSite',
-	name: 'derex smp',
-	url: Astro.site?.href,
-	description: description,
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "derex smp",
+  url: Astro.site?.href,
+  description: description,
 };
 ---
 
@@ -54,11 +54,14 @@ const jsonLd = {
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+  rel="stylesheet"
+/>
 <link href="https://fonts.cdnfonts.com/css/pixelcraft-2" rel="stylesheet" />
 
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
 <style is:global>
-	@import '../styles.css';
+  @import "../styles.css";
 </style>

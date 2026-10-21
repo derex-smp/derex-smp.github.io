@@ -1,52 +1,63 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Navbar from '../components/Navbar.astro';
-import CardList from '../components/CardList.astro';
-import PlayerCard from '../components/PlayerCard.astro';
-import Footer from '../components/Footer.astro';
-import punishments from '../data/punishments.json';
-import historyData from '../data/player_history.json';
+import BaseHead from "../components/BaseHead.astro";
+import Navbar from "../components/Navbar.astro";
+import CardList from "../components/CardList.astro";
+import PlayerCard from "../components/PlayerCard.astro";
+import Footer from "../components/Footer.astro";
+import punishments from "../data/punishments.json";
+import historyData from "../data/player_history.json";
 
 const history: Record<string, any> = historyData;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead
-			title="Disciplinary Records - derex smp"
-			description="Official administrative log of server rule enforcement actions and jailing records on derex smp."
-		/>
-	</head>
-	<body
-		class="min-h-screen flex flex-col bg-cover bg-fixed bg-no-repeat"
-		style="background-image: url('/images/2021-12-25_23.21.02.png');"
-	>
-		<Navbar />
-		<main class="flex-1">
-			<CardList
-				title="derex smp Disciplinary Records"
-				description="Public log of server rule enforcement actions and jailing records"
-				listId="banlist"
-				listClass="banlist"
-			>
-				{punishments.map((punishment) => {
-					const record = history[punishment.uuid] || history[punishment.uuid.replace(/-/g, '')];
-					const name = record?.currentName || punishment.name;
-					const pastNames = record?.pastNames?.length ? record.pastNames : undefined;
-					return (
-						<PlayerCard
-							name={name}
-							uuid={punishment.uuid}
-							punishmentDate={new Date(punishment.punishmentDate)}
-							pastNames={pastNames}
-						/>
-					);
-				})}
-			</CardList>
-			<div style="text-align: center; margin: 30px 0; color: #ccc; font-size: 0.9rem;">
-				<p>To dispute a record, submit a correction, or request an appeal, please open a ticket on our official Discord server.</p>
-			</div>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead
+      title="Disciplinary Records - derex smp"
+      description="Official administrative log of server rule enforcement actions and jailing records on derex smp."
+    />
+  </head>
+  <body
+    class="min-h-screen flex flex-col bg-cover bg-fixed bg-no-repeat"
+    style="background-image: url('/images/2021-12-25_23.21.02.png');"
+  >
+    <Navbar />
+    <main class="flex-1">
+      <CardList
+        title="derex smp Disciplinary Records"
+        description="Public log of server rule enforcement actions and jailing records"
+        listId="banlist"
+        listClass="banlist"
+      >
+        {
+          punishments.map((punishment) => {
+            const record =
+              history[punishment.uuid] ||
+              history[punishment.uuid.replace(/-/g, "")];
+            const name = record?.currentName || punishment.name;
+            const pastNames = record?.pastNames?.length
+              ? record.pastNames
+              : undefined;
+            return (
+              <PlayerCard
+                name={name}
+                uuid={punishment.uuid}
+                punishmentDate={new Date(punishment.punishmentDate)}
+                pastNames={pastNames}
+              />
+            );
+          })
+        }
+      </CardList>
+      <div
+        style="text-align: center; margin: 30px 0; color: #ccc; font-size: 0.9rem;"
+      >
+        <p>
+          To dispute a record, submit a correction, or request an appeal, please
+          open a ticket on our official Discord server.
+        </p>
+      </div>
+    </main>
+    <Footer />
+  </body>
 </html>

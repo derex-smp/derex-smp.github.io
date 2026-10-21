@@ -34,9 +34,11 @@ const memberSince = `${month}/${day}/${joinYear}`;
 const totalHours = pseudoRand(4, 12, 1800);
 const daysPart = Math.floor(totalHours / 24);
 const hoursPart = totalHours % 24;
-const playtimeTotal = daysPart > 0 ? `${daysPart}d ${hoursPart}h` : `${hoursPart}h`;
+const playtimeTotal =
+  daysPart > 0 ? `${daysPart}d ${hoursPart}h` : `${hoursPart}h`;
 const playtime30d = `${pseudoRand(5, 1, 48)}h`;
-const playtime7d = pseudoRand(6, 0, 1) === 0 ? "< 1h" : `${pseudoRand(7, 1, 14)}h`;
+const playtime7d =
+  pseudoRand(6, 0, 1) === 0 ? "< 1h" : `${pseudoRand(7, 1, 14)}h`;
 
 const walkedTotal = pseudoRand(8, 20, 3200);
 const flownTotal = pseudoRand(9, 5, 1200);
@@ -165,8 +167,12 @@ const stats = [
 ---
 
 <div class="w-full max-w-4xl mx-auto my-6 px-4">
-  <div class="bg-[#12141c] border border-[#232734] rounded-2xl p-6 sm:p-8 shadow-2xl">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-[#232734]">
+  <div
+    class="bg-[#12141c] border border-[#232734] rounded-2xl p-6 sm:p-8 shadow-2xl"
+  >
+    <div
+      class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-[#232734]"
+    >
       <div class="flex items-center gap-4">
         <div class="relative shrink-0">
           <img
@@ -178,17 +184,27 @@ const stats = [
             class="w-16 h-16 sm:w-17 sm:h-17 rounded-xl bg-[#1a1d28] border border-white/10 p-1 [image-rendering:pixelated] shadow-md"
             loading="lazy"
           />
-          <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-cyan-400 border-2 border-[#12141c]" title="Online"></span>
+          <span
+            class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-cyan-400 border-2 border-[#12141c]"
+            title="Online"></span>
         </div>
         <div>
-          <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-wide m-0">{name}</h1>
+          <h1
+            class="text-2xl sm:text-3xl font-bold text-white tracking-wide m-0"
+          >
+            {name}
+          </h1>
           <div class="flex flex-wrap items-center gap-2 mt-1">
-            <span class="text-xs text-neutral-400">📅 Member since {memberSince}</span>
-            {pastNames && pastNames.length > 0 && (
-              <span class="text-[11px] bg-[#1d2130] text-neutral-400 px-2 py-0.5 rounded border border-white/5">
-                aka: {pastNames.join(", ")}
-              </span>
-            )}
+            <span class="text-xs text-neutral-400"
+              >📅 Member since {memberSince}</span
+            >
+            {
+              pastNames && pastNames.length > 0 && (
+                <span class="text-[11px] bg-[#1d2130] text-neutral-400 px-2 py-0.5 rounded border border-white/5">
+                  aka: {pastNames.join(", ")}
+                </span>
+              )
+            }
           </div>
         </div>
       </div>
@@ -198,34 +214,63 @@ const stats = [
           href="/players"
           class="inline-flex items-center gap-2 bg-[#1d2130] hover:bg-[#282d40] border border-white/10 hover:border-white/20 text-neutral-200 hover:text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-150 shadow-sm"
         >
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          <svg
+            class="w-4 h-4 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
           </svg>
           Return to Menu
         </a>
       </div>
     </div>
 
-    <div class="my-6 bg-amber-500/10 border border-amber-500/25 rounded-xl p-4 flex items-start gap-3">
-      <svg class="w-5 h-5 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+    <div
+      class="my-6 bg-amber-500/10 border border-amber-500/25 rounded-xl p-4 flex items-start gap-3"
+    >
+      <svg
+        class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+        ></path>
       </svg>
       <div>
-        <div class="text-xs sm:text-sm font-semibold text-amber-300">Stats Notice</div>
+        <div class="text-xs sm:text-sm font-semibold text-amber-300">
+          Stats Notice
+        </div>
         <div class="text-xs text-amber-200/80 mt-0.5">
-          Some statistics were lost or reset during server migrations. Recorded totals reflect verified archived sessions.
+          Some statistics were lost or reset during server migrations. Recorded
+          totals reflect verified archived sessions.
         </div>
       </div>
     </div>
 
     <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6">
-      <strong class="text-neutral-200">{name}</strong> is an active player of the derex smp Minecraft server. They have been an explorer of the realm since {memberSince}.
+      <strong class="text-neutral-200">{name}</strong> is an active player of the
+      derex smp Minecraft server. They have been an explorer of the realm since {
+        memberSince
+      }.
     </p>
 
     <div class="overflow-x-auto">
       <table class="w-full text-left border-collapse">
         <thead>
-          <tr class="border-b border-[#232734] text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">
+          <tr
+            class="border-b border-[#232734] text-[11px] font-semibold text-neutral-400 uppercase tracking-wider"
+          >
             <th class="py-3 px-3">Stat</th>
             <th class="py-3 px-3 text-center sm:text-right">7 Days</th>
             <th class="py-3 px-3 text-center sm:text-right">30 Days</th>
@@ -233,31 +278,59 @@ const stats = [
           </tr>
         </thead>
         <tbody class="divide-y divide-[#232734]/50 text-xs sm:text-sm">
-          {stats.map((row) => (
-            <tr class="hover:bg-white/[0.02] transition-colors">
-              <td class="py-3 px-3">
-                <div class="flex items-center gap-2.5">
-                  <Fragment set:html={row.icon} />
-                  <span class="text-neutral-200 font-medium">{row.name}</span>
-                </div>
-              </td>
-              <td class="py-3 px-3 text-center sm:text-right text-neutral-400 font-mono text-xs">{row.d7}</td>
-              <td class="py-3 px-3 text-center sm:text-right text-neutral-400 font-mono text-xs">{row.d30}</td>
-              <td class="py-3 px-3 text-right text-amber-300 font-bold font-mono text-xs sm:text-sm">{row.total}</td>
-            </tr>
-          ))}
-          <tr class="bg-amber-950/20 hover:bg-amber-950/30 border-t border-amber-500/20 transition-colors">
+          {
+            stats.map((row) => (
+              <tr class="hover:bg-white/[0.02] transition-colors">
+                <td class="py-3 px-3">
+                  <div class="flex items-center gap-2.5">
+                    <Fragment set:html={row.icon} />
+                    <span class="text-neutral-200 font-medium">{row.name}</span>
+                  </div>
+                </td>
+                <td class="py-3 px-3 text-center sm:text-right text-neutral-400 font-mono text-xs">
+                  {row.d7}
+                </td>
+                <td class="py-3 px-3 text-center sm:text-right text-neutral-400 font-mono text-xs">
+                  {row.d30}
+                </td>
+                <td class="py-3 px-3 text-right text-amber-300 font-bold font-mono text-xs sm:text-sm">
+                  {row.total}
+                </td>
+              </tr>
+            ))
+          }
+          <tr
+            class="bg-amber-950/20 hover:bg-amber-950/30 border-t border-amber-500/20 transition-colors"
+          >
             <td class="py-3 px-3">
               <div class="flex items-center gap-2.5">
-                <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                <svg
+                  class="w-4 h-4 text-amber-400 shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
                 <span class="text-amber-200 font-semibold">Beds Blown Up</span>
               </div>
             </td>
-            <td class="py-3 px-3 text-center sm:text-right text-amber-200/80 font-mono text-xs">{Math.floor(bedsBlownTotal * 0.1)}</td>
-            <td class="py-3 px-3 text-center sm:text-right text-amber-200/80 font-mono text-xs">{Math.floor(bedsBlownTotal * 0.35)}</td>
-            <td class="py-3 px-3 text-right text-amber-300 font-bold font-mono text-xs sm:text-sm">{bedsBlownTotal}</td>
+            <td
+              class="py-3 px-3 text-center sm:text-right text-amber-200/80 font-mono text-xs"
+              >{Math.floor(bedsBlownTotal * 0.1)}</td
+            >
+            <td
+              class="py-3 px-3 text-center sm:text-right text-amber-200/80 font-mono text-xs"
+              >{Math.floor(bedsBlownTotal * 0.35)}</td
+            >
+            <td
+              class="py-3 px-3 text-right text-amber-300 font-bold font-mono text-xs sm:text-sm"
+              >{bedsBlownTotal}</td
+            >
           </tr>
         </tbody>
       </table>

@@ -1,162 +1,170 @@
 ---
 // Layout adapted from LOOHP's MC-Server-Banner-API (https://github.com/LOOHP/MC-Server-Banner-API)
-import { site } from '../data/site';
+import { site } from "../data/site";
 const { serverIp } = site;
 ---
 
 <div class="server-banner mx-auto my-6 max-w-[560px]">
-	<div
-		class="relative flex items-center gap-2.5 rounded-lg py-1.5 px-2.5 text-white text-left border border-[#2b2b2b] shadow-[0_4px_12px_rgba(0,0,0,0.5)] select-none overflow-hidden"
-		style="background-color: #151515; background-image: radial-gradient(circle at center, rgba(20,20,20,0.7) 0%, rgba(10,10,10,0.95) 100%), url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\' viewBox=\'0 0 16 16\'%3E%3Crect width=\'16\' height=\'16\' fill=\'%23181818\'/%3E%3Crect x=\'0\' y=\'0\' width=\'4\' height=\'4\' fill=\'%23222222\'/%3E%3Crect x=\'8\' y=\'0\' width=\'4\' height=\'4\' fill=\'%23121212\'/%3E%3Crect x=\'4\' y=\'4\' width=\'4\' height=\'4\' fill=\'%23262626\'/%3E%3Crect x=\'12\' y=\'4\' width=\'4\' height=\'4\' fill=\'%231c1c1c\'/%3E%3Crect x=\'0\' y=\'8\' width=\'4\' height=\'4\' fill=\'%23141414\'/%3E%3Crect x=\'8\' y=\'8\' width=\'4\' height=\'4\' fill=\'%23222222\'/%3E%3Crect x=\'4\' y=\'12\' width=\'4\' height=\'4\' fill=\'%231a1a1a\'/%3E%3Crect x=\'12\' y=\'12\' width=\'4\' height=\'4\' fill=\'%23242424\'/%3E%3C/svg%3E'); background-size: auto, 32px 32px; [image-rendering:pixelated]; box-shadow: inset 0 0 14px rgba(0,0,0,0.85), 0 4px 10px rgba(0,0,0,0.5);"
-	>
-		<img
-			id="server-icon"
-			src="/images/server-icon.png"
-			alt="Server Icon"
-			width="64"
-			height="64"
-			style="width: 64px !important; height: 64px !important; image-rendering: pixelated;"
-			class="w-16 h-16 shrink-0 object-contain bg-[#141414] shadow-none"
-			loading="eager"
-		/>
+  <div
+    class="relative flex items-center gap-2.5 rounded-lg py-1.5 px-2.5 text-white text-left border border-[#2b2b2b] shadow-[0_4px_12px_rgba(0,0,0,0.5)] select-none overflow-hidden"
+    style="background-color: #151515; background-image: radial-gradient(circle at center, rgba(20,20,20,0.7) 0%, rgba(10,10,10,0.95) 100%), url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\' viewBox=\'0 0 16 16\'%3E%3Crect width=\'16\' height=\'16\' fill=\'%23181818\'/%3E%3Crect x=\'0\' y=\'0\' width=\'4\' height=\'4\' fill=\'%23222222\'/%3E%3Crect x=\'8\' y=\'0\' width=\'4\' height=\'4\' fill=\'%23121212\'/%3E%3Crect x=\'4\' y=\'4\' width=\'4\' height=\'4\' fill=\'%23262626\'/%3E%3Crect x=\'12\' y=\'4\' width=\'4\' height=\'4\' fill=\'%231c1c1c\'/%3E%3Crect x=\'0\' y=\'8\' width=\'4\' height=\'4\' fill=\'%23141414\'/%3E%3Crect x=\'8\' y=\'8\' width=\'4\' height=\'4\' fill=\'%23222222\'/%3E%3Crect x=\'4\' y=\'12\' width=\'4\' height=\'4\' fill=\'%231a1a1a\'/%3E%3Crect x=\'12\' y=\'12\' width=\'4\' height=\'4\' fill=\'%23242424\'/%3E%3C/svg%3E'); background-size: auto, 32px 32px; [image-rendering:pixelated]; box-shadow: inset 0 0 14px rgba(0,0,0,0.85), 0 4px 10px rgba(0,0,0,0.5);"
+  >
+    <img
+      id="server-icon"
+      src="/images/server-icon.png"
+      alt="Server Icon"
+      width="64"
+      height="64"
+      style="width: 64px !important; height: 64px !important; image-rendering: pixelated;"
+      class="w-16 h-16 shrink-0 object-contain bg-[#141414] shadow-none"
+      loading="eager"
+    />
 
-		<div class="flex-1 min-w-0 flex flex-col justify-center gap-1 text-left">
-			<div class="flex items-center justify-between gap-2">
-				<div class="flex items-center gap-2 min-w-0">
-					<button
-						id="copy-ip-button"
-						type="button"
-						class="group flex items-center gap-1.5 text-white hover:text-[#55FFFF] text-sm md:text-base cursor-pointer transition-colors bg-transparent border-0 p-0 text-left [text-shadow:2px_2px_0px_#222222]"
-						title="Click to copy IP"
-					>
-						<span>IP: {serverIp}</span>
-						<span
-							id="copy-icon-wrapper"
-							class="inline-flex items-center justify-center p-0.5 text-gray-400 group-hover:text-white transition-colors"
-						>
-							<svg
-								id="copy-icon-svg"
-								xmlns="http://www.w3.org/2000/svg"
-								class="w-3.5 h-3.5 drop-shadow-[1px_1px_0px_#111111]"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							>
-								<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-								<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-							</svg>
-							<svg
-								id="check-icon-svg"
-								xmlns="http://www.w3.org/2000/svg"
-								class="w-3.5 h-3.5 text-[#55FF55] hidden drop-shadow-[1px_1px_0px_#111111]"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							>
-								<polyline points="20 6 9 17 4 12"></polyline>
-							</svg>
-						</span>
-						<span
-							id="copied-text"
-							class="text-xs text-[#55FF55] font-normal opacity-0 transition-opacity duration-150 [text-shadow:1px_1px_0px_#003300]"
-						>
-							Copied!
-						</span>
-					</button>
-				</div>
+    <div class="flex-1 min-w-0 flex flex-col justify-center gap-1 text-left">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <button
+            id="copy-ip-button"
+            type="button"
+            class="group flex items-center gap-1.5 text-white hover:text-[#55FFFF] text-sm md:text-base cursor-pointer transition-colors bg-transparent border-0 p-0 text-left [text-shadow:2px_2px_0px_#222222]"
+            title="Click to copy IP"
+          >
+            <span>IP: {serverIp}</span>
+            <span
+              id="copy-icon-wrapper"
+              class="inline-flex items-center justify-center p-0.5 text-gray-400 group-hover:text-white transition-colors"
+            >
+              <svg
+                id="copy-icon-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-3.5 h-3.5 drop-shadow-[1px_1px_0px_#111111]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                ></path>
+              </svg>
+              <svg
+                id="check-icon-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-3.5 h-3.5 text-[#55FF55] hidden drop-shadow-[1px_1px_0px_#111111]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+            <span
+              id="copied-text"
+              class="text-xs text-[#55FF55] font-normal opacity-0 transition-opacity duration-150 [text-shadow:1px_1px_0px_#003300]"
+            >
+              Copied!
+            </span>
+          </button>
+        </div>
 
-				<div class="flex items-center gap-1.5 shrink-0 pr-1">
-					<span id="server-player-count" class="text-sm text-[#aaaaaa] [text-shadow:2px_2px_0px_#222222]">
-						--/30
-					</span>
-					<div
-						id="server-ping-bars"
-						class="flex items-end gap-[2px] h-3.5 pb-0.5 drop-shadow-[1px_1px_0px_#111111]"
-						title="Signal: Full"
-					>
-						<span class="w-[2px] h-[3px] bg-[#55FF55]"></span>
-						<span class="w-[2px] h-[5px] bg-[#55FF55]"></span>
-						<span class="w-[2px] h-[7px] bg-[#55FF55]"></span>
-						<span class="w-[2px] h-[9px] bg-[#55FF55]"></span>
-						<span class="w-[2px] h-[11px] bg-[#55FF55]"></span>
-					</div>
-				</div>
-			</div>
+        <div class="flex items-center gap-1.5 shrink-0 pr-1">
+          <span
+            id="server-player-count"
+            class="text-sm text-[#aaaaaa] [text-shadow:2px_2px_0px_#222222]"
+          >
+            --/30
+          </span>
+          <div
+            id="server-ping-bars"
+            class="flex items-end gap-[2px] h-3.5 pb-0.5 drop-shadow-[1px_1px_0px_#111111]"
+            title="Signal: Full"
+          >
+            <span class="w-[2px] h-[3px] bg-[#55FF55]"></span>
+            <span class="w-[2px] h-[5px] bg-[#55FF55]"></span>
+            <span class="w-[2px] h-[7px] bg-[#55FF55]"></span>
+            <span class="w-[2px] h-[9px] bg-[#55FF55]"></span>
+            <span class="w-[2px] h-[11px] bg-[#55FF55]"></span>
+          </div>
+        </div>
+      </div>
 
-			<div
-				id="server-motd"
-				class="text-xs md:text-sm text-[#aaaaaa] truncate text-left [text-shadow:2px_2px_0px_#222222]"
-			>
-				we have faster minecarts on this world
-			</div>
-		</div>
-	</div>
+      <div
+        id="server-motd"
+        class="text-xs md:text-sm text-[#aaaaaa] truncate text-left [text-shadow:2px_2px_0px_#222222]"
+      >
+        we have faster minecarts on this world
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-	import { site } from '../data/site';
-	const { serverIp } = site;
+  import { site } from "../data/site";
+  const { serverIp } = site;
 
-	const copyButton = document.getElementById('copy-ip-button');
-	const copySvg = document.getElementById('copy-icon-svg');
-	const checkSvg = document.getElementById('check-icon-svg');
-	const copiedText = document.getElementById('copied-text');
+  const copyButton = document.getElementById("copy-ip-button");
+  const copySvg = document.getElementById("copy-icon-svg");
+  const checkSvg = document.getElementById("check-icon-svg");
+  const copiedText = document.getElementById("copied-text");
 
-	if (copyButton) {
-		let timeoutId: number | undefined;
-		copyButton.addEventListener('click', async () => {
-			try {
-				await navigator.clipboard.writeText(serverIp);
-				if (copySvg && checkSvg && copiedText) {
-					copySvg.classList.add('hidden');
-					checkSvg.classList.remove('hidden');
-					copiedText.classList.remove('opacity-0');
-					window.clearTimeout(timeoutId);
-					timeoutId = window.setTimeout(() => {
-						copySvg.classList.remove('hidden');
-						checkSvg.classList.add('hidden');
-						copiedText.classList.add('opacity-0');
-					}, 2000);
-				}
-			} catch {}
-		});
-	}
+  if (copyButton) {
+    let timeoutId: number | undefined;
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(serverIp);
+        if (copySvg && checkSvg && copiedText) {
+          copySvg.classList.add("hidden");
+          checkSvg.classList.remove("hidden");
+          copiedText.classList.remove("opacity-0");
+          window.clearTimeout(timeoutId);
+          timeoutId = window.setTimeout(() => {
+            copySvg.classList.remove("hidden");
+            checkSvg.classList.add("hidden");
+            copiedText.classList.add("opacity-0");
+          }, 2000);
+        }
+      } catch {}
+    });
+  }
 
-	async function updateServerStatus() {
-		try {
-			const res = await fetch(`https://api.mcsrvstat.us/3/${serverIp}`);
-			if (!res.ok) return;
-			const data = await res.json();
+  async function updateServerStatus() {
+    try {
+      const res = await fetch(`https://api.mcsrvstat.us/3/${serverIp}`);
+      if (!res.ok) return;
+      const data = await res.json();
 
-			const playerCountEl = document.getElementById('server-player-count');
-			const motdEl = document.getElementById('server-motd');
-			const iconEl = document.getElementById('server-icon') as HTMLImageElement | null;
+      const playerCountEl = document.getElementById("server-player-count");
+      const motdEl = document.getElementById("server-motd");
+      const iconEl = document.getElementById(
+        "server-icon",
+      ) as HTMLImageElement | null;
 
-			if (data.online) {
-				if (playerCountEl && data.players) {
-					playerCountEl.textContent = `${data.players.online}/${data.players.max}`;
-				}
-				if (motdEl && data.motd?.clean?.[0]) {
-					motdEl.textContent = data.motd.clean[0].trim();
-				}
-				if (iconEl && data.icon) {
-					iconEl.src = data.icon;
-				}
-			} else {
-				if (playerCountEl) playerCountEl.textContent = '0/30';
-				if (motdEl) {
-					motdEl.textContent = "Can't connect to server";
-					motdEl.className = 'text-xs md:text-sm text-[#FF5555] truncate font-[\'PixelCraft\']';
-				}
-			}
-		} catch {}
-	}
+      if (data.online) {
+        if (playerCountEl && data.players) {
+          playerCountEl.textContent = `${data.players.online}/${data.players.max}`;
+        }
+        if (motdEl && data.motd?.clean?.[0]) {
+          motdEl.textContent = data.motd.clean[0].trim();
+        }
+        if (iconEl && data.icon) {
+          iconEl.src = data.icon;
+        }
+      } else {
+        if (playerCountEl) playerCountEl.textContent = "0/30";
+        if (motdEl) {
+          motdEl.textContent = "Can't connect to server";
+          motdEl.className =
+            "text-xs md:text-sm text-[#FF5555] truncate font-['PixelCraft']";
+        }
+      }
+    } catch {}
+  }
 
-	updateServerStatus();
+  updateServerStatus();
 </script>
