@@ -44,7 +44,7 @@ interface Props {
 
 const { page, isRedirect, target, player } = Astro.props;
 const currentPage = page?.currentPage || 1;
-const bgImage = `/images/members_${((currentPage - 1) % 6) + 1}.png`;
+const bgImage = `/images/members_${((currentPage - 1) % 6) + 1}.webp`;
 ---
 
 {
@@ -75,6 +75,13 @@ const bgImage = `/images/members_${((currentPage - 1) % 6) + 1}.png`;
   ) : page ? (
     <html lang="en">
       <head>
+        <link
+          rel="preload"
+          as="image"
+          href={bgImage}
+          fetchpriority="high"
+          type="image/webp"
+        />
         <BaseHead
           title={
             page.currentPage === 1
@@ -85,10 +92,12 @@ const bgImage = `/images/members_${((currentPage - 1) % 6) + 1}.png`;
           image={bgImage}
         />
       </head>
-      <body
-        class="min-h-screen flex flex-col bg-cover bg-fixed bg-no-repeat"
-        style={`background-image: url('${bgImage}');`}
-      >
+      <body class="min-h-screen flex flex-col bg-[#0c0d12]">
+        <div
+          class="fixed inset-0 -z-10 pointer-events-none bg-cover bg-center bg-no-repeat"
+          style={`background-image: url('${bgImage}');`}
+        >
+        </div>
         <Navbar />
         <main class="flex-1">
           <CardList

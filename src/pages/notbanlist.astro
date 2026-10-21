@@ -12,15 +12,24 @@ const history: Record<string, any> = historyData;
 
 <html lang="en">
   <head>
+    <link
+      rel="preload"
+      as="image"
+      href="/images/2021-12-25_23.21.02.webp"
+      fetchpriority="high"
+      type="image/webp"
+    />
     <BaseHead
       title="Disciplinary Records - derex smp"
       description="Official administrative log of server rule enforcement actions and jailing records on derex smp."
     />
   </head>
-  <body
-    class="min-h-screen flex flex-col bg-cover bg-fixed bg-no-repeat"
-    style="background-image: url('/images/2021-12-25_23.21.02.png');"
-  >
+  <body class="min-h-screen flex flex-col bg-[#0c0d12]">
+    <div
+      class="fixed inset-0 -z-10 pointer-events-none bg-cover bg-center bg-no-repeat"
+      style="background-image: url('/images/2021-12-25_23.21.02.webp');"
+    >
+    </div>
     <Navbar />
     <main class="flex-1">
       <CardList

@@ -6,6 +6,13 @@ import Footer from "../components/Footer.astro";
 
 <html lang="en">
   <head>
+    <link
+      rel="preload"
+      as="image"
+      href="/images/2021-12-25_23.21.02.webp"
+      fetchpriority="high"
+      type="image/webp"
+    />
     <BaseHead
       title="404 - Page Not Found | derex smp"
       description="The requested page could not be found."
@@ -13,9 +20,13 @@ import Footer from "../components/Footer.astro";
     />
   </head>
   <body
-    class="min-h-screen flex flex-col bg-cover bg-fixed bg-no-repeat text-center text-white font-['PixelCraft']"
-    style="background-image: url('/images/2021-12-25_23.21.02.png');"
+    class="min-h-screen flex flex-col bg-[#0c0d12] text-center text-white font-['PixelCraft']"
   >
+    <div
+      class="fixed inset-0 -z-10 pointer-events-none bg-cover bg-center bg-no-repeat"
+      style="background-image: url('/images/2021-12-25_23.21.02.webp');"
+    >
+    </div>
     <Navbar />
     <main class="flex-1 mt-40 px-4 font-['PixelCraft']">
       <h1

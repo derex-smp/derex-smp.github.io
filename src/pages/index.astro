@@ -8,15 +8,24 @@ import Footer from "../components/Footer.astro";
 <html lang="en">
   <head>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="preload"
+      as="image"
+      href="/images/2025-12-18_03.38.29.webp"
+      fetchpriority="high"
+      type="image/webp"
+    />
     <BaseHead
       title="derex smp - Minecraft Survival Multiplayer Server"
       description="Welcome to derex smp, an active Minecraft Survival Multiplayer server. Explore our community players, world map, and server guidelines."
     />
   </head>
-  <body
-    class="min-h-screen flex flex-col bg-cover bg-fixed bg-no-repeat bg-center"
-    style="background-image: url('/images/2025-12-18_03.38.29.png');"
-  >
+  <body class="min-h-screen flex flex-col bg-[#0c0d12]">
+    <div
+      class="fixed inset-0 -z-10 pointer-events-none bg-cover bg-center bg-no-repeat"
+      style="background-image: url('/images/2025-12-18_03.38.29.webp');"
+    >
+    </div>
     <Navbar />
     <header
       class="w3-container w3-center mx-auto w-full px-25 py-32 md:px-10 xl:px-15"
