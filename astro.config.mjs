@@ -33,7 +33,8 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => {
-        if (page.includes("/players/")) return false;
+        if (page.includes("/members")) return false;
+        if (/\/players\/[0-9a-fA-F-]{32,36}/.test(page)) return false;
         const match = page.match(/\/player\/([^/]+)/);
         if (match) {
           if (!canonicalNames) {
@@ -54,7 +55,7 @@ export default defineConfig({
           item.priority = 0.9;
           item.changefreq = "weekly";
           item.lastmod = now;
-        } else if (item.url.includes("/members")) {
+        } else if (item.url.includes("/players")) {
           item.priority = 0.8;
           item.changefreq = "hourly";
           item.lastmod = now;

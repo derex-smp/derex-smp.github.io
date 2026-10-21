@@ -11,7 +11,7 @@ export const site = {
 export const navigationLinks = [
   { label: "Home", href: site.homeUrl },
   { label: "World Map", href: site.worldMapUrl },
-  { label: "Members", href: "/members" },
+  { label: "Players", href: "/players" },
   { label: "Disciplinary Records", href: "/notbanlist" },
   { label: "Youtube", href: site.youtubeUrl },
   { label: "Rules", href: site.rulesUrl },
