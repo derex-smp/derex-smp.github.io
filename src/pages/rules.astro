@@ -80,7 +80,7 @@ const { guild, thread, messages, announcements } = rulesData;
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          <div class="lg:col-span-2 flex flex-col gap-6">
+          <div class="lg:col-span-3 max-w-4xl mx-auto w-full flex flex-col gap-6">
             {
               messages.map((msg, index) => (
                 <>
@@ -235,6 +235,7 @@ const { guild, thread, messages, announcements } = rulesData;
             }
           </div>
 
+          {/*
           <div class="flex flex-col gap-6">
             <div
               class="bg-[#14151e] border border-[#242636] rounded-lg p-5 text-left shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
@@ -325,6 +326,7 @@ const { guild, thread, messages, announcements } = rulesData;
               </div>
             </div>
           </div>
+          */}
         </div>
       </div>
     </div>
