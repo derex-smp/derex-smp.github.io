@@ -156,12 +156,15 @@ const breadcrumbSchema = {
       </head>
       <body class="min-h-screen flex flex-col bg-[#0c0d12] text-[#dbdee1]">
         <Navbar />
-        <main class="flex-1 flex justify-center items-start py-6 sm:py-10">
+        <main class="flex-1 flex flex-col justify-start items-center py-6 sm:py-10 px-4">
           <BigCard
             name={player.name}
             uuid={player.uuid}
             pastNames={player.pastNames ? player.pastNames : []}
           />
+          <p class="text-center mt-6 text-xs text-neutral-400 font-mono">
+            Looking for someone? <a href="/directory" class="text-sky-400 hover:text-white hover:underline">See full directory here</a>
+          </p>
         </main>
         <Footer />
       </body>
