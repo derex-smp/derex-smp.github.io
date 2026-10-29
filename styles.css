@@ -188,3 +188,10 @@ p, a {
 }
 
 #map { height: 250px; }
+
+body.cinema-mode main,
+body.cinema-mode header:not(nav),
+body.cinema-mode footer,
+body.cinema-mode .banlist-container {
+  display: none !important;
+}

@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar relative">
   <a href="/">Home</a>
   <a
     href="https://mc.longhorns.dev/map/"
@@ -14,4 +14,14 @@
   >
   <a href="/rules">Rules</a>
   <a href="/notbanlist">Disciplinary Records</a>
+
+  <button
+    type="button"
+    title="Toggle Wallpaper View"
+    aria-label="Toggle Wallpaper View"
+    onclick="document.body.classList.toggle('cinema-mode')"
+    class="absolute right-3.5 top-1/2 -translate-y-1/2 p-1.5 hover:bg-neutral-700/60 rounded cursor-pointer transition-colors"
+  >
+    <img src="/images/camera.svg" class="w-5 h-5 block" alt="Camera" />
+  </button>
 </nav>
