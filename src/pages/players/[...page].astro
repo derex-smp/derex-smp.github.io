@@ -120,6 +120,7 @@ const breadcrumbSchema = {
           class="fixed inset-0 -z-10 pointer-events-none bg-cover bg-center bg-no-repeat"
           style={`background-image: url('${bgImage}');`}
         >
+          <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60"></div>
         </div>
         <Navbar />
         <main class="flex-1">
@@ -186,8 +187,8 @@ const breadcrumbSchema = {
             )}
           </nav>
 
-          <p class="text-center mt-2 mb-8 text-xs text-neutral-400 font-mono">
-            Looking for someone? <a href="/directory" class="text-sky-400 hover:text-white hover:underline">See full directory here</a>
+          <p class="text-center mt-2 mb-8 text-xs text-stone-200! drop-shadow-[1px_1px_0_rgba(0,0,0,1)] font-mono">
+            Looking for someone? <a href="/directory" class="text-sky-300 hover:text-white hover:underline drop-shadow-[1px_1px_0_rgba(0,0,0,1)]">See full directory here</a>
           </p>
         </main>
         <Footer />
