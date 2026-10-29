@@ -12,6 +12,26 @@ const groups = allMembers.reduce((acc, p) => {
   return acc;
 }, {} as Record<string, typeof allMembers>);
 const letters = ["#", ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"].filter((l) => groups[l]?.length);
+
+const siteUrl = Astro.site?.href || "https://derex-smp.github.io";
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: siteUrl,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Directory",
+      item: new URL("/directory", siteUrl).href,
+    },
+  ],
+};
 ---
 
 <html lang="en">
@@ -19,6 +39,7 @@ const letters = ["#", ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"].filter((l) => groups[l]?.
     <BaseHead
       title="Player Directory (A-Z) - derex smp"
       description="Alphabetical directory of all players on the derex smp Minecraft server."
+      structuredData={breadcrumbSchema}
     />
   </head>
   <body class="min-h-screen flex flex-col bg-[#0c0d12] text-[#dbdee1]">

@@ -55,6 +55,10 @@ export default defineConfig({
           item.priority = 0.9;
           item.changefreq = "weekly";
           item.lastmod = now;
+        } else if (item.url.includes("/directory")) {
+          item.priority = 0.8;
+          item.changefreq = "daily";
+          item.lastmod = now;
         } else if (item.url.includes("/players")) {
           item.priority = 0.8;
           item.changefreq = "hourly";
