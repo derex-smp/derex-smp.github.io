@@ -16,12 +16,69 @@
   <a href="/notbanlist">Disciplinary Records</a>
 
   <button
+    id="cinema-toggle"
     type="button"
-    title="Toggle Wallpaper View"
-    aria-label="Toggle Wallpaper View"
-    onclick="document.body.classList.toggle('cinema-mode')"
+    title="Toggle Wallpaper View (F1)"
+    aria-label="Toggle Wallpaper View (F1)"
     class="absolute right-3.5 top-1/2 -translate-y-1/2 p-1.5 hover:bg-neutral-700/60 rounded cursor-pointer transition-colors"
   >
     <img src="/images/camera.svg" class="w-5 h-5 block" alt="Camera" />
   </button>
 </nav>
+
+<style is:global>
+  main, header:not(nav), footer, .banlist-container {
+    transition: opacity 0.3s ease;
+  }
+  html.cinema-mode,
+  body.cinema-mode {
+    overflow: hidden !important;
+    height: 100vh !important;
+  }
+  body.cinema-mode main,
+  body.cinema-mode header:not(nav),
+  body.cinema-mode footer,
+  body.cinema-mode .banlist-container {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  body.cinema-mode nav.navbar {
+    opacity: 0.25 !important;
+    transition: opacity 0.3s ease !important;
+  }
+  body.cinema-mode nav.navbar:hover {
+    opacity: 1 !important;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById("cinema-toggle");
+  function toggleCinema() {
+    const isCinema = document.body.classList.toggle("cinema-mode");
+    document.documentElement.classList.toggle("cinema-mode", isCinema);
+    if (isCinema) {
+      window.scrollTo(0, 0);
+    }
+  }
+  btn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleCinema();
+  });
+  document.addEventListener("click", (e) => {
+    if (!document.body.classList.contains("cinema-mode")) return;
+    const target = e.target as HTMLElement;
+    if (target?.closest("#cinema-toggle")) return;
+    document.body.classList.remove("cinema-mode");
+    document.documentElement.classList.remove("cinema-mode");
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "F1") {
+      e.preventDefault();
+      toggleCinema();
+    } else if (e.key === "Escape" && document.body.classList.contains("cinema-mode")) {
+      e.preventDefault();
+      document.body.classList.remove("cinema-mode");
+      document.documentElement.classList.remove("cinema-mode");
+    }
+  });
+</script>
