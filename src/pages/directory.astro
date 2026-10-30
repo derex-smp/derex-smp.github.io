@@ -32,14 +32,26 @@ const breadcrumbSchema = {
     },
   ],
 };
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  numberOfItems: allMembers.length,
+  itemListElement: allMembers.map((p, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: p.name,
+    url: new URL(`/player/${p.name}`, siteUrl).href,
+  })),
+};
 ---
 
 <html lang="en">
   <head>
     <BaseHead
       title="Player Directory (A-Z) - derex smp"
-      description="Alphabetical directory of all players on the derex smp Minecraft server."
-      structuredData={breadcrumbSchema}
+      description={`Complete A–Z directory of all ${allMembers.length} active and historical players on the derex smp Minecraft server.`}
+      structuredData={[breadcrumbSchema, itemListSchema]}
     />
   </head>
   <body class="min-h-screen flex flex-col bg-[#0c0d12] text-[#dbdee1]">
@@ -77,6 +89,10 @@ const breadcrumbSchema = {
           </section>
         ))}
       </div>
+
+      <p class="text-center mt-12 mb-4 text-xs text-stone-200! drop-shadow-[1px_1px_0_rgba(0,0,0,1)] font-mono">
+        Prefer visual cards? <a href="/players" class="text-sky-300 hover:text-white hover:underline drop-shadow-[1px_1px_0_rgba(0,0,0,1)]">Browse with player avatars here</a>
+      </p>
     </main>
     <Footer />
   </body>
