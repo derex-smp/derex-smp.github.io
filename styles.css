@@ -36,8 +36,9 @@ nav.navbar a:hover {
   text-decoration: none !important;
 }
 header, main {
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
 }
 @media (min-width: 768px) {
   header, main {
@@ -62,9 +63,10 @@ header, main {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .banlist-container {
-  width: 80%;
+  width: 100%;
+  max-width: 1200px;
   margin: auto;
-  overflow: hidden;
+  box-sizing: border-box;
 }
 .banlist-container h1 {
   color: white;
@@ -95,14 +97,25 @@ h2 {
   border: 1px solid #6b7a8a;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 10px;
-  padding: 20px;
-  width: 200px;
+  margin: 6px;
+  padding: 14px 8px;
+  width: calc(50% - 12px);
+  max-width: 200px;
   text-align: center;
+  box-sizing: border-box;
+}
+@media (min-width: 640px) {
+  .card {
+    margin: 10px;
+    padding: 20px;
+    width: 200px;
+  }
 }
 .card h2 {
   color: black;
   margin: 0 0 10px;
+  word-break: break-word;
+  font-size: 0.95rem;
 }
 .card p {
   margin: 0;
