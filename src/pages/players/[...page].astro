@@ -65,6 +65,28 @@ const breadcrumbSchema = {
     },
   ],
 };
+
+const itemListSchema = page
+  ? {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      numberOfItems: page.total,
+      itemListElement: page.data.map((member: any, index: number) => ({
+        "@type": "ListItem",
+        position: page.start + index + 1,
+        name: member.name,
+        url: new URL(`/player/${member.name}`, siteUrl).href,
+      })),
+    }
+  : null;
+
+const pageSchemas = itemListSchema ? [breadcrumbSchema, itemListSchema] : [breadcrumbSchema];
+
+const pageDescription = page
+  ? page.currentPage === 1
+    ? `Browse the complete roster of ${page.total} active and historical players on the derex smp Minecraft server.`
+    : `Browse players ${page.start + 1} to ${page.end + 1} of ${page.total} on page ${page.currentPage} of the derex smp Minecraft server roster.`
+  : "Browse the complete roster of active and historical players on the derex smp Minecraft server.";
 ---
 
 {
@@ -108,11 +130,11 @@ const breadcrumbSchema = {
               ? "Server Players - derex smp"
               : `Server Players (Page ${page.currentPage} of ${page.lastPage}) - derex smp`
           }
-          description="Browse the complete roster of active and historical players on the derex smp Minecraft server."
+          description={pageDescription}
           image={bgImage}
           prevUrl={page.url.prev}
           nextUrl={page.url.next}
-          structuredData={breadcrumbSchema}
+          structuredData={pageSchemas}
         />
       </head>
       <body class="min-h-screen flex flex-col bg-[#0c0d12]">
