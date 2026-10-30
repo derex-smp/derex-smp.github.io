@@ -48,13 +48,27 @@ const itemListSchema = {
 
 <html lang="en">
   <head>
+    <link
+      rel="preload"
+      as="image"
+      href="/images/directory.webp"
+      fetchpriority="high"
+      type="image/webp"
+    />
     <BaseHead
       title="Player Directory (A-Z) - derex smp"
       description={`Complete A–Z directory of all ${allMembers.length} active and historical players on the derex smp Minecraft server.`}
+      image="/images/directory.webp"
       structuredData={[breadcrumbSchema, itemListSchema]}
     />
   </head>
   <body class="min-h-screen flex flex-col bg-[#0c0d12] text-[#dbdee1]">
+    <div
+      class="fixed inset-0 -z-10 pointer-events-none bg-cover bg-center bg-no-repeat"
+      style="background-image: url('/images/directory.webp');"
+    >
+      <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/75"></div>
+    </div>
     <Navbar />
     <main class="flex-1 max-w-4xl mx-auto w-full px-4 py-8">
       <h1 class="text-2xl font-bold text-white mb-1">Player Directory</h1>
