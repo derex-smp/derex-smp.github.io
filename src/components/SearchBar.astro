@@ -1,0 +1,38 @@
+---
+interface Props {
+  id?: string;
+  placeholder?: string;
+  class?: string;
+}
+
+const { id = "search-input", placeholder = "Search...", class: className = "" } = Astro.props;
+---
+
+<div class={`relative w-full max-w-md mx-auto ${className}`}>
+  <div class="relative flex items-center">
+    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+    </div>
+    <input
+      type="text"
+      id={id}
+      placeholder={placeholder}
+      autocomplete="off"
+      spellcheck="false"
+      class="w-full pl-10 pr-10 py-2 bg-[#181a20]/90 hover:bg-[#1f232b] focus:bg-[#1f232b] border border-white/15 focus:border-sky-400/80 rounded-lg text-sm text-white placeholder-neutral-400 outline-none transition-all shadow-lg backdrop-blur-md font-mono"
+    />
+    <button
+      type="button"
+      data-clear-for={id}
+      title="Clear search (Esc)"
+      aria-label="Clear search"
+      class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-neutral-400 hover:text-white cursor-pointer transition-colors"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+</div>

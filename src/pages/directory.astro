@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Navbar from "../components/Navbar.astro";
+import SearchBar from "../components/SearchBar.astro";
 import Footer from "../components/Footer.astro";
 import { getAllMembers } from "../data/players";
 
@@ -71,10 +72,12 @@ const itemListSchema = {
     </div>
     <Navbar />
     <main class="flex-1 max-w-4xl mx-auto w-full px-4 py-8">
-      <h1 class="text-2xl font-bold text-white mb-1">Player Directory</h1>
-      <p class="text-sm text-neutral-400 mb-6">{allMembers.length} players indexed</p>
+      <h1 class="text-2xl font-bold text-white! drop-shadow-[2px_2px_0_rgba(0,0,0,1)] mb-6">Player Directory</h1>
 
-      <nav class="flex flex-wrap gap-1.5 mb-8" aria-label="Alphabetical jump">
+      <SearchBar id="directory-search" placeholder="Search 1,000+ players..." class="mb-4" />
+      <p id="search-status" class="hidden text-center text-xs text-neutral-300 font-mono mb-4"></p>
+
+      <nav id="alphabet-jump" class="flex flex-wrap justify-center gap-1.5 mb-8" aria-label="Alphabetical jump">
         {letters.map((l) => (
           <a
             href={`#section-${l}`}
@@ -111,3 +114,61 @@ const itemListSchema = {
     <Footer />
   </body>
 </html>
+
+<script>
+  const input = document.getElementById("directory-search") as HTMLInputElement | null;
+  const clearBtn = document.querySelector('[data-clear-for="directory-search"]');
+  const status = document.getElementById("search-status");
+  const sections = document.querySelectorAll("section[id^='section-']");
+  const jumpNav = document.getElementById("alphabet-jump");
+
+  function filterDirectory() {
+    const query = input?.value.trim().toLowerCase() || "";
+    if (clearBtn) {
+      clearBtn.classList.toggle("hidden", query.length === 0);
+    }
+    let totalMatches = 0;
+
+    sections.forEach((sec) => {
+      const items = sec.querySelectorAll("li");
+      let sectionMatches = 0;
+      items.forEach((li) => {
+        const name = li.textContent?.trim().toLowerCase() || "";
+        const match = query === "" || name.includes(query);
+        li.classList.toggle("hidden", !match);
+        if (match) sectionMatches++;
+      });
+      (sec as HTMLElement).classList.toggle("hidden", query.length > 0 && sectionMatches === 0);
+      totalMatches += sectionMatches;
+    });
+
+    if (jumpNav) {
+      jumpNav.classList.toggle("hidden", query.length > 0);
+    }
+
+    if (status) {
+      if (query.length > 0) {
+        status.textContent = `Found ${totalMatches} player${totalMatches === 1 ? "" : "s"} matching "${input?.value.trim()}"`;
+        status.classList.remove("hidden");
+      } else {
+        status.textContent = "";
+        status.classList.add("hidden");
+      }
+    }
+  }
+
+  input?.addEventListener("input", filterDirectory);
+  clearBtn?.addEventListener("click", () => {
+    if (input) {
+      input.value = "";
+      filterDirectory();
+      input.focus();
+    }
+  });
+  input?.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      input.value = "";
+      filterDirectory();
+    }
+  });
+</script>

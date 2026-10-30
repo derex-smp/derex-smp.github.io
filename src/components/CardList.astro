@@ -4,13 +4,14 @@ interface Props {
   description?: string;
   listId: string;
   listClass: "banlist" | "memberlist";
+  titleClass?: string;
 }
 
-const { title, description, listId, listClass } = Astro.props;
+const { title, description, listId, listClass, titleClass = "text-2xl font-bold text-white! drop-shadow-[2px_2px_0_rgba(0,0,0,1)]" } = Astro.props;
 ---
 
 <div class="banlist-container">
-  <h1 class="text-white! drop-shadow-[2px_2px_0_rgba(0,0,0,1)]">{title}</h1>
+  <h1 class={titleClass}>{title}</h1>
   {description && <h2 class="text-stone-200! drop-shadow-[2px_2px_0_rgba(0,0,0,1)]">{description}</h2>}
   <div class={listClass} id={listId}>
     <slot />

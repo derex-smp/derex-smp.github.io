@@ -2,6 +2,7 @@
 import type { Page } from "astro";
 import BaseHead from "../../components/BaseHead.astro";
 import Navbar from "../../components/Navbar.astro";
+import SearchBar from "../../components/SearchBar.astro";
 import CardList from "../../components/CardList.astro";
 import PlayerCard from "../../components/PlayerCard.astro";
 import Footer from "../../components/Footer.astro";
@@ -45,6 +46,11 @@ interface Props {
 const { page, isRedirect, target, player } = Astro.props;
 const currentPage = page?.currentPage || 1;
 const bgImage = `/images/members_${((currentPage - 1) % 6) + 1}.webp`;
+
+const allMembers = getAllMembers();
+const allMembersJson = JSON.stringify(
+  allMembers.map((m) => ({ name: m.name, uuid: m.uuid, pastNames: m.pastNames })),
+);
 
 const siteUrl = Astro.site?.href || "https://derex-smp.github.io";
 const breadcrumbSchema = {
@@ -146,75 +152,167 @@ const pageDescription = page
         </div>
         <Navbar />
         <main class="flex-1">
-          <CardList
-            title="derex smp Players"
-            description={`Showing players ${page.start + 1}–${page.end + 1} of ${page.total}`}
-            listId="playerlist"
-            listClass="memberlist"
-          >
-            {page.data.map((member: any) => (
-              <PlayerCard
-                name={member.name}
-                uuid={member.uuid}
-              />
-            ))}
-          </CardList>
-          <nav
-            class="flex items-center justify-center gap-1.5 sm:gap-2 my-8 flex-wrap px-4"
-            aria-label="Pagination"
-          >
-            {page.url.prev ? (
-              <a
-                href={page.url.prev}
-                class="px-3 py-1.5 bg-[#c8d6e5] hover:bg-[#b0c4de] text-black border border-[#6b7a8a] rounded text-sm transition-colors cursor-pointer"
-              >
-                « Prev
-              </a>
-            ) : (
-              <span class="px-3 py-1.5 bg-[#c8d6e5]/40 text-gray-500 border border-[#6b7a8a]/40 rounded text-sm cursor-not-allowed">
-                « Prev
-              </span>
-            )}
+          <SearchBar id="players-search" placeholder="Search 1,000+ players by name or past alias..." class="mt-6 mb-2 max-w-lg px-4" />
+          <p id="search-status" class="hidden text-center text-xs text-stone-200! drop-shadow-[1px_1px_0_rgba(0,0,0,1)] font-mono my-2"></p>
 
-            {Array.from({ length: page.lastPage }, (_, i) => i + 1).map((p) =>
-              p === page.currentPage ? (
-                <span class="px-3 py-1.5 bg-[#2c3e50] text-white border border-[#1a252f] rounded text-sm font-bold shadow-inner">
-                  {p}
-                </span>
-              ) : (
+          <div id="search-results-container" class="hidden banlist-container">
+            <div class="memberlist" id="search-results-list"></div>
+          </div>
+
+          <div id="paginated-view">
+            <CardList
+              title="derex smp Players"
+              description={`Showing players ${page.start + 1}–${page.end + 1} of ${page.total}`}
+              listId="playerlist"
+              listClass="memberlist"
+            >
+              {page.data.map((member: any) => (
+                <PlayerCard
+                  name={member.name}
+                  uuid={member.uuid}
+                />
+              ))}
+            </CardList>
+            <nav
+              class="flex items-center justify-center gap-1.5 sm:gap-2 my-8 flex-wrap px-4"
+              aria-label="Pagination"
+            >
+              {page.url.prev ? (
                 <a
-                  href={
-                    p === 1
-                      ? page.url.first || "/players"
-                      : `${(page.url.first || "/players").replace(/\/$/, "")}/${p}`
-                  }
+                  href={page.url.prev}
                   class="px-3 py-1.5 bg-[#c8d6e5] hover:bg-[#b0c4de] text-black border border-[#6b7a8a] rounded text-sm transition-colors cursor-pointer"
                 >
-                  {p}
+                  « Prev
                 </a>
-              ),
-            )}
+              ) : (
+                <span class="px-3 py-1.5 bg-[#c8d6e5]/40 text-gray-500 border border-[#6b7a8a]/40 rounded text-sm cursor-not-allowed">
+                  « Prev
+                </span>
+              )}
 
-            {page.url.next ? (
-              <a
-                href={page.url.next}
-                class="px-3 py-1.5 bg-[#c8d6e5] hover:bg-[#b0c4de] text-black border border-[#6b7a8a] rounded text-sm transition-colors cursor-pointer"
-              >
-                Next »
-              </a>
-            ) : (
-              <span class="px-3 py-1.5 bg-[#c8d6e5]/40 text-gray-500 border border-[#6b7a8a]/40 rounded text-sm cursor-not-allowed">
-                Next »
-              </span>
-            )}
-          </nav>
+              {Array.from({ length: page.lastPage }, (_, i) => i + 1).map((p) =>
+                p === page.currentPage ? (
+                  <span class="px-3 py-1.5 bg-[#2c3e50] text-white border border-[#1a252f] rounded text-sm font-bold shadow-inner">
+                    {p}
+                  </span>
+                ) : (
+                  <a
+                    href={
+                      p === 1
+                        ? page.url.first || "/players"
+                        : `${(page.url.first || "/players").replace(/\/$/, "")}/${p}`
+                    }
+                    class="px-3 py-1.5 bg-[#c8d6e5] hover:bg-[#b0c4de] text-black border border-[#6b7a8a] rounded text-sm transition-colors cursor-pointer"
+                  >
+                    {p}
+                  </a>
+                ),
+              )}
+
+              {page.url.next ? (
+                <a
+                  href={page.url.next}
+                  class="px-3 py-1.5 bg-[#c8d6e5] hover:bg-[#b0c4de] text-black border border-[#6b7a8a] rounded text-sm transition-colors cursor-pointer"
+                >
+                  Next »
+                </a>
+              ) : (
+                <span class="px-3 py-1.5 bg-[#c8d6e5]/40 text-gray-500 border border-[#6b7a8a]/40 rounded text-sm cursor-not-allowed">
+                  Next »
+                </span>
+              )}
+            </nav>
+          </div>
 
           <p class="text-center mt-2 mb-8 text-xs text-stone-200! drop-shadow-[1px_1px_0_rgba(0,0,0,1)] font-mono">
             Looking for someone? <a href="/directory" class="text-sky-300 hover:text-white hover:underline drop-shadow-[1px_1px_0_rgba(0,0,0,1)]">See full directory here</a>
           </p>
         </main>
         <Footer />
+        <script type="application/json" id="all-players-data" set:html={allMembersJson}></script>
       </body>
     </html>
   ) : null
 }
+
+<script>
+  interface MemberData {
+    name: string;
+    uuid: string;
+    pastNames?: string[];
+  }
+
+  const input = document.getElementById("players-search") as HTMLInputElement | null;
+  const clearBtn = document.querySelector('[data-clear-for="players-search"]');
+  const status = document.getElementById("search-status");
+  const searchContainer = document.getElementById("search-results-container");
+  const searchList = document.getElementById("search-results-list");
+  const paginatedView = document.getElementById("paginated-view");
+  const dataScript = document.getElementById("all-players-data");
+
+  let players: MemberData[] = [];
+  if (dataScript?.textContent) {
+    try {
+      players = JSON.parse(dataScript.textContent);
+    } catch {}
+  }
+
+  function renderCard(p: MemberData): string {
+    const aka = p.pastNames && p.pastNames.length > 0 ? `<p class="text-xs text-gray-600">aka: ${p.pastNames.join(", ")}</p>` : "";
+    return `<div class="card"><img src="/avatars/${p.uuid}.png" onerror="this.onerror=null;this.src='https://mc-heads.net/avatar/${p.uuid}/100';" alt="${p.name}'s head" width="100" height="100" class="w-[100px] h-[100px] mx-auto mb-2.5 block [image-rendering:pixelated]" loading="lazy" decoding="async" /><h2><a href="/player/${p.name}">${p.name}</a></h2>${aka}</div>`;
+  }
+
+  function handleSearch() {
+    const query = input?.value.trim().toLowerCase() || "";
+    if (clearBtn) {
+      clearBtn.classList.toggle("hidden", query.length === 0);
+    }
+
+    if (!query) {
+      if (searchContainer) searchContainer.classList.add("hidden");
+      if (paginatedView) paginatedView.classList.remove("hidden");
+      if (status) {
+        status.textContent = "";
+        status.classList.add("hidden");
+      }
+      return;
+    }
+
+    if (paginatedView) paginatedView.classList.add("hidden");
+    if (searchContainer) searchContainer.classList.remove("hidden");
+
+    const matches = players.filter((p) => {
+      if (p.name.toLowerCase().includes(query)) return true;
+      if (p.pastNames?.some((n) => n.toLowerCase().includes(query))) return true;
+      return false;
+    });
+
+    if (status) {
+      status.textContent = `Found ${matches.length} player${matches.length === 1 ? "" : "s"} matching "${input?.value.trim()}"`;
+      status.classList.remove("hidden");
+    }
+
+    if (searchList) {
+      if (matches.length > 0) {
+        searchList.innerHTML = matches.slice(0, 120).map(renderCard).join("");
+      } else {
+        searchList.innerHTML = `<p class="text-center text-sm text-stone-200! font-mono col-span-full py-8">No players found matching "${input?.value.trim()}"</p>`;
+      }
+    }
+  }
+
+  input?.addEventListener("input", handleSearch);
+  clearBtn?.addEventListener("click", () => {
+    if (input) {
+      input.value = "";
+      handleSearch();
+      input.focus();
+    }
+  });
+  input?.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      input.value = "";
+      handleSearch();
+    }
+  });
+</script>
