@@ -10,19 +10,19 @@ const navLinks = [
 ---
 
 <nav class="sticky top-0 z-50 w-full bg-[#333] border-b border-white/10 font-['PixelCraft'] select-none">
-  <div class="max-w-6xl mx-auto px-4 flex items-center justify-between sm:justify-center h-12 relative">
-    <a href="/" class="text-white! text-sm font-bold tracking-wider sm:hidden no-underline">
+  <div class="max-w-6xl mx-auto px-4 flex items-center justify-between sm:justify-center h-12 sm:h-auto sm:py-2.5 relative">
+    <a href="/" class="text-white! text-sm font-bold tracking-wider sm:hidden! no-underline">
       derex smp
     </a>
 
-    <div class="hidden sm:flex sm:items-center sm:justify-center sm:gap-2">
+    <div class="hidden sm:flex sm:items-center sm:justify-center">
       {navLinks.map((link) => (
         <a
           href={link.href}
           target={link.external ? "_blank" : undefined}
           rel={link.external ? "noopener noreferrer" : undefined}
           title={link.title}
-          class="text-white! hover:bg-[#ddd]! hover:text-black! px-3.5 py-3 text-sm transition-colors text-center whitespace-nowrap no-underline"
+          class="text-white! hover:bg-[#ddd]! hover:text-black! px-5 py-3.5 text-base transition-colors text-center whitespace-nowrap no-underline"
         >
           {link.label}
         </a>
@@ -35,12 +35,12 @@ const navLinks = [
         type="button"
         title="Toggle Wallpaper View (F1)"
         aria-label="Toggle Wallpaper View (F1)"
-        class="p-1.5 hover:bg-neutral-700/60 rounded cursor-pointer transition-colors"
+        class="p-2 hover:bg-neutral-700/60 rounded cursor-pointer transition-colors"
       >
         <img src="/images/camera.svg" class="w-5 h-5 block" alt="Camera" />
       </button>
 
-      <details class="sm:hidden group relative">
+      <details class="sm:hidden! hidden max-sm:block mobile-nav-toggle group relative">
         <summary class="list-none text-white! hover:bg-neutral-700/60 p-1.5 rounded cursor-pointer select-none">
           <svg class="w-5 h-5 block group-open:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -68,6 +68,11 @@ const navLinks = [
 </nav>
 
 <style is:global>
+  @media (min-width: 640px) {
+    .mobile-nav-toggle {
+      display: none !important;
+    }
+  }
   main, header:not(nav), footer, .banlist-container {
     transition: opacity 0.3s ease;
   }
