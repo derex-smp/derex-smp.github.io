@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Navbar from "../components/Navbar.astro";
+import BackgroundWallpaper from "../components/BackgroundWallpaper.astro";
 import CardList from "../components/CardList.astro";
 import PlayerCard from "../components/PlayerCard.astro";
 import Footer from "../components/Footer.astro";
@@ -46,11 +47,7 @@ const breadcrumbSchema = {
     />
   </head>
   <body class="min-h-screen flex flex-col bg-[#0c0d12]">
-    <div
-      class="fixed inset-0 -z-10 pointer-events-none bg-cover bg-center bg-no-repeat"
-      style="background-image: url('/images/2021-12-25_23.21.02.webp');"
-    >
-    </div>
+    <BackgroundWallpaper src="/images/2021-12-25_23.21.02.webp" />
     <Navbar />
     <main class="flex-1">
       <CardList

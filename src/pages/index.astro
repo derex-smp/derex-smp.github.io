@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Navbar from "../components/Navbar.astro";
+import BackgroundWallpaper from "../components/BackgroundWallpaper.astro";
 import ServerBanner from "../components/ServerBanner.astro";
 import Footer from "../components/Footer.astro";
 
@@ -43,11 +44,7 @@ const orgSchema = {
     />
   </head>
   <body class="min-h-screen flex flex-col bg-[#0c0d12]">
-    <div
-      class="fixed inset-0 -z-10 pointer-events-none bg-cover bg-center bg-no-repeat"
-      style="background-image: url('/images/2025-12-18_03.38.29.webp');"
-    >
-    </div>
+    <BackgroundWallpaper src="/images/2025-12-18_03.38.29.webp" />
     <Navbar />
     <header
       class="w3-container w3-center mx-auto w-full px-2 sm:px-6 py-12 sm:py-24 md:px-10 xl:px-15"

@@ -1,0 +1,15 @@
+---
+interface Props {
+  src: string;
+  overlay?: string;
+}
+
+const { src, overlay } = Astro.props;
+---
+
+<div
+  class="fixed inset-0 -z-10 pointer-events-none bg-cover bg-center bg-no-repeat"
+  style={`background-image: url('${src}');`}
+>
+  {overlay && <div class={`absolute inset-0 ${overlay}`} />}
+</div>

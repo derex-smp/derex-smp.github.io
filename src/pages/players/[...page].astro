@@ -2,6 +2,7 @@
 import type { Page } from "astro";
 import BaseHead from "../../components/BaseHead.astro";
 import Navbar from "../../components/Navbar.astro";
+import BackgroundWallpaper from "../../components/BackgroundWallpaper.astro";
 import SearchBar from "../../components/SearchBar.astro";
 import CardList from "../../components/CardList.astro";
 import PlayerCard from "../../components/PlayerCard.astro";
@@ -144,12 +145,10 @@ const pageDescription = page
         />
       </head>
       <body class="min-h-screen flex flex-col bg-[#0c0d12]">
-        <div
-          class="fixed inset-0 -z-10 pointer-events-none bg-cover bg-center bg-no-repeat"
-          style={`background-image: url('${bgImage}');`}
-        >
-          <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60"></div>
-        </div>
+        <BackgroundWallpaper
+          src={bgImage}
+          overlay="bg-gradient-to-b from-black/60 via-transparent to-black/60"
+        />
         <Navbar />
         <main class="flex-1">
           <SearchBar id="players-search" placeholder="Search 1,000+ players by name or past alias..." class="mt-6 mb-2 max-w-lg px-4" />

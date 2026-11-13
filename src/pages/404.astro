@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Navbar from "../components/Navbar.astro";
+import BackgroundWallpaper from "../components/BackgroundWallpaper.astro";
 import Footer from "../components/Footer.astro";
 ---
 
@@ -22,11 +23,7 @@ import Footer from "../components/Footer.astro";
   <body
     class="min-h-screen flex flex-col bg-[#0c0d12] text-center text-white font-['PixelCraft']"
   >
-    <div
-      class="fixed inset-0 -z-10 pointer-events-none bg-cover bg-center bg-no-repeat"
-      style="background-image: url('/images/2021-12-25_23.21.02.webp');"
-    >
-    </div>
+    <BackgroundWallpaper src="/images/2021-12-25_23.21.02.webp" />
     <Navbar />
     <main class="flex-1 mt-40 px-4 font-['PixelCraft']">
       <h1
