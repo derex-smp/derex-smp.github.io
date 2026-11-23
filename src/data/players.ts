@@ -64,7 +64,10 @@ if (existsSync(serverPlayersPath)) {
           nameMap.get(uuid) ||
           nameMap.get(cleanUuid) ||
           uuid.slice(0, 8);
-        const pastNames = hist?.pastNames?.length ? hist.pastNames : undefined;
+        const cleanPast = hist?.pastNames?.filter(
+          (p) => p.toLowerCase() !== name.toLowerCase(),
+        );
+        const pastNames = cleanPast?.length ? cleanPast : undefined;
         members.push({ name, uuid, pastNames });
       }
     }
@@ -84,7 +87,10 @@ if (existsSync(serverPlayersPath)) {
           nameMap.get(uuid) ||
           nameMap.get(cleanUuid) ||
           uuid.slice(0, 8);
-        const pastNames = hist?.pastNames?.length ? hist.pastNames : undefined;
+        const cleanPast = hist?.pastNames?.filter(
+          (p) => p.toLowerCase() !== name.toLowerCase(),
+        );
+        const pastNames = cleanPast?.length ? cleanPast : undefined;
         members.push({ name, uuid, pastNames });
       }
     }
@@ -105,7 +111,10 @@ for (const punished of punishments) {
   seen.add(cleanUuid);
   const hist = historyMap.get(uuid) || historyMap.get(cleanUuid);
   const name = hist?.currentName || punished.name;
-  const pastNames = hist?.pastNames?.length ? hist.pastNames : undefined;
+  const cleanPast = hist?.pastNames?.filter(
+    (p) => p.toLowerCase() !== name.toLowerCase(),
+  );
+  const pastNames = cleanPast?.length ? cleanPast : undefined;
   allMembers.push({ name, uuid, pastNames });
 }
 

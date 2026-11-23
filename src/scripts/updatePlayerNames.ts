@@ -98,7 +98,12 @@ export async function updateAllPlayerNames(): Promise<void> {
             lastUpdated: new Date().toISOString(),
           };
         } else if (current.currentName !== name) {
-          if (!current.pastNames.includes(current.currentName)) {
+          if (
+            current.currentName.toLowerCase() !== name.toLowerCase() &&
+            !current.pastNames.some(
+              (p) => p.toLowerCase() === current.currentName.toLowerCase(),
+            )
+          ) {
             current.pastNames.push(current.currentName);
           }
           current.currentName = name;

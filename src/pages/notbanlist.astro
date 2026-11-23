@@ -62,9 +62,10 @@ const breadcrumbSchema = {
               history[punishment.uuid] ||
               history[punishment.uuid.replace(/-/g, "")];
             const name = record?.currentName || punishment.name;
-            const pastNames = record?.pastNames?.length
-              ? record.pastNames
-              : undefined;
+            const cleanPast = record?.pastNames?.filter(
+              (p: string) => p.toLowerCase() !== name.toLowerCase(),
+            );
+            const pastNames = cleanPast?.length ? cleanPast : undefined;
             return (
               <PlayerCard
                 name={name}
