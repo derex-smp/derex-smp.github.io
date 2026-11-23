@@ -10,6 +10,7 @@ interface HistoryRecord {
 const historyPath = path.resolve("src/data/player_history.json");
 const usercachePath = path.resolve("src/data/usercache.json");
 const playerdataDir = path.resolve("src/data/playerdata");
+const serverPlayersPath = path.resolve("src/data/server_players.json");
 const punishmentsPath = path.resolve("src/data/punishments.json");
 
 function toDashed(clean: string): string {
@@ -48,7 +49,16 @@ export async function updateAllPlayerNames(): Promise<void> {
 
   const allUuids = new Set<string>();
 
-  if (fs.existsSync(playerdataDir)) {
+  if (fs.existsSync(serverPlayersPath)) {
+    try {
+      const uuids: string[] = JSON.parse(
+        fs.readFileSync(serverPlayersPath, "utf8"),
+      );
+      for (const uuid of uuids) {
+        allUuids.add(toClean(uuid));
+      }
+    } catch {}
+  } else if (fs.existsSync(playerdataDir)) {
     for (const file of fs.readdirSync(playerdataDir)) {
       if (file.endsWith(".dat") && !file.includes("_old")) {
         allUuids.add(toClean(file.replace(".dat", "")));

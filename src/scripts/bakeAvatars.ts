@@ -8,6 +8,7 @@ interface PlayerRecord {
 
 const punishmentsPath = path.resolve("src/data/punishments.json");
 const playerdataDir = path.resolve("src/data/playerdata");
+const serverPlayersPath = path.resolve("src/data/server_players.json");
 const usercachePath = path.resolve("src/data/usercache.json");
 const outputDir = path.resolve("public/avatars");
 
@@ -95,7 +96,19 @@ export async function ensureAvatarsBaked(): Promise<void> {
     }
   }
 
-  if (fs.existsSync(playerdataDir)) {
+  if (fs.existsSync(serverPlayersPath)) {
+    try {
+      const uuids: string[] = JSON.parse(
+        fs.readFileSync(serverPlayersPath, "utf8"),
+      );
+      for (const uuid of uuids) {
+        if (!seen.has(uuid)) {
+          seen.add(uuid);
+          uniquePlayers.push({ uuid, name: nameMap.get(uuid) });
+        }
+      }
+    } catch {}
+  } else if (fs.existsSync(playerdataDir)) {
     const files = fs.readdirSync(playerdataDir);
     for (const file of files) {
       if (file.endsWith(".dat") && !file.includes("_old")) {

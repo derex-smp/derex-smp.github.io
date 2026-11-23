@@ -17,6 +17,7 @@ interface Member {
 const historyPath = resolve("src/data/player_history.json");
 const usercachePath = resolve("src/data/usercache.json");
 const playerdataDir = resolve("src/data/playerdata");
+const serverPlayersPath = resolve("src/data/server_players.json");
 
 const historyMap = new Map<string, HistoryRecord>();
 if (existsSync(historyPath)) {
@@ -49,7 +50,26 @@ if (existsSync(usercachePath)) {
 const members: Member[] = [];
 const seen = new Set<string>();
 
-if (existsSync(playerdataDir)) {
+if (existsSync(serverPlayersPath)) {
+  try {
+    const uuids: string[] = JSON.parse(readFileSync(serverPlayersPath, "utf8"));
+    for (const uuid of uuids) {
+      const cleanUuid = uuid.replace(/-/g, "");
+      if (!seen.has(uuid) && !seen.has(cleanUuid)) {
+        seen.add(uuid);
+        seen.add(cleanUuid);
+        const hist = historyMap.get(uuid) || historyMap.get(cleanUuid);
+        const name =
+          hist?.currentName ||
+          nameMap.get(uuid) ||
+          nameMap.get(cleanUuid) ||
+          uuid.slice(0, 8);
+        const pastNames = hist?.pastNames?.length ? hist.pastNames : undefined;
+        members.push({ name, uuid, pastNames });
+      }
+    }
+  } catch {}
+} else if (existsSync(playerdataDir)) {
   const files = readdirSync(playerdataDir);
   for (const file of files) {
     if (file.endsWith(".dat") && !file.includes("_old")) {
