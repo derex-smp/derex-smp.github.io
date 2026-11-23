@@ -43,9 +43,9 @@ with open('$OUTPUT_FILE', 'w', encoding='utf-8') as out:
 "
 
 if [ -n "$(git status --porcelain "$OUTPUT_FILE")" ]; then
-    git config user.name "Pelican Sync Bot"
-    git config user.email "bot@derexsmp.internal"
+    git config user.name "Derex SMP"
+    git config user.email "derex-smp@users.noreply.github.com"
     git add "$OUTPUT_FILE"
-    git commit -m "Auto-sync player UUIDs from Pelican server"
+    git commit -m "Auto-sync player UUIDs from server"
     git push origin main
 fi
