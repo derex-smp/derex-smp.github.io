@@ -116,8 +116,6 @@ const stats = getPlayerStats(uuid || name);
             class="border-b border-[#232734] text-[11px] font-semibold text-neutral-400 uppercase tracking-wider"
           >
             <th class="py-3 px-3">Stat</th>
-            <th class="py-3 px-3 text-center sm:text-right">7 Days</th>
-            <th class="py-3 px-3 text-center sm:text-right">30 Days</th>
             <th class="py-3 px-3 text-right">Total</th>
           </tr>
         </thead>
@@ -134,12 +132,6 @@ const stats = getPlayerStats(uuid || name);
                     <span class={`w-1.5 h-1.5 rounded-full shrink-0 ${row.id === "beds_blown" ? "bg-amber-400" : "bg-sky-400"}`} />
                     <span class={`font-medium ${row.id === "beds_blown" ? "text-amber-200 font-semibold" : "text-neutral-200"}`}>{row.name}</span>
                   </div>
-                </td>
-                <td class={`py-3 px-3 text-center sm:text-right font-mono text-xs ${row.id === "beds_blown" ? "text-amber-200/80" : "text-neutral-400"}`}>
-                  {row.d7}
-                </td>
-                <td class={`py-3 px-3 text-center sm:text-right font-mono text-xs ${row.id === "beds_blown" ? "text-amber-200/80" : "text-neutral-400"}`}>
-                  {row.d30}
                 </td>
                 <td class="py-3 px-3 text-right text-amber-300 font-bold font-mono text-xs sm:text-sm">
                   {row.total}
