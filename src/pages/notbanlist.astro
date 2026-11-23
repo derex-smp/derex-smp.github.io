@@ -29,6 +29,7 @@ const breadcrumbSchema = {
     },
   ],
 };
+const bgImage = "/images/2021-12-25_23.21.02.webp";
 ---
 
 <html lang="en">
@@ -36,18 +37,19 @@ const breadcrumbSchema = {
     <link
       rel="preload"
       as="image"
-      href="/images/2021-12-25_23.21.02.webp"
+      href={bgImage}
       fetchpriority="high"
       type="image/webp"
     />
     <BaseHead
       title="Disciplinary Records - derex smp"
       description="Official administrative log of server rule enforcement actions and jailing records on derex smp."
+      image={bgImage}
       structuredData={breadcrumbSchema}
     />
   </head>
   <body class="min-h-screen flex flex-col bg-[#0c0d12]">
-    <BackgroundWallpaper src="/images/2021-12-25_23.21.02.webp" />
+    <BackgroundWallpaper src={bgImage} />
     <Navbar />
     <main class="flex-1">
       <CardList

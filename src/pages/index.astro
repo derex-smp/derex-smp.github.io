@@ -6,6 +6,8 @@ import ServerBanner from "../components/ServerBanner.astro";
 import Footer from "../components/Footer.astro";
 
 const siteUrl = Astro.site?.href || "https://derex-smp.github.io";
+const bgImage = "/images/2025-12-18_03.38.29.webp";
+
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -33,18 +35,19 @@ const orgSchema = {
     <link
       rel="preload"
       as="image"
-      href="/images/2025-12-18_03.38.29.webp"
+      href={bgImage}
       fetchpriority="high"
       type="image/webp"
     />
     <BaseHead
       title="derex smp - Minecraft Survival Multiplayer Server"
       description="Welcome to derex smp, an active Minecraft Survival Multiplayer server. Explore our community players, world map, and server guidelines."
+      image={bgImage}
       structuredData={[websiteSchema, orgSchema]}
     />
   </head>
   <body class="min-h-screen flex flex-col bg-[#0c0d12]">
-    <BackgroundWallpaper src="/images/2025-12-18_03.38.29.webp" />
+    <BackgroundWallpaper src={bgImage} />
     <Navbar />
     <header
       class="w3-container w3-center mx-auto w-full px-2 sm:px-6 py-12 sm:py-24 md:px-10 xl:px-15"
