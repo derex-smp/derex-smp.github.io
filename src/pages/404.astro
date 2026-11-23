@@ -3,6 +3,8 @@ import BaseHead from "../components/BaseHead.astro";
 import Navbar from "../components/Navbar.astro";
 import BackgroundWallpaper from "../components/BackgroundWallpaper.astro";
 import Footer from "../components/Footer.astro";
+
+const bgImage = "/images/2021-12-25_23.21.02.webp";
 ---
 
 <html lang="en">
@@ -10,21 +12,21 @@ import Footer from "../components/Footer.astro";
     <link
       rel="preload"
       as="image"
-      href="/images/2021-12-25_23.21.02.webp"
+      href={bgImage}
       fetchpriority="high"
       type="image/webp"
     />
     <BaseHead
       title="404 - Page Not Found | derex smp"
       description="The requested page could not be found."
-      image="/images/2021-12-25_23.21.02.webp"
+      image={bgImage}
       noindex={true}
     />
   </head>
   <body
     class="min-h-screen flex flex-col bg-[#0c0d12] text-center text-white font-['PixelCraft']"
   >
-    <BackgroundWallpaper src="/images/2021-12-25_23.21.02.webp" />
+    <BackgroundWallpaper src={bgImage} />
     <Navbar />
     <main class="flex-1 mt-40 px-4 font-['PixelCraft']">
       <h1

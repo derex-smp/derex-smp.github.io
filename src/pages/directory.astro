@@ -46,6 +46,8 @@ const itemListSchema = {
     url: new URL(`/player/${p.name}`, siteUrl).href,
   })),
 };
+
+const bgImage = "/images/directory.webp";
 ---
 
 <html lang="en">
@@ -53,20 +55,20 @@ const itemListSchema = {
     <link
       rel="preload"
       as="image"
-      href="/images/directory.webp"
+      href={bgImage}
       fetchpriority="high"
       type="image/webp"
     />
     <BaseHead
       title="Player Directory (A-Z) - derex smp"
       description={`Complete A–Z directory of all ${allMembers.length} active and historical players on the derex smp Minecraft server.`}
-      image="/images/directory.webp"
+      image={bgImage}
       structuredData={[breadcrumbSchema, itemListSchema]}
     />
   </head>
   <body class="min-h-screen flex flex-col bg-[#0c0d12] text-[#dbdee1]">
     <BackgroundWallpaper
-      src="/images/directory.webp"
+      src={bgImage}
       overlay="bg-gradient-to-b from-black/70 via-black/50 to-black/75"
     />
     <Navbar />
