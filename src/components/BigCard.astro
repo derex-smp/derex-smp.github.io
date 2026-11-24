@@ -34,12 +34,8 @@ const stats = getPlayerStats(uuid || name);
             decoding="async"
           />
         </div>
-        <div>
-          <h1
-            class="text-2xl sm:text-3xl font-bold text-white tracking-wide m-0"
-          >
-            {name}
-          </h1>
+        <div class="text-left">
+          <h1 class="text-left !text-left text-2xl sm:text-3xl font-bold text-white tracking-wide m-0">{name.trim()}</h1>
           <div class="flex flex-wrap items-center gap-2 mt-1">
             <span class="text-xs text-neutral-400">
               {firstJoined ? `📅 Member since ${firstJoined}` : `📅 Member`}
