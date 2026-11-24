@@ -8,7 +8,6 @@ interface HistoryRecord {
 }
 
 const historyPath = path.resolve("src/data/player_history.json");
-const usercachePath = path.resolve("src/data/usercache.json");
 const playerdataDir = path.resolve("src/data/playerdata");
 const serverPlayersPath = path.resolve("src/data/server_players.json");
 const punishmentsPath = path.resolve("src/data/punishments.json");
@@ -116,12 +115,4 @@ export async function updateAllPlayerNames(): Promise<void> {
   await Promise.all(Array.from({ length: concurrency }, () => worker()));
 
   fs.writeFileSync(historyPath, JSON.stringify(history, null, 2), "utf8");
-
-  const usercache = Object.entries(history).map(([uuid, record]) => ({
-    name: record.currentName,
-    uuid,
-    expiresOn: "2099-01-01 00:00:00 -0000",
-  }));
-
-  fs.writeFileSync(usercachePath, JSON.stringify(usercache, null, 2), "utf8");
 }

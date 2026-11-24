@@ -9,7 +9,7 @@ interface PlayerRecord {
 const punishmentsPath = path.resolve("src/data/punishments.json");
 const playerdataDir = path.resolve("src/data/playerdata");
 const serverPlayersPath = path.resolve("src/data/server_players.json");
-const usercachePath = path.resolve("src/data/usercache.json");
+const historyPath = path.resolve("src/data/player_history.json");
 const outputDir = path.resolve("public/avatars");
 
 async function fetchAvatar(
@@ -64,15 +64,15 @@ export async function ensureAvatarsBaked(): Promise<void> {
   }
 
   const nameMap = new Map<string, string>();
-  if (fs.existsSync(usercachePath)) {
+  if (fs.existsSync(historyPath)) {
     try {
-      const entries: { uuid: string; name: string }[] = JSON.parse(
-        fs.readFileSync(usercachePath, "utf8"),
+      const history: Record<string, { currentName: string }> = JSON.parse(
+        fs.readFileSync(historyPath, "utf8"),
       );
-      for (const entry of entries) {
-        if (entry.uuid && entry.name) {
-          nameMap.set(entry.uuid, entry.name);
-          nameMap.set(entry.uuid.replace(/-/g, ""), entry.name);
+      for (const [uuid, record] of Object.entries(history)) {
+        if (record?.currentName) {
+          nameMap.set(uuid, record.currentName);
+          nameMap.set(uuid.replace(/-/g, ""), record.currentName);
         }
       }
     } catch {}

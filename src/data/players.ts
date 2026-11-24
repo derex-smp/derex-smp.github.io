@@ -15,7 +15,6 @@ interface Member {
 }
 
 const historyPath = resolve("src/data/player_history.json");
-const usercachePath = resolve("src/data/usercache.json");
 const playerdataDir = resolve("src/data/playerdata");
 const serverPlayersPath = resolve("src/data/server_players.json");
 
@@ -32,21 +31,6 @@ if (existsSync(historyPath)) {
   } catch {}
 }
 
-const nameMap = new Map<string, string>();
-if (existsSync(usercachePath)) {
-  try {
-    const entries: { uuid: string; name: string }[] = JSON.parse(
-      readFileSync(usercachePath, "utf8"),
-    );
-    for (const entry of entries) {
-      if (entry.uuid && entry.name) {
-        nameMap.set(entry.uuid, entry.name);
-        nameMap.set(entry.uuid.replace(/-/g, ""), entry.name);
-      }
-    }
-  } catch {}
-}
-
 const members: Member[] = [];
 const seen = new Set<string>();
 
@@ -59,11 +43,7 @@ if (existsSync(serverPlayersPath)) {
         seen.add(uuid);
         seen.add(cleanUuid);
         const hist = historyMap.get(uuid) || historyMap.get(cleanUuid);
-        const name =
-          hist?.currentName ||
-          nameMap.get(uuid) ||
-          nameMap.get(cleanUuid) ||
-          uuid.slice(0, 8);
+        const name = hist?.currentName || uuid.slice(0, 8);
         const cleanPast = hist?.pastNames?.filter(
           (p) => p.toLowerCase() !== name.toLowerCase(),
         );
@@ -82,11 +62,7 @@ if (existsSync(serverPlayersPath)) {
         seen.add(uuid);
         seen.add(cleanUuid);
         const hist = historyMap.get(uuid) || historyMap.get(cleanUuid);
-        const name =
-          hist?.currentName ||
-          nameMap.get(uuid) ||
-          nameMap.get(cleanUuid) ||
-          uuid.slice(0, 8);
+        const name = hist?.currentName || uuid.slice(0, 8);
         const cleanPast = hist?.pastNames?.filter(
           (p) => p.toLowerCase() !== name.toLowerCase(),
         );
