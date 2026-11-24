@@ -1,3 +1,5 @@
+import playerStatsData from "./player_stats.json";
+
 export interface StatItem {
   id: string;
   name: string;
@@ -6,6 +8,8 @@ export interface StatItem {
   d30: string;
   total: string;
 }
+
+const rawStats = playerStatsData as Record<string, Record<string, number>>;
 
 export interface StatDefinition {
   id: string;
@@ -114,6 +118,36 @@ export const STAT_DEFINITIONS: StatDefinition[] = [
 ];
 
 export function getPlayerStats(uuidOrName: string): StatItem[] {
+  const cleanId = uuidOrName.replace(/-/g, "");
+  const real = rawStats[uuidOrName] || rawStats[cleanId];
+
+  if (real && Object.keys(real).length > 0) {
+    return STAT_DEFINITIONS.map((def) => {
+      const val = real[def.id] || 0;
+      let totalStr = val.toLocaleString();
+
+      if (def.unit === "time") {
+        const totalHours = Math.floor(val / 3600);
+        const daysPart = Math.floor(totalHours / 24);
+        const hoursPart = totalHours % 24;
+        totalStr = daysPart > 0 ? `${daysPart}d ${hoursPart}h` : `${hoursPart}h`;
+      } else if (def.unit === "km") {
+        totalStr = `${val.toLocaleString()}km`;
+      } else {
+        totalStr = val.toLocaleString();
+      }
+
+      return {
+        id: def.id,
+        name: def.name,
+        category: def.category,
+        d7: "0",
+        d30: "0",
+        total: totalStr,
+      };
+    });
+  }
+
   const seed = hashSeed(uuidOrName);
 
   return STAT_DEFINITIONS.map((def, idx) => {

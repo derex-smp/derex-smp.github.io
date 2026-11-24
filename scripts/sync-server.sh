@@ -20,32 +20,45 @@ if [ ! -d "$DATA_DIR" ]; then
     exit 1
 fi
 
-OUTPUT_FILE="$REPO_DIR/src/data/server_players.json"
+PLAYERS_FILE="$REPO_DIR/src/data/server_players.json"
+STATS_FILE="$REPO_DIR/src/data/player_stats.json"
 
 cd "$REPO_DIR"
 
 git pull --rebase origin main
 
 python3 -c "
-import os, json, glob, sys
+import os, json, glob
 
 data_dir = '$DATA_DIR'
-files = glob.glob(os.path.join(data_dir, '*.dat'))
-uuids = []
+players_out = '$PLAYERS_FILE'
 
-for f in sorted(files):
+data_files = glob.glob(os.path.join(data_dir, '*.dat'))
+uuids = []
+for f in sorted(data_files):
     name = os.path.basename(f)
     if name.endswith('.dat') and not name.endswith('.dat_old'):
         uuids.append(name[:-4])
 
-with open('$OUTPUT_FILE', 'w', encoding='utf-8') as out:
+with open(players_out, 'w', encoding='utf-8') as out:
     json.dump(uuids, out, indent=2)
 "
 
-if [ -n "$(git status --porcelain "$OUTPUT_FILE")" ]; then
+python3 "$SCRIPT_DIR/extract_stats.py"
+
+CHANGED=0
+if [ -n "$(git status --porcelain "$PLAYERS_FILE")" ]; then
+    git add "$PLAYERS_FILE"
+    CHANGED=1
+fi
+if [ -n "$(git status --porcelain "$STATS_FILE")" ]; then
+    git add "$STATS_FILE"
+    CHANGED=1
+fi
+
+if [ "$CHANGED" -eq 1 ]; then
     git config user.name "Derex SMP"
     git config user.email "derex-smp@users.noreply.github.com"
-    git add "$OUTPUT_FILE"
-    git commit -m "Auto-sync player UUIDs from server"
+    git commit -m "Auto-sync player roster and statistics from server"
     git push origin main
 fi
