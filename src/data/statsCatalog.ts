@@ -140,3 +140,9 @@ export function getPlayerStats(uuidOrName: string): StatItem[] {
     };
   });
 }
+
+export function getPlayerFirstJoined(uuidOrName: string): string | undefined {
+  const cleanId = uuidOrName.replace(/-/g, "");
+  const real = (rawStats as Record<string, Record<string, any>>)[uuidOrName] || (rawStats as Record<string, Record<string, any>>)[cleanId];
+  return real ? real.first_joined : undefined;
+}
