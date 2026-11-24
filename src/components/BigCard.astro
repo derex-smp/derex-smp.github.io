@@ -93,11 +93,19 @@ const isJailed = Boolean(
     </div>
 
     <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6">
-      <strong class="text-neutral-200">{name}</strong> is an active player of the
-      derex smp Minecraft server.{
+      <strong class="text-neutral-200">{name}</strong> is {
+        isJailed ? "a registered player" : "an active player"
+      } of the derex smp Minecraft server.{
         firstJoined
           ? ` They have been an explorer of the realm since ${firstJoined}.`
-          : ` They are an active explorer of the realm.`
+          : ` They are an explorer of the realm.`
+      }{
+        isJailed && (
+          <>
+            {" "}Administrative disciplinary action has been recorded for this account pursuant to server community guidelines. See{" "}
+            <a href="/notbanlist" class="text-sky-400 hover:underline">disciplinary records</a> for public logs.
+          </>
+        )
       }
     </p>
 
