@@ -462,7 +462,10 @@ def extract_player_stats(filepath):
     if beds_blown:
         extracted["beds_blown"] = beds_blown
 
-    dat_path = os.path.join(os.path.dirname(os.path.dirname(filepath)), "playerdata", f"{uuid}.dat")
+    parent_dir = os.path.dirname(os.path.dirname(filepath))
+    dat_path = os.path.join(parent_dir, "data", f"{uuid}.dat")
+    if not os.path.isfile(dat_path):
+        dat_path = os.path.join(parent_dir, "playerdata", f"{uuid}.dat")
     if os.path.isfile(dat_path):
         first_joined = get_first_played(dat_path)
         if first_joined:
