@@ -20,21 +20,6 @@ export interface StatDefinition {
   unit?: "km" | "time" | "damage" | "count";
 }
 
-function hashSeed(str: string): number {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = (hash << 5) - hash + str.charCodeAt(i);
-    hash |= 0;
-  }
-  return Math.abs(hash);
-}
-
-function pseudoRand(seed: number, offset: number, min: number, max: number): number {
-  const x = Math.sin(seed + offset) * 10000;
-  const val = x - Math.floor(x);
-  return Math.floor(val * (max - min + 1)) + min;
-}
-
 export const STAT_DEFINITIONS: StatDefinition[] = [
   { id: "playtime", name: "Playtime", category: "movement", min: 12, max: 2400, unit: "time" },
   { id: "walked", name: "Distance Walked", category: "movement", min: 20, max: 4500, unit: "km" },
@@ -121,70 +106,36 @@ export function getPlayerStats(uuidOrName: string): StatItem[] {
   const cleanId = uuidOrName.replace(/-/g, "");
   const real = rawStats[uuidOrName] || rawStats[cleanId];
 
-  if (real && Object.keys(real).length > 0) {
-    return STAT_DEFINITIONS.map((def) => {
-      const val = real[def.id] || 0;
-      let totalStr = val.toLocaleString();
+  return STAT_DEFINITIONS.map((def) => {
+    const val = real ? real[def.id] || 0 : 0;
+    let totalStr = "0";
 
+    if (val > 0) {
       if (def.unit === "time") {
         const totalHours = Math.floor(val / 3600);
         const daysPart = Math.floor(totalHours / 24);
         const hoursPart = totalHours % 24;
-        totalStr = daysPart > 0 ? `${daysPart}d ${hoursPart}h` : `${hoursPart}h`;
+        if (daysPart > 0) {
+          totalStr = `${daysPart}d ${hoursPart}h`;
+        } else if (hoursPart > 0) {
+          totalStr = `${hoursPart}h`;
+        } else {
+          const mins = Math.max(1, Math.floor(val / 60));
+          totalStr = `${mins}m`;
+        }
       } else if (def.unit === "km") {
         totalStr = `${val.toLocaleString()}km`;
       } else {
         totalStr = val.toLocaleString();
       }
-
-      return {
-        id: def.id,
-        name: def.name,
-        category: def.category,
-        d7: "0",
-        d30: "0",
-        total: totalStr,
-      };
-    });
-  }
-
-  const seed = hashSeed(uuidOrName);
-
-  return STAT_DEFINITIONS.map((def, idx) => {
-    const totalVal = pseudoRand(seed, idx * 3 + 1, def.min, def.max);
-    const d30Val = Math.floor(totalVal * (pseudoRand(seed, idx * 3 + 2, 12, 35) / 100));
-    const d7Val = Math.floor(d30Val * (pseudoRand(seed, idx * 3 + 3, 10, 35) / 100));
-
-    let d7Str = String(d7Val);
-    let d30Str = String(d30Val);
-    let totalStr = totalVal.toLocaleString();
-
-    if (def.unit === "time") {
-      const daysPart = Math.floor(totalVal / 24);
-      const hoursPart = totalVal % 24;
-      totalStr = daysPart > 0 ? `${daysPart}d ${hoursPart}h` : `${hoursPart}h`;
-      d30Str = `${Math.max(1, Math.floor(totalVal * 0.15))}h`;
-      d7Str = `${Math.max(0, Math.floor(totalVal * 0.04))}h`;
-    } else if (def.unit === "km") {
-      totalStr = `${totalVal.toLocaleString()}km`;
-      d30Str = `${d30Val.toLocaleString()}km`;
-      d7Str = `${d7Val.toLocaleString()}km`;
-    } else if (def.unit === "damage") {
-      totalStr = totalVal.toLocaleString();
-      d30Str = d30Val.toLocaleString();
-      d7Str = d7Val.toLocaleString();
-    } else {
-      totalStr = totalVal.toLocaleString();
-      d30Str = d30Val.toLocaleString();
-      d7Str = d7Val.toLocaleString();
     }
 
     return {
       id: def.id,
       name: def.name,
       category: def.category,
-      d7: d7Str,
-      d30: d30Str,
+      d7: "0",
+      d30: "0",
       total: totalStr,
     };
   });

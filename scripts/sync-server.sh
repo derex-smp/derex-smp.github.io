@@ -57,7 +57,7 @@ if [ -n "$(git status --porcelain "$STATS_FILE")" ]; then
 fi
 
 if [ "$CHANGED" -eq 1 ]; then
-    git config user.name "Derex SMP"
+    git config user.name "derex smp"
     git config user.email "derex-smp@users.noreply.github.com"
     git commit -m "Auto-sync player roster and statistics from server"
     git push origin main
