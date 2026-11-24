@@ -79,9 +79,11 @@ const stats = getPlayerStats(uuid || name);
 
     <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6">
       <strong class="text-neutral-200">{name}</strong> is an active player of the
-      derex smp Minecraft server. They have been an explorer of the realm since {
-        memberSince
-      }.
+      derex smp Minecraft server.{
+        firstJoined
+          ? ` They have been an explorer of the realm since ${firstJoined}.`
+          : ` They are an active explorer of the realm.`
+      }
     </p>
 
     <div class="overflow-x-auto">
