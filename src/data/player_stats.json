@@ -2117,7 +2117,7 @@
     "first_joined": "Dec 03, 2025"
   },
   "b969c486-394a-4064-9f66-d7b595505fe5": {
-    "playtime": 44111637,
+    "playtime": 44133237,
     "walked": 0,
     "minecart": 201,
     "swum": 0,
@@ -2129,7 +2129,7 @@
     "damage_taken": 31243,
     "kills": 19,
     "deaths": 98,
-    "mob_kills": 3760,
+    "mob_kills": 3971,
     "tools_broken": 1
   },
   "97603464-0e32-4160-8ef3-f2108759164e": {
@@ -11215,7 +11215,7 @@
     "first_joined": "Dec 12, 2025"
   },
   "5df41b29-afca-4fb1-a9e8-9b190b9fd5ef": {
-    "playtime": 8684978,
+    "playtime": 8706578,
     "walked": 1403,
     "flown": 1713,
     "sailed": 45,
@@ -22742,7 +22742,7 @@
     "first_joined": "Aug 23, 2026"
   },
   "1bd9b5f5-a830-4cbd-80a7-a65c5311c9a7": {
-    "playtime": 2290782,
+    "playtime": 2312382,
     "walked": 1925,
     "flown": 2073,
     "sailed": 8,
@@ -23171,32 +23171,34 @@
     "first_joined": "Sep 01, 2026"
   },
   "d69209af-011a-4ed7-8f88-daf6ffa8e3a3": {
-    "playtime": 53501,
-    "walked": 43,
-    "flown": 18,
+    "playtime": 57812,
+    "walked": 47,
+    "flown": 37,
+    "ridden": 0,
     "minecart": 2,
     "swum": 3,
     "dived": 1,
     "climbed": 0,
-    "fallen": 4,
-    "jumps": 13667,
-    "damage_dealt": 129171,
-    "damage_taken": 15441,
-    "deaths": 7,
-    "mob_kills": 3310,
+    "fallen": 5,
+    "jumps": 14819,
+    "damage_dealt": 147641,
+    "damage_taken": 18005,
+    "deaths": 10,
+    "mob_kills": 3440,
     "wardens": 2,
     "shulkers": 63,
-    "spiders": 38,
-    "creepers": 70,
+    "spiders": 43,
+    "creepers": 82,
     "endermen": 2702,
-    "cows": 18,
-    "sheep": 1,
+    "cows": 63,
+    "sheep": 2,
     "diamonds": 30,
-    "coal": 53,
-    "stone": 4472,
+    "coal": 102,
+    "obsidian": 4,
+    "stone": 4505,
     "netherrack": 7,
-    "excavator": 813,
-    "bamboo": 112,
+    "excavator": 834,
+    "bamboo": 311,
     "sugarcane": 15,
     "trees": 35,
     "armor": 5,
@@ -23204,15 +23206,15 @@
     "baker": 48,
     "redstone_placed": 2,
     "grindstone": 5,
-    "shears": 126,
+    "shears": 128,
     "fish_eaten": 5,
     "junk_food": 1,
     "potions": 3,
-    "water_buckets": 13,
+    "water_buckets": 21,
     "tools_broken": 2,
+    "animals_bred": 10,
     "trades": 1590,
-    "pearls": 39,
-    "first_joined": "Sep 01, 2026"
+    "pearls": 39
   },
   "f6ff84ad-2ef8-49c4-8658-11f70cd952e1": {
     "playtime": 7,
@@ -25978,25 +25980,25 @@
     "first_joined": "Nov 10, 2026"
   },
   "22446f7c-20d4-46e5-a343-09f37b7b4e01": {
-    "playtime": 213788,
-    "walked": 160,
-    "flown": 292,
+    "playtime": 230287,
+    "walked": 167,
+    "flown": 300,
     "sailed": 10,
     "minecart": 48,
     "swum": 3,
     "dived": 1,
     "climbed": 0,
     "fallen": 15,
-    "jumps": 41145,
-    "damage_dealt": 155915,
-    "damage_taken": 57735,
+    "jumps": 42329,
+    "damage_dealt": 156906,
+    "damage_taken": 59045,
     "damage_blocked": 8610,
     "deaths": 13,
-    "mob_kills": 4264,
+    "mob_kills": 4276,
     "ghasts": 2,
     "shulkers": 74,
-    "spiders": 43,
-    "creepers": 42,
+    "spiders": 44,
+    "creepers": 44,
     "endermen": 2041,
     "slimes": 1002,
     "cows": 10,
@@ -26007,19 +26009,19 @@
     "redstone": 87,
     "quartz": 76,
     "obsidian": 199,
-    "stone": 3095,
+    "stone": 3096,
     "netherrack": 251,
     "excavator": 2359,
     "bamboo": 153,
-    "sugarcane": 73,
+    "sugarcane": 101,
     "mushrooms": 2,
     "armor": 12,
     "weapons": 36,
     "baker": 183,
     "scaffolding": 13,
-    "torches": 1019,
-    "redstone_placed": 1801,
-    "rails": 6785,
+    "torches": 1031,
+    "redstone_placed": 1877,
+    "rails": 7632,
     "signs": 3,
     "enchanted": 35,
     "shears": 279,
@@ -26146,7 +26148,7 @@
     "tools_broken": 6
   },
   "f481a176-ef68-48ec-af22-bd9bdbf91948": {
-    "playtime": 365942,
+    "playtime": 368065,
     "walked": 130,
     "flown": 31,
     "sailed": 7,
@@ -26246,7 +26248,7 @@
     "first_joined": "Nov 18, 2026"
   },
   "3da546d9-50a8-4b07-a854-9dd2a5553b98": {
-    "playtime": 79658,
+    "playtime": 79697,
     "walked": 97,
     "flown": 288,
     "sailed": 5,
@@ -26256,9 +26258,9 @@
     "dived": 1,
     "climbed": 0,
     "fallen": 8,
-    "jumps": 21138,
+    "jumps": 21145,
     "damage_dealt": 121644,
-    "damage_taken": 36515,
+    "damage_taken": 36519,
     "damage_blocked": 8192,
     "deaths": 21,
     "mob_kills": 3792,
@@ -26273,10 +26275,10 @@
     "debris": 51,
     "coal": 38,
     "lapis": 8,
-    "quartz": 68,
+    "quartz": 76,
     "obsidian": 16,
     "stone": 410,
-    "netherrack": 42409,
+    "netherrack": 43104,
     "excavator": 1220,
     "ice": 23,
     "trees": 19,
@@ -26386,30 +26388,33 @@
     "first_joined": "Nov 21, 2026"
   },
   "ff7931c5-1ca9-4eaa-830b-967d38e27b60": {
-    "playtime": 8953,
-    "walked": 12,
+    "playtime": 16158,
+    "walked": 17,
     "swum": 0,
     "dived": 0,
     "climbed": 0,
     "fallen": 0,
-    "jumps": 2866,
-    "damage_dealt": 3373,
-    "damage_taken": 1833,
-    "deaths": 3,
-    "mob_kills": 14,
+    "jumps": 3645,
+    "damage_dealt": 5703,
+    "damage_taken": 2492,
+    "deaths": 5,
+    "mob_kills": 24,
+    "spiders": 1,
+    "creepers": 1,
     "cows": 1,
     "sheep": 4,
-    "coal": 45,
-    "stone": 52,
-    "excavator": 294,
+    "coal": 61,
+    "stone": 381,
+    "excavator": 1375,
     "armor": 4,
     "weapons": 5,
     "baker": 180,
     "scaffolding": 75,
-    "torches": 88,
-    "raw_meat": 2,
+    "torches": 140,
+    "raw_meat": 3,
+    "junk_food": 1,
     "potions": 2,
-    "tools_broken": 6,
+    "tools_broken": 11,
     "pearls": 3
   },
   "611b6173-bcfb-416f-a946-1eb9a072e0bf": {
@@ -26608,7 +26613,7 @@
     "playtime": 12
   },
   "1210035a-099d-433b-9767-d2b0ab97c5ab": {
-    "playtime": 4023,
+    "playtime": 4078,
     "dived": 0
   },
   "146856a9-da8b-4228-8087-933241c23e57": {
@@ -26697,5 +26702,32 @@
   },
   "4e0ce57f-c87c-4506-b153-a891d133cc06": {
     "playtime": 21
+  },
+  "b9516194-5772-4030-93a3-d91919040a5c": {
+    "playtime": 0
+  },
+  "31a00ce0-593c-41b6-9f26-3f1c1a9d5945": {
+    "playtime": 1
+  },
+  "af54c861-faa2-48d5-ba96-6bf4a55079d5": {
+    "playtime": 2
+  },
+  "25b6cbf6-7f55-468b-b454-94adc6b1497d": {
+    "playtime": 1
+  },
+  "d53074ec-ae69-4064-8016-c9f977c121b3": {
+    "playtime": 25
+  },
+  "63e067ed-0118-4af2-b814-e2bbd1464bff": {
+    "playtime": 2
+  },
+  "079575c1-a324-4833-902c-ff3bf2666582": {
+    "playtime": 1
+  },
+  "9fcd79b7-3e47-461d-bc36-4f8d02920b54": {
+    "playtime": 2
+  },
+  "a7df91c6-8e87-43d7-a482-da3b8c31bdab": {
+    "playtime": 115
   }
 }
