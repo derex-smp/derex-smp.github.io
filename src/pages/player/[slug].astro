@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar.astro";
 import BigCard from "../../components/BigCard.astro";
 import Footer from "../../components/Footer.astro";
 import { getAllMembers } from "../../data/players";
+import { getPlayerFirstJoined, getPlayerStats } from "../../data/statsCatalog";
 
 export function getStaticPaths() {
   const members = getAllMembers();
@@ -75,6 +76,17 @@ const siteUrl = Astro.site?.href || "https://derex-smp.github.io";
 const profileUrl = new URL(`/player/${player.name}`, siteUrl).href;
 const avatarUrl = new URL(`/avatars/${player.uuid}.png`, siteUrl).href;
 
+const firstJoined = getPlayerFirstJoined(player.uuid || player.name);
+const stats = getPlayerStats(player.uuid || player.name);
+const playtime = stats.find((s) => s.id === "playtime" && s.total !== "0");
+
+const metaDetails = [
+  firstJoined ? `Joined ${firstJoined}` : "",
+  playtime ? `${playtime.total} played` : "",
+].filter(Boolean);
+
+const description = `${player.name} on derex smp${metaDetails.length ? ` — ${metaDetails.join(", ")}` : ""}. Explore 75 tracked server stats, combat, mining, and history.`;
+
 const profileSchema = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
@@ -83,7 +95,7 @@ const profileSchema = {
     name: player.name,
     identifier: player.uuid,
     image: avatarUrl,
-    description: `Minecraft player profile and stats for ${player.name} on the derex smp server.`,
+    description,
     url: profileUrl,
   },
 };
@@ -146,7 +158,7 @@ const breadcrumbSchema = {
       <head>
         <BaseHead
           title={`${player.name} - derex smp`}
-          description={`View ${player.name}'s player profile and history on derex smp.`}
+          description={description}
           image={`/avatars/${player.uuid}.png`}
           ogType="profile"
           twitterCard="summary"
