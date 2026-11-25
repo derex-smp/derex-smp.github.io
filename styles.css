@@ -1,3 +1,10 @@
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
 body {
   font-family: 'PixelCraft', sans-serif;
   background-color: #f4f4f4;
