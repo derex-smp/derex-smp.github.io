@@ -65,39 +65,66 @@ def main():
     output_path = os.path.join(repo_dir, "src", "data", "punishments.json")
 
     punishments_by_uuid = {}
+    id_to_uuid = {}
 
-    with open(storage_path, "r", encoding="utf-8", errors="ignore") as f:
-        for line in f:
-            line_str = line.strip()
-            if not line_str.startswith("INSERT INTO PUNISHMENTS VALUES") and not line_str.startswith("INSERT INTO punishments VALUES"):
-                continue
-
-            m = re.search(r"INSERT\s+INTO\s+PUNISHMENTS\s+VALUES\s*\((.*)\)\s*;?$", line_str, re.I)
-            if not m:
-                continue
-
-            try:
-                vals = list(csv.reader([m.group(1)], quotechar="'", skipinitialspace=True))[0]
-                if len(vals) < 7:
+    def parse_file(filepath):
+        if not os.path.isfile(filepath):
+            return
+        with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
+            for line in f:
+                line_str = line.strip()
+                if not line_str:
                     continue
 
-                name = vals[1].strip()
-                raw_uuid = vals[2].strip().replace("-", "").lower()
-                if len(raw_uuid) == 32:
-                    uuid_str = f"{raw_uuid[:8]}-{raw_uuid[8:12]}-{raw_uuid[12:16]}-{raw_uuid[16:20]}-{raw_uuid[20:]}"
-                else:
-                    uuid_str = vals[2].strip()
+                m_ins = re.search(r"INSERT\s+INTO\s+PUNISHMENTS\s+VALUES\s*\((.*)\)\s*;?$", line_str, re.I)
+                if m_ins:
+                    try:
+                        vals = list(csv.reader([m_ins.group(1)], quotechar="'", skipinitialspace=True))[0]
+                        if len(vals) < 7:
+                            continue
 
-                start_time = int(vals[6].strip())
+                        id_val = int(vals[0].strip()) if vals[0].strip().isdigit() else None
+                        name = vals[1].strip()
+                        raw_uuid = vals[2].strip().replace("-", "").lower()
+                        if len(raw_uuid) == 32:
+                            uuid_str = f"{raw_uuid[:8]}-{raw_uuid[8:12]}-{raw_uuid[12:16]}-{raw_uuid[16:20]}-{raw_uuid[20:]}"
+                        else:
+                            uuid_str = vals[2].strip()
 
-                if raw_uuid not in punishments_by_uuid or start_time > punishments_by_uuid[raw_uuid]["punishmentDate"]:
-                    punishments_by_uuid[raw_uuid] = {
-                        "name": name,
-                        "uuid": uuid_str,
-                        "punishmentDate": start_time
-                    }
-            except Exception:
-                continue
+                        start_time = int(vals[6].strip())
+
+                        if id_val is not None:
+                            id_to_uuid[id_val] = raw_uuid
+
+                        if raw_uuid not in punishments_by_uuid or start_time > punishments_by_uuid[raw_uuid]["punishmentDate"]:
+                            punishments_by_uuid[raw_uuid] = {
+                                "name": name,
+                                "uuid": uuid_str,
+                                "punishmentDate": start_time
+                            }
+                    except Exception:
+                        continue
+                    continue
+
+                m_del_id = re.search(r"DELETE\s+FROM\s+PUNISHMENTS\s+WHERE\s+ID\s*=\s*(\d+)", line_str, re.I)
+                if m_del_id:
+                    del_id = int(m_del_id.group(1))
+                    target_uuid = id_to_uuid.get(del_id)
+                    if target_uuid:
+                        punishments_by_uuid.pop(target_uuid, None)
+                    continue
+
+                m_del_uuid = re.search(r"DELETE\s+FROM\s+PUNISHMENTS\s+WHERE\s+UUID\s*=\s*'([^']+)'", line_str, re.I)
+                if m_del_uuid:
+                    target_uuid = m_del_uuid.group(1).replace("-", "").lower()
+                    punishments_by_uuid.pop(target_uuid, None)
+                    continue
+
+    parse_file(storage_path)
+
+    log_path = os.path.join(os.path.dirname(storage_path), "storage.log")
+    if os.path.isfile(log_path):
+        parse_file(log_path)
 
     records = list(punishments_by_uuid.values())
     records.sort(key=lambda x: x["punishmentDate"])
