@@ -65,7 +65,16 @@ def main():
     output_path = os.path.join(repo_dir, "src", "data", "punishments.json")
 
     punishments_by_uuid = {}
-    id_to_uuid = {}
+
+    if os.path.isfile(output_path):
+        try:
+            with open(output_path, "r", encoding="utf-8") as existing_file:
+                for rec in json.load(existing_file):
+                    raw_uuid = rec.get("uuid", "").replace("-", "").lower()
+                    if raw_uuid:
+                        punishments_by_uuid[raw_uuid] = rec
+        except Exception:
+            pass
 
     def parse_file(filepath):
         if not os.path.isfile(filepath):
@@ -76,14 +85,13 @@ def main():
                 if not line_str:
                     continue
 
-                m_ins = re.search(r"INSERT\s+INTO\s+PUNISHMENTS\s+VALUES\s*\((.*)\)\s*;?$", line_str, re.I)
+                m_ins = re.search(r"INSERT\s+INTO\s+(?:PUNISHMENTS|PUNISHMENTHISTORY)\s+VALUES\s*\((.*)\)\s*;?$", line_str, re.I)
                 if m_ins:
                     try:
                         vals = list(csv.reader([m_ins.group(1)], quotechar="'", skipinitialspace=True))[0]
                         if len(vals) < 7:
                             continue
 
-                        id_val = int(vals[0].strip()) if vals[0].strip().isdigit() else None
                         name = vals[1].strip()
                         raw_uuid = vals[2].strip().replace("-", "").lower()
                         if len(raw_uuid) == 32:
@@ -93,9 +101,6 @@ def main():
 
                         start_time = int(vals[6].strip())
 
-                        if id_val is not None:
-                            id_to_uuid[id_val] = raw_uuid
-
                         if raw_uuid not in punishments_by_uuid or start_time > punishments_by_uuid[raw_uuid]["punishmentDate"]:
                             punishments_by_uuid[raw_uuid] = {
                                 "name": name,
@@ -104,21 +109,6 @@ def main():
                             }
                     except Exception:
                         continue
-                    continue
-
-                m_del_id = re.search(r"DELETE\s+FROM\s+PUNISHMENTS\s+WHERE\s+ID\s*=\s*(\d+)", line_str, re.I)
-                if m_del_id:
-                    del_id = int(m_del_id.group(1))
-                    target_uuid = id_to_uuid.get(del_id)
-                    if target_uuid:
-                        punishments_by_uuid.pop(target_uuid, None)
-                    continue
-
-                m_del_uuid = re.search(r"DELETE\s+FROM\s+PUNISHMENTS\s+WHERE\s+UUID\s*=\s*'([^']+)'", line_str, re.I)
-                if m_del_uuid:
-                    target_uuid = m_del_uuid.group(1).replace("-", "").lower()
-                    punishments_by_uuid.pop(target_uuid, None)
-                    continue
 
     parse_file(storage_path)
 
