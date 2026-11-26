@@ -4,6 +4,21 @@ import json
 import urllib.request
 import urllib.error
 
+def get_best_model(api_key):
+    try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models?key={api_key}"
+        req = urllib.request.Request(url)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            for m in data.get("models", []):
+                name = m.get("name", "")
+                methods = m.get("supportedGenerationMethods", [])
+                if "generateContent" in methods and "flash" in name.lower() and "exp" not in name.lower():
+                    return name.replace("models/", "")
+    except Exception:
+        pass
+    return "gemini-1.5-flash"
+
 def query_gemini_batch(names, api_key):
     template = os.environ.get("MODERATION_PROMPT")
     if template:
@@ -14,30 +29,37 @@ def query_gemini_batch(names, api_key):
     else:
         prompt = f"Analyze these usernames and return a JSON array of strings containing only the usernames that violate community safety standards: {json.dumps(names)}"
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
-    payload = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {
-            "temperature": 0.0,
-            "responseMimeType": "application/json"
+    chosen_model = get_best_model(api_key)
+    candidates = [chosen_model]
+    for fallback in ["gemini-1.5-flash", "gemini-2.0-flash"]:
+        if fallback not in candidates:
+            candidates.append(fallback)
+
+    for model_name in candidates:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
+        payload = {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "temperature": 0.0,
+                "responseMimeType": "application/json"
+            }
         }
-    }
 
-    req = urllib.request.Request(
-        url,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json"}
-    )
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"}
+        )
 
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-            text = data["candidates"][0]["content"]["parts"][0]["text"]
-            flagged = json.loads(text)
-            if isinstance(flagged, list):
-                return set(flagged)
-    except Exception as e:
-        print(f"Gemini API request failed: {e}", file=sys.stderr)
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                text = data["candidates"][0]["content"]["parts"][0]["text"]
+                flagged = json.loads(text)
+                if isinstance(flagged, list):
+                    return set(flagged)
+        except Exception:
+            continue
 
     return set()
 
