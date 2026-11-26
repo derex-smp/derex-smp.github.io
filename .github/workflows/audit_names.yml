@@ -1,0 +1,32 @@
+name: Audit Existing Player Names
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Name Moderation Audit
+        env:
+          GEMINI_API_KEY: ${{ secrets.API_KEY || secrets.GEMINI_API_KEY }}
+          MODERATION_PROMPT: ${{ secrets.MODERATION_PROMPT }}
+        run: python scripts/audit_names.py
+
+      - name: Upload Audit Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-report
+          path: audit_report.md
