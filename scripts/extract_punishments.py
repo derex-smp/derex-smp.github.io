@@ -70,9 +70,10 @@ def main():
         try:
             with open(output_path, "r", encoding="utf-8") as existing_file:
                 for rec in json.load(existing_file):
-                    raw_uuid = rec.get("uuid", "").replace("-", "").lower()
-                    if raw_uuid:
-                        punishments_by_uuid[raw_uuid] = rec
+                    if rec.get("punishmentDate", 0) < 1736000000000:
+                        raw_uuid = rec.get("uuid", "").replace("-", "").lower()
+                        if raw_uuid:
+                            punishments_by_uuid[raw_uuid] = rec
         except Exception:
             pass
 
@@ -82,10 +83,10 @@ def main():
         with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
             for line in f:
                 line_str = line.strip()
-                if not line_str:
+                if not line_str or "PUNISHMENTHISTORY" in line_str.upper():
                     continue
 
-                m_ins = re.search(r"INSERT\s+INTO\s+(?:PUNISHMENTS|PUNISHMENTHISTORY)\s+VALUES\s*\((.*)\)\s*;?$", line_str, re.I)
+                m_ins = re.search(r"INSERT\s+INTO\s+PUNISHMENTS\s+VALUES\s*\((.*)\)\s*;?$", line_str, re.I)
                 if m_ins:
                     try:
                         vals = list(csv.reader([m_ins.group(1)], quotechar="'", skipinitialspace=True))[0]
