@@ -2117,7 +2117,7 @@
     "first_joined": "Dec 03, 2025"
   },
   "b969c486-394a-4064-9f66-d7b595505fe5": {
-    "playtime": 44161437,
+    "playtime": 44161737,
     "walked": 0,
     "minecart": 201,
     "swum": 0,
@@ -9577,9 +9577,9 @@
     "first_joined": "Feb 23, 2025"
   },
   "f713d03c-51c5-434d-94c6-df7e6fad2d2f": {
-    "playtime": 911048,
-    "walked": 774,
-    "flown": 1009,
+    "playtime": 911348,
+    "walked": 775,
+    "flown": 1010,
     "sailed": 5,
     "ridden": 52,
     "minecart": 24,
@@ -9587,9 +9587,9 @@
     "dived": 16,
     "climbed": 15,
     "fallen": 70,
-    "jumps": 223424,
-    "damage_dealt": 365129,
-    "damage_taken": 118335,
+    "jumps": 223582,
+    "damage_dealt": 365139,
+    "damage_taken": 118389,
     "damage_blocked": 20086,
     "kills": 35,
     "deaths": 76,
@@ -9611,7 +9611,7 @@
     "obsidian": 844,
     "stone": 51120,
     "netherrack": 509,
-    "excavator": 16648,
+    "excavator": 16651,
     "corals": 23,
     "ice": 23,
     "bamboo": 38,
@@ -9626,7 +9626,7 @@
     "torches": 1823,
     "redstone_placed": 143,
     "rails": 339,
-    "signs": 143,
+    "signs": 144,
     "enchanted": 65,
     "grindstone": 23,
     "loom": 1,
@@ -22741,7 +22741,7 @@
     "first_joined": "Aug 23, 2026"
   },
   "1bd9b5f5-a830-4cbd-80a7-a65c5311c9a7": {
-    "playtime": 2340444,
+    "playtime": 2340744,
     "walked": 1925,
     "flown": 2073,
     "sailed": 8,
@@ -24817,9 +24817,9 @@
     "first_joined": "Oct 13, 2026"
   },
   "ecc37654-36b4-47f8-b336-102d4dc6a291": {
-    "playtime": 703122,
+    "playtime": 703422,
     "walked": 509,
-    "flown": 1456,
+    "flown": 1458,
     "sailed": 7,
     "ridden": 32,
     "minecart": 26,
@@ -24827,13 +24827,13 @@
     "dived": 8,
     "climbed": 5,
     "fallen": 105,
-    "jumps": 163192,
-    "damage_dealt": 629361,
-    "damage_taken": 4789075,
+    "jumps": 163349,
+    "damage_dealt": 629570,
+    "damage_taken": 4789401,
     "damage_blocked": 122032,
     "kills": 37,
-    "deaths": 10071,
-    "mob_kills": 72231,
+    "deaths": 10072,
+    "mob_kills": 72232,
     "wardens": 9593,
     "ghasts": 21,
     "shulkers": 18,
@@ -24852,7 +24852,7 @@
     "obsidian": 79,
     "stone": 12487,
     "netherrack": 31990,
-    "excavator": 3958,
+    "excavator": 3961,
     "ice": 99,
     "sugarcane": 26,
     "trees": 346,
@@ -24880,7 +24880,7 @@
     "records": 6,
     "tools_broken": 83,
     "trades": 393,
-    "pearls": 2639,
+    "pearls": 2642,
     "totems": 273,
     "beds_blown": 11
   },
@@ -25103,7 +25103,7 @@
     "first_joined": "Oct 16, 2026"
   },
   "50573999-8ada-4828-a55b-b3cbc436e8fc": {
-    "playtime": 304817,
+    "playtime": 304958,
     "walked": 216,
     "flown": 557,
     "sailed": 8,
@@ -26148,7 +26148,7 @@
     "tools_broken": 6
   },
   "f481a176-ef68-48ec-af22-bd9bdbf91948": {
-    "playtime": 370165,
+    "playtime": 370465,
     "walked": 131,
     "flown": 31,
     "sailed": 7,
@@ -26157,7 +26157,7 @@
     "dived": 1,
     "climbed": 1,
     "fallen": 20,
-    "jumps": 65221,
+    "jumps": 65249,
     "damage_dealt": 106127,
     "damage_taken": 38799,
     "damage_blocked": 15982,
@@ -26248,9 +26248,9 @@
     "first_joined": "Nov 18, 2026"
   },
   "3da546d9-50a8-4b07-a854-9dd2a5553b98": {
-    "playtime": 94657,
+    "playtime": 94891,
     "walked": 111,
-    "flown": 335,
+    "flown": 337,
     "sailed": 5,
     "ridden": 43,
     "minecart": 14,
@@ -26258,9 +26258,9 @@
     "dived": 1,
     "climbed": 0,
     "fallen": 10,
-    "jumps": 23918,
+    "jumps": 24010,
     "damage_dealt": 125044,
-    "damage_taken": 39554,
+    "damage_taken": 39693,
     "damage_blocked": 8192,
     "deaths": 22,
     "mob_kills": 5526,
@@ -26282,6 +26282,7 @@
     "excavator": 1220,
     "corals": 16,
     "ice": 23,
+    "sugarcane": 1,
     "trees": 19,
     "mushrooms": 13,
     "armor": 8,
@@ -26707,7 +26708,7 @@
     "playtime": 21
   },
   "b9516194-5772-4030-93a3-d91919040a5c": {
-    "playtime": 3
+    "playtime": 5
   },
   "31a00ce0-593c-41b6-9f26-3f1c1a9d5945": {
     "playtime": 1
