@@ -1,20 +1,5 @@
 [
   {
-    "name": "SavageDylan101",
-    "uuid": "661cdd04-b2f1-4718-a1f2-c9806cb20dce",
-    "punishmentDate": 1601078400000
-  },
-  {
-    "name": "PhilipThePigeon",
-    "uuid": "3dc644b2-39c6-4ad7-8c6a-94f699771d24",
-    "punishmentDate": 1616417640000
-  },
-  {
-    "name": "Simpin4Netherite",
-    "uuid": "3dded9ae-d7ac-4698-921f-944490483745",
-    "punishmentDate": 1617287640000
-  },
-  {
     "name": "BORZ_CHIMAEV",
     "uuid": "8e6302d0-4453-46ea-9ecd-855bc615988c",
     "punishmentDate": 1736165246111
@@ -25,7 +10,7 @@
     "punishmentDate": 1736165532261
   },
   {
-    "name": "duckmanmc",
+    "name": "duckmanMC",
     "uuid": "f5317c92-e873-4115-b3d8-d4d477e0f2a5",
     "punishmentDate": 1736624912827
   },
@@ -95,12 +80,12 @@
     "punishmentDate": 1739091596735
   },
   {
-    "name": "[Inappropriate Name]",
+    "name": "Baby_Banger",
     "uuid": "12f47942-96be-494a-bcf2-9b15595af7f9",
     "punishmentDate": 1739256506558
   },
   {
-    "name": "[Inappropriate Name]",
+    "name": "_Ni__er_",
     "uuid": "069072fd-29f8-44ab-af35-2364f481c35d",
     "punishmentDate": 1739257082081
   },
@@ -170,11 +155,6 @@
     "punishmentDate": 1740350376443
   },
   {
-    "name": "KingLion455",
-    "uuid": "4a3a4616-ebce-4d5c-aae8-18e8441d0443",
-    "punishmentDate": 1740537186443
-  },
-  {
     "name": "GalacticComet",
     "uuid": "c6568ef7-f08d-4fad-b7d0-f5007733532c",
     "punishmentDate": 1740563815344
@@ -208,6 +188,11 @@
     "name": "b9st",
     "uuid": "91c1cad1-1d07-4092-b0c5-447cb3333e4d",
     "punishmentDate": 1741651877734
+  },
+  {
+    "name": "kinglion455",
+    "uuid": "4a3a4616-ebce-4d5c-aae8-18e8441d0443",
+    "punishmentDate": 1741737729690
   },
   {
     "name": "_WinterV",
@@ -255,6 +240,16 @@
     "punishmentDate": 1743363025782
   },
   {
+    "name": "Lunarisyn",
+    "uuid": "26a8156a-65ab-478b-b55c-37545e92142d",
+    "punishmentDate": 1743363784125
+  },
+  {
+    "name": "Lunarisyn_01",
+    "uuid": "cf93e182-5f63-4cfa-91f6-6f3cfb7d95bb",
+    "punishmentDate": 1743364179126
+  },
+  {
     "name": "Desixcal",
     "uuid": "42c3dd1b-c4d7-410b-8a78-db9eafc3e567",
     "punishmentDate": 1743518545078
@@ -262,12 +257,12 @@
   {
     "name": "ArloVision",
     "uuid": "e4cf102c-bff1-495b-b14c-44802636e1a6",
-    "punishmentDate": 1743536236329
+    "punishmentDate": 1743536257382
   },
   {
     "name": "pranalohas",
     "uuid": "729416cc-a5cf-4437-b3dc-e58610ab2ad0",
-    "punishmentDate": 1743536236329
+    "punishmentDate": 1743631325245
   },
   {
     "name": "LivingElm",
@@ -288,6 +283,11 @@
     "name": "ak4_msmc_amj",
     "uuid": "353c28d2-a34b-44d7-8a2e-f377e3b4af8d",
     "punishmentDate": 1745202110084
+  },
+  {
+    "name": "wheatley_g",
+    "uuid": "7d282302-de7d-4c5e-9c00-107f8b80a269",
+    "punishmentDate": 1745891689300
   },
   {
     "name": "paiso_67",
@@ -370,11 +370,6 @@
     "punishmentDate": 1754561717504
   },
   {
-    "name": "PhasedGyatple",
-    "uuid": "cc6c209f-6c1c-4c59-b8c6-5a471af48f2f",
-    "punishmentDate": 1755202398090
-  },
-  {
     "name": "Sympnot",
     "uuid": "df5081ac-9c32-45b4-80a8-f110d2ec9cba",
     "punishmentDate": 1755203363186
@@ -398,6 +393,11 @@
     "name": "Aygirla",
     "uuid": "2a8a02e3-803c-46ca-bb1c-bca5a7a0849f",
     "punishmentDate": 1755205134597
+  },
+  {
+    "name": "phasedgyatple",
+    "uuid": "cc6c209f-6c1c-4c59-b8c6-5a471af48f2f",
+    "punishmentDate": 1755206731495
   },
   {
     "name": "minicpm",
@@ -472,7 +472,7 @@
   {
     "name": "Ogmur",
     "uuid": "aaa28cde-2dca-4cd8-bcac-37230bf00f5b",
-    "punishmentDate": 1767137088928
+    "punishmentDate": 1767137093280
   },
   {
     "name": "zingyno1",
@@ -550,7 +550,7 @@
     "punishmentDate": 1772225794391
   },
   {
-    "name": "[Inappropriate Name]",
+    "name": "RealistNasist",
     "uuid": "fa3b6f01-e1a1-4c1e-bbf6-682e2d0e7846",
     "punishmentDate": 1772225797390
   },
@@ -715,6 +715,11 @@
     "punishmentDate": 1788060442122
   },
   {
+    "name": "185.203.139.76",
+    "uuid": "185.203.139.76",
+    "punishmentDate": 1789024267551
+  },
+  {
     "name": "TPUSA",
     "uuid": "885de992-3206-44e4-9014-1f55122ecb4e",
     "punishmentDate": 1790304849617
@@ -758,5 +763,80 @@
     "name": "leangreen10",
     "uuid": "64a1fa64-d4fb-4ece-8c11-d96d9de388b1",
     "punishmentDate": 1792207626445
+  },
+  {
+    "name": "elijah8walker",
+    "uuid": "11514d8e-2354-41ff-9ded-c395c3f28032",
+    "punishmentDate": 1792378557974
+  },
+  {
+    "name": "2Legit4U",
+    "uuid": "179af1c3-3303-4d6c-9658-9c54efa76d77",
+    "punishmentDate": 1792549937390
+  },
+  {
+    "name": "1bossbunny",
+    "uuid": "09b75542-4641-4fa3-a338-942e9fd76498",
+    "punishmentDate": 1793570266680
+  },
+  {
+    "name": "UT_Austin",
+    "uuid": "b969c486-394a-4064-9f66-d7b595505fe5",
+    "punishmentDate": 1793587474167
+  },
+  {
+    "name": "mclist",
+    "uuid": "807ed616-a77d-4a4a-9a0f-b3932ed1bbee",
+    "punishmentDate": 1793632745256
+  },
+  {
+    "name": "TheOnlyNick2",
+    "uuid": "995cdd46-cd7b-4ee4-9c76-35e9b20b2965",
+    "punishmentDate": 1793992807478
+  },
+  {
+    "name": "DARKECHO___",
+    "uuid": "f00685d9-24d2-431a-9d7c-b76fcddc16bf",
+    "punishmentDate": 1795056328345
+  },
+  {
+    "name": "Jestro_X0",
+    "uuid": "1210035a-099d-433b-9767-d2b0ab97c5ab",
+    "punishmentDate": 1795572400291
+  },
+  {
+    "name": "madcapmagician47",
+    "uuid": "2847cd27-9b95-43d1-92b7-de74c087e115",
+    "punishmentDate": 1795582282008
+  },
+  {
+    "name": "WARTORTLE69",
+    "uuid": "a2268d9a-aff7-4264-aecd-79bda731ac82",
+    "punishmentDate": 1795582455961
+  },
+  {
+    "name": "TibbySama",
+    "uuid": "52a473db-4615-4146-b6df-c31f3907a8d0",
+    "punishmentDate": 1795583052557
+  },
+  {
+    "name": "Totooxxz",
+    "uuid": "cbd9d0e0-02d7-48cf-bbb4-e8dac9522343",
+    "punishmentDate": 1795600121331
+  },
+  {
+    "name": "GlossyEbutbetter",
+    "uuid": "8f9b5bb7-6b71-4d36-8651-1f2a2375edf6",
+    "punishmentDate": 1795600262738
+  },
+  {
+    "name": "Pugifying",
+    "uuid": "46b165c0-134c-4d3f-ab85-9b61d8c8c5f6",
+    "punishmentDate": 1795600270477
+  },
+  {
+    "name": "NOOB_GAMEPLAYHD",
+    "uuid": "cf720c88-629c-4251-9e66-768258e6c4fc",
+    "punishmentDate": 1795600279853
   }
 ]
