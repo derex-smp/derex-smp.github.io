@@ -10,7 +10,7 @@ on:
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -29,6 +29,12 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.API_KEY || secrets.GEMINI_API_KEY }}
           MODERATION_PROMPT: ${{ secrets.MODERATION_PROMPT }}
         run: python scripts/censor_names.py
+      - name: Commit clean records if updated
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/player_history.json src/data/punishments.json src/data/reviewed_names.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-moderate new player names [skip ci]" && git push)
       - name: Install, build, and upload your site output
         uses: withastro/action@v6
         # with:
