@@ -1,6 +1,8 @@
 import os
 import sys
 import json
+import re
+import subprocess
 import urllib.request
 import urllib.error
 
@@ -63,19 +65,42 @@ def query_gemini_batch(names, api_key):
 
     return set()
 
+def get_diff_names(repo_dir, all_known_names):
+    diffs = []
+    cmds = [
+        ["git", "diff", "--staged", "-U0", "src/data/player_history.json", "src/data/punishments.json"],
+        ["git", "diff", "-U0", "src/data/player_history.json", "src/data/punishments.json"],
+        ["git", "diff", "-U0", "HEAD~1", "HEAD", "src/data/player_history.json", "src/data/punishments.json"]
+    ]
+    for cmd in cmds:
+        try:
+            res = subprocess.run(cmd, cwd=repo_dir, capture_output=True, text=True)
+            if res.returncode == 0 and res.stdout.strip():
+                diffs.append(res.stdout)
+        except Exception:
+            pass
+
+    combined_diff = "\n".join(diffs)
+    candidates = set()
+    ignored_keywords = {
+        "currentName", "pastNames", "lastUpdated", "name", "reason",
+        "operator", "punishmentType", "punishmentDate", "uuid",
+        "[Inappropriate Name]"
+    }
+
+    for line in combined_diff.splitlines():
+        if line.startswith("+") and not line.startswith("+++"):
+            matches = re.findall(r'"([^"]+)"', line)
+            for m in matches:
+                if m not in ignored_keywords and m in all_known_names:
+                    candidates.add(m)
+
+    return sorted(list(candidates))
+
 def main():
     repo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    reviewed_path = os.path.join(repo_dir, "src", "data", "reviewed_names.json")
     history_path = os.path.join(repo_dir, "src", "data", "player_history.json")
     punishments_path = os.path.join(repo_dir, "src", "data", "punishments.json")
-
-    reviewed = set()
-    if os.path.isfile(reviewed_path):
-        try:
-            with open(reviewed_path, "r", encoding="utf-8") as f:
-                reviewed = set(json.load(f))
-        except Exception:
-            reviewed = set()
 
     history = {}
     if os.path.isfile(history_path):
@@ -106,25 +131,35 @@ def main():
         if name and name != "[Inappropriate Name]":
             all_names.add(name)
 
-    unreviewed = [n for n in all_names if n not in reviewed]
+    if "--all" in sys.argv:
+        names_to_review = sorted(list(all_names))
+    else:
+        names_to_review = get_diff_names(repo_dir, all_names)
+
+    if not names_to_review:
+        print("No new unmoderated names found.")
+        return
 
     api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("API_KEY")
-    flagged_names = set()
-    if api_key and unreviewed:
-        print(f"Reviewing {len(unreviewed)} unmoderated names with Gemini...")
-        batch_size = 50
-        for i in range(0, len(unreviewed), batch_size):
-            batch = unreviewed[i:i + batch_size]
-            batch_flagged = query_gemini_batch(batch, api_key)
-            for name in batch:
-                if name in batch_flagged:
-                    flagged_names.add(name)
-                else:
-                    reviewed.add(name)
+    if not api_key:
+        print("Skipping moderation: GEMINI_API_KEY is not set.")
+        return
 
-        clean_list = sorted(list(reviewed))
-        with open(reviewed_path, "w", encoding="utf-8") as f:
-            json.dump(clean_list, f, indent=2)
+    flagged_names = set()
+    print(f"Reviewing {len(names_to_review)} unmoderated names with Gemini...")
+    batch_size = 50
+    for i in range(0, len(names_to_review), batch_size):
+        batch = names_to_review[i:i + batch_size]
+        batch_flagged = query_gemini_batch(batch, api_key)
+        for name in batch:
+            if name in batch_flagged:
+                flagged_names.add(name)
+
+    if not flagged_names:
+        print("Name moderation check completed. No inappropriate names found.")
+        return
+
+    print(f"Flagged {len(flagged_names)} inappropriate names for censoring.")
 
     history_changed = False
     for rec in history.values():
@@ -135,16 +170,18 @@ def main():
 
         past = rec.get("pastNames", [])
         new_past = []
-        has_past_change = False
+        seen_inappropriate = False
+        past_changed = False
         for p in past:
-            if p in flagged_names:
-                if rec.get("currentName") != "[Inappropriate Name]" and "[Inappropriate Name]" not in new_past:
+            if p in flagged_names or p == "[Inappropriate Name]":
+                if not seen_inappropriate:
                     new_past.append("[Inappropriate Name]")
-                has_past_change = True
+                    seen_inappropriate = True
+                past_changed = True
             else:
                 new_past.append(p)
 
-        if has_past_change:
+        if past_changed or len(new_past) != len(past):
             rec["pastNames"] = new_past
             history_changed = True
 

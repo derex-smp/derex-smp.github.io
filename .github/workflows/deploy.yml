@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -33,7 +35,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/data/player_history.json src/data/punishments.json src/data/reviewed_names.json
+          git add src/data/player_history.json src/data/punishments.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-moderate new player names [skip ci]" && git push)
       - name: Install, build, and upload your site output
         uses: withastro/action@v6

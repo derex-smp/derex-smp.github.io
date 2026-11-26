@@ -24,7 +24,6 @@ PLAYERS_FILE="$REPO_DIR/src/data/server_players.json"
 STATS_FILE="$REPO_DIR/src/data/player_stats.json"
 PUNISHMENTS_FILE="$REPO_DIR/src/data/punishments.json"
 HISTORY_FILE="$REPO_DIR/src/data/player_history.json"
-REVIEWED_FILE="$REPO_DIR/src/data/reviewed_names.json"
 
 cd "$REPO_DIR"
 
@@ -66,10 +65,6 @@ if [ -n "$(git status --porcelain "$PUNISHMENTS_FILE")" ]; then
 fi
 if [ -n "$(git status --porcelain "$HISTORY_FILE")" ]; then
     git add "$HISTORY_FILE"
-    CHANGED=1
-fi
-if [ -n "$(git status --porcelain "$REVIEWED_FILE")" ]; then
-    git add "$REVIEWED_FILE"
     CHANGED=1
 fi
 
