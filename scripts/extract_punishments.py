@@ -108,3 +108,4 @@ def main():
     print(f"Successfully extracted {len(records)} active punishments from {storage_path}.")
 
 if __name__ == "__main__":
+    main()
