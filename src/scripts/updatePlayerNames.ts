@@ -98,6 +98,7 @@ export async function updateAllPlayerNames(): Promise<void> {
           };
         } else if (current.currentName !== name) {
           if (
+            current.currentName !== "[Inappropriate Name]" &&
             current.currentName.toLowerCase() !== name.toLowerCase() &&
             !current.pastNames.some(
               (p) => p.toLowerCase() === current.currentName.toLowerCase(),

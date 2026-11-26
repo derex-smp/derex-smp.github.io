@@ -138,7 +138,7 @@ def main():
         has_past_change = False
         for p in past:
             if p in flagged_names:
-                if "[Inappropriate Name]" not in new_past:
+                if rec.get("currentName") != "[Inappropriate Name]" and "[Inappropriate Name]" not in new_past:
                     new_past.append("[Inappropriate Name]")
                 has_past_change = True
             else:
