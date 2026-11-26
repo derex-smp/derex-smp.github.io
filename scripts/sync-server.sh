@@ -23,6 +23,8 @@ fi
 PLAYERS_FILE="$REPO_DIR/src/data/server_players.json"
 STATS_FILE="$REPO_DIR/src/data/player_stats.json"
 PUNISHMENTS_FILE="$REPO_DIR/src/data/punishments.json"
+HISTORY_FILE="$REPO_DIR/src/data/player_history.json"
+REVIEWED_FILE="$REPO_DIR/src/data/reviewed_names.json"
 
 cd "$REPO_DIR"
 
@@ -47,6 +49,7 @@ with open(players_out, 'w', encoding='utf-8') as out:
 
 python3 "$SCRIPT_DIR/extract_stats.py"
 python3 "$SCRIPT_DIR/extract_punishments.py"
+python3 "$SCRIPT_DIR/censor_names.py"
 
 CHANGED=0
 if [ -n "$(git status --porcelain "$PLAYERS_FILE")" ]; then
@@ -59,6 +62,14 @@ if [ -n "$(git status --porcelain "$STATS_FILE")" ]; then
 fi
 if [ -n "$(git status --porcelain "$PUNISHMENTS_FILE")" ]; then
     git add "$PUNISHMENTS_FILE"
+    CHANGED=1
+fi
+if [ -n "$(git status --porcelain "$HISTORY_FILE")" ]; then
+    git add "$HISTORY_FILE"
+    CHANGED=1
+fi
+if [ -n "$(git status --porcelain "$REVIEWED_FILE")" ]; then
+    git add "$REVIEWED_FILE"
     CHANGED=1
 fi
 

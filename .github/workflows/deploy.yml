@@ -20,6 +20,15 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Moderate and censor inappropriate names
+        env:
+          GEMINI_API_KEY: ${{ secrets.API_KEY || secrets.GEMINI_API_KEY }}
+          MODERATION_PROMPT: ${{ secrets.MODERATION_PROMPT }}
+        run: python scripts/censor_names.py
       - name: Install, build, and upload your site output
         uses: withastro/action@v6
         # with:
