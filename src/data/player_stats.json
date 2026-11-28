@@ -2117,7 +2117,7 @@
     "first_joined": "Dec 03, 2025"
   },
   "b969c486-394a-4064-9f66-d7b595505fe5": {
-    "playtime": 44300636,
+    "playtime": 44322236,
     "walked": 0,
     "minecart": 201,
     "swum": 0,
@@ -2129,7 +2129,7 @@
     "damage_taken": 31243,
     "kills": 20,
     "deaths": 98,
-    "mob_kills": 5454,
+    "mob_kills": 5667,
     "tools_broken": 1
   },
   "97603464-0e32-4160-8ef3-f2108759164e": {
@@ -22735,7 +22735,7 @@
     "first_joined": "Aug 23, 2026"
   },
   "1bd9b5f5-a830-4cbd-80a7-a65c5311c9a7": {
-    "playtime": 2464419,
+    "playtime": 2486019,
     "walked": 1939,
     "flown": 2095,
     "sailed": 8,
@@ -24810,8 +24810,8 @@
     "first_joined": "Oct 13, 2026"
   },
   "ecc37654-36b4-47f8-b336-102d4dc6a291": {
-    "playtime": 724583,
-    "walked": 526,
+    "playtime": 730009,
+    "walked": 529,
     "flown": 1477,
     "sailed": 8,
     "ridden": 32,
@@ -24819,23 +24819,23 @@
     "swum": 25,
     "dived": 8,
     "climbed": 6,
-    "fallen": 108,
-    "jumps": 169570,
-    "damage_dealt": 658287,
-    "damage_taken": 4805681,
+    "fallen": 109,
+    "jumps": 171046,
+    "damage_dealt": 665024,
+    "damage_taken": 4808999,
     "damage_blocked": 127790,
     "kills": 77,
-    "deaths": 10098,
-    "mob_kills": 72381,
+    "deaths": 10106,
+    "mob_kills": 72419,
     "wardens": 9593,
     "ghasts": 21,
     "shulkers": 18,
-    "spiders": 84,
-    "creepers": 57,
+    "spiders": 85,
+    "creepers": 59,
     "endermen": 10591,
     "slimes": 219,
-    "cows": 139,
-    "sheep": 273,
+    "cows": 140,
+    "sheep": 277,
     "diamonds": 526,
     "debris": 246,
     "coal": 412,
@@ -24845,7 +24845,7 @@
     "obsidian": 79,
     "stone": 13512,
     "netherrack": 31990,
-    "excavator": 4016,
+    "excavator": 4039,
     "ice": 99,
     "sugarcane": 26,
     "trees": 346,
@@ -24865,7 +24865,7 @@
     "fish_eaten": 60,
     "raw_meat": 20,
     "junk_food": 10,
-    "gapples": 517,
+    "gapples": 518,
     "potions": 75,
     "water_buckets": 425,
     "goat_horns": 63,
@@ -24873,9 +24873,9 @@
     "records": 6,
     "tools_broken": 83,
     "trades": 393,
-    "pearls": 2656,
+    "pearls": 2659,
     "totems": 273,
-    "beds_blown": 11
+    "beds_blown": 7
   },
   "9d13ade6-f03b-4cf0-9a0c-46ff98469d03": {
     "playtime": 24,
@@ -26616,7 +26616,7 @@
     "playtime": 12
   },
   "1210035a-099d-433b-9767-d2b0ab97c5ab": {
-    "playtime": 4078,
+    "playtime": 4152,
     "dived": 0
   },
   "146856a9-da8b-4228-8087-933241c23e57": {
